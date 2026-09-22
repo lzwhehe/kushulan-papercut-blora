@@ -1,0 +1,34 @@
+{
+  "source_files": 3443,
+  "source_bytes": 9948489017,
+  "categories": {
+    "人物.jpg": 30,
+    "动物.jpg": 46,
+    "日常.jpg": 25,
+    "植物.jpg": 38,
+    "窗花.jpg": 20,
+    "边框.jpg": 20
+  },
+  "weights": {
+    "Experiment/test-round1/ksl_style.safetensors": {
+      "tensors": 320,
+      "blocks": {
+        "unet.up_blocks.0.attentions.0": 160,
+        "unet.up_blocks.0.attentions.1": 160
+      },
+      "down_ranks": [
+        64
+      ]
+    },
+    "Experiment/test-round2/ksl_content.safetensors": {
+      "tensors": 320,
+      "blocks": {
+        "unet.up_blocks.0.attentions.0": 160,
+        "unet.up_blocks.0.attentions.1": 160
+      },
+      "down_ranks": [
+        64
+      ]
+    }
+  }
+}
