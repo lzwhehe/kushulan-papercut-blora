@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/yardenfren1996/B-LoRA",
+  "commit": "e08380dfd3a5e337f74d76bcc1155bfd2c5c0d3d",
+  "files": {
+    "train_dreambooth_b-lora_sdxl.py": "9173e949e4fb4ff812e7388290212a70d655bc81345107104f51fabedadad4e9",
+    "inference.py": "5f1e35176eefa29af2447dbe9f429c3f3e1ef162fa1f9e19a82360440e33159a",
+    "blora_utils.py": "fb4079c832c78c4acce32c92dd487530a43c075a56391f479af20bd07a7edd2b",
+    "requirements.txt": "5b54879d970edb45d130a1e92c579b4249df453f54bfc26fdaa7de31866cbe93",
+    "LICENSE": "f444d652ba8767fef23bde121cff36bd262a2bb48f335300f9b9d0bed691edab"
+  }
+}

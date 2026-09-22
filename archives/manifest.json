@@ -1,0 +1,27 @@
+{
+  "filename": "1.库淑兰剪纸作品.zip",
+  "bytes": 3491723397,
+  "sha256": "a8f02489708248194324c1e71f620afeea501fb1572a715cc9b42500651c1830",
+  "parts": [
+    {
+      "path": "archive.part000",
+      "bytes": 1073741824,
+      "sha256": "2522e1d412795100d93c6131c19278c4bc9187d4574b78864b3b6ed32d8caa2f"
+    },
+    {
+      "path": "archive.part001",
+      "bytes": 1073741824,
+      "sha256": "f4549e58ace79a91f4c6e81137a493364c9c456ca80d584575e11ff1ead806b3"
+    },
+    {
+      "path": "archive.part002",
+      "bytes": 1073741824,
+      "sha256": "e101236ed0bbac93dea2d13d135636c593e2e078f257f049ef4c55c90625eb47"
+    },
+    {
+      "path": "archive.part003",
+      "bytes": 270497925,
+      "sha256": "21c094b867dfd00c1601c8cc1a0884b8322ec2d00406fa376ea232a263beee21"
+    }
+  ]
+}
