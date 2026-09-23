@@ -2,7 +2,7 @@
 
 ![KUSHULAN Papercut B-LoRA — 库淑兰剪纸风格与内容分离研究](docs/assets/project-banner.png)
 
-[![Migration tools](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml/badge.svg)](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml)
+[![Tests](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml/badge.svg)](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml)
 [![SDXL](https://img.shields.io/badge/Backbone-SDXL-5865F2)](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
 [![B-LoRA](https://img.shields.io/badge/Method-B--LoRA-BD3B36)](https://github.com/yardenfren1996/B-LoRA)
 
@@ -14,9 +14,17 @@
 
 ## 方法流程
 
+[![方法框架图：半结构化数据整理、分块 B-LoRA 微调、推理时风格与内容组合、评估协议](docs/assets/framework/framework.png)](docs/assets/framework/framework.pdf)
+
+*方法框架图（论文版矢量 PDF：[framework.pdf](docs/assets/framework/framework.pdf)，LaTeX 引用与中英文图注见 [说明](docs/assets/framework/README.md)）。图中只嵌入仓库已有的数据与 7.5 结果缩略图，不含未经复核的分数。*
+
+<details><summary>原始研究流程图</summary>
+
 [![库淑兰剪纸研究流程：半结构化数据构建、风格与内容分离生成、自动指标与专家评价](docs/assets/research-pipeline.jpg)](docs/assets/research-pipeline.jpg)
 
 *研究流程概览，点击图片可查看原图。图中数值保留所提供流程图的原始口径；与当前仓库资料的对应关系和待复核项见 [实验记录](docs/EXPERIMENTS.md#与参考图的对应关系)。*
+
+</details>
 
 ### 1. 剪纸元素与纹样整理
 
@@ -28,7 +36,7 @@
 
 ### 3. 结构、风格与符号表达评估
 
-流程图中的评估设计结合 Edge F1、silhouette IoU、CLIP-I / CLIP-T，以及结构、元素、风格和符号维度的专家评分。当前仓库保存了生成样例；配对评估数据、评分表与指标复现脚本尚待补充，图中分数不作为本仓库已复跑验证的结论。
+评估结合 Edge F1、silhouette IoU、DINO、CLIP-I / CLIP-T、调色板距离，以及结构、元素、风格和符号维度的专家评分（Kendall's W）。指标脚本见 `tools/evaluate.py`。Edge F1 与 silhouette IoU 要求输出与线稿在像素上对齐，而纯 B-LoRA 采样没有空间条件，因此脚本会同时计算“错配内容”对照，只有匹配组显著高于对照时才算有效。在已归档的三组 7.5 结果上，两者都未超过对照（见 [实验记录](docs/EXPERIMENTS.md#结构指标的有效性检查)）。原流程图中的分数仍未在本仓库复跑验证。
 
 ## 生成结果
 
@@ -48,7 +56,8 @@
 | --- | --- |
 | 代表元素 | 179 张，人物 30、动物 46、日常器物 25、植物 38、窗花 20、边框 20 |
 | 纹样符号 | 103 张，21 个目录类别 |
-| 整理后图像总数 | 282 张；代表元素与纹样目录合计，不表示已验证的线稿/彩色配对记录 |
+| 整理后图像总数 | 282 张，均已与 DOCX 描述逐条对应（`metadata/records.jsonl`，0 缺失）；其中 270 张字节唯一，合并近重复后为 261 组 |
+| 线稿配对 | 归档数据中没有与彩色元素逐条配对的线稿文件；记录表中 `line_art` 暂为空 |
 | 原始作品 ZIP | 1,153 个图像条目；与参考图的 2,008 件原作口径尚未对应 |
 | 实验 | 两轮，各有 checkpoint-500 和 checkpoint-1000 |
 | 导出权重 | `ksl_style.safetensors`、`ksl_content.safetensors` |
@@ -85,6 +94,24 @@ python tools/inventory.py verify
 
 不要只通过 GitHub 的源码 ZIP 判断数据是否齐全：LFS 文件可能仍是文本指针。
 
+## 研究工具
+
+| 工具 | 作用 |
+| --- | --- |
+| `tools/build_records.py` | 解析 27 个提示词 DOCX，生成图像—描述—类别记录表 `metadata/records.jsonl`，并拆分内容词与风格/符号词；`--check` 校验记录表是否最新 |
+| `tools/split.py` | 按 SHA-256 与颜色感知哈希合并重复/近重复图像后分组，再分层划分 train/val/test（`metadata/splits.json`） |
+| `tools/generate.py` | 固定种子、步数、CFG 与分辨率的 B-LoRA 生成，记录权重哈希、环境与 git 提交，输出评估用 `pairs.csv` |
+| `tools/evaluate.py` | 结构、风格、文本指标，并附错配对照与 bootstrap 置信区间；`agreement` 子命令计算专家评分的 Kendall's W |
+| `tools/figures/make_framework_figure.py` | 重新生成方法框架图 |
+
+```bash
+python tools/build_records.py --check
+python -m pip install numpy pillow
+python tools/split.py
+python tools/generate.py --jobs configs/jobs_example.csv --name demo --content_B_LoRA Experiment/test-round2/ksl_content.safetensors --style_B_LoRA Experiment/test-round1/ksl_style.safetensors --seeds 0 1 2 3
+python tools/evaluate.py metrics runs/demo/pairs.csv --clip --dino
+```
+
 ## 使用现有权重推理
 
 训练和推理需要单独的 Python 环境、CUDA GPU 与 SDXL 模型。上游使用旧版 Diffusers 0.25.0，环境与现代 PEFT 版 LoRA 流程不能直接混用。以下是官方代码入口；本次只验证了资产完整性和迁移工具，没有验证 GPU 兼容性。
@@ -111,8 +138,9 @@ Experiment/            两轮导出权重、训练检查点和第一轮生成结
 archives/              大型 ZIP 的四个无损分块与校验清单
 metadata/              原始文件 SHA-256 清单与汇总
 vendor/B-LoRA/         固定版本的上游训练/推理代码及原许可证
-tools/                  分块、还原、清单构建与验证工具
-tests/                  迁移工具的单元测试
+tools/                  迁移校验、记录表、数据划分、生成、评估与作图工具
+configs/                生成任务示例
+tests/                  迁移与研究工具的单元测试
 docs/                   研究流程图、数据、实验和迁移说明
 ```
 

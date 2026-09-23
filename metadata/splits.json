@@ -1,0 +1,1227 @@
+{
+ "method": "sha256 + colour dHash768 (hamming <= 120)",
+ "seed": 0,
+ "records_sha256": "20ad9e350ca7bb7b28d36e8b73c223bae84596759f6ac4111ac4caf40b889d0e",
+ "counts": {
+  "train": 219,
+  "val": 27,
+  "test": 36
+ },
+ "groups": 261,
+ "multi_record_groups": [
+  [
+   "element/Animal/006",
+   "element/Animal/023"
+  ],
+  [
+   "element/Animal/011",
+   "symbol/Bird/001"
+  ],
+  [
+   "element/Animal/016",
+   "symbol/Fish/005"
+  ],
+  [
+   "element/Animal/034",
+   "symbol/Fish/003"
+  ],
+  [
+   "element/Animal/035",
+   "symbol/Bird/007"
+  ],
+  [
+   "element/Animal/044",
+   "symbol/Butterfly/002"
+  ],
+  [
+   "element/Animal/046",
+   "symbol/Fish/002"
+  ],
+  [
+   "element/Border/002",
+   "symbol/Curtain/001"
+  ],
+  [
+   "element/Border/006",
+   "symbol/Wind/001"
+  ],
+  [
+   "element/Border/012",
+   "symbol/Wind/002"
+  ],
+  [
+   "element/Border/014",
+   "symbol/Wind/003"
+  ],
+  [
+   "element/Border/016",
+   "symbol/Curtain/002"
+  ],
+  [
+   "element/Border/017",
+   "symbol/Wind/004"
+  ],
+  [
+   "element/Object/016",
+   "symbol/Sun/006"
+  ],
+  [
+   "element/Plant/013",
+   "symbol/Peony/004"
+  ],
+  [
+   "element/Plant/021",
+   "symbol/Plum/004"
+  ],
+  [
+   "element/Plant/025",
+   "symbol/Tree/006"
+  ],
+  [
+   "element/Plant/028",
+   "symbol/Tree/007"
+  ],
+  [
+   "element/Plant/037",
+   "symbol/Chrysanthemum/001"
+  ],
+  [
+   "element/Window flower/004",
+   "element/Window flower/014"
+  ],
+  [
+   "symbol/Dot/003",
+   "symbol/Dot/005"
+  ]
+ ],
+ "assignments": {
+  "element/Figure/001": {
+   "group": "g0000",
+   "split": "train"
+  },
+  "element/Figure/002": {
+   "group": "g0001",
+   "split": "train"
+  },
+  "element/Figure/003": {
+   "group": "g0002",
+   "split": "train"
+  },
+  "element/Figure/004": {
+   "group": "g0003",
+   "split": "test"
+  },
+  "element/Figure/005": {
+   "group": "g0004",
+   "split": "val"
+  },
+  "element/Figure/006": {
+   "group": "g0005",
+   "split": "train"
+  },
+  "element/Figure/007": {
+   "group": "g0006",
+   "split": "train"
+  },
+  "element/Figure/008": {
+   "group": "g0007",
+   "split": "train"
+  },
+  "element/Figure/009": {
+   "group": "g0008",
+   "split": "train"
+  },
+  "element/Figure/010": {
+   "group": "g0009",
+   "split": "train"
+  },
+  "element/Figure/011": {
+   "group": "g0010",
+   "split": "train"
+  },
+  "element/Figure/012": {
+   "group": "g0011",
+   "split": "val"
+  },
+  "element/Figure/013": {
+   "group": "g0012",
+   "split": "train"
+  },
+  "element/Figure/014": {
+   "group": "g0013",
+   "split": "train"
+  },
+  "element/Figure/015": {
+   "group": "g0014",
+   "split": "test"
+  },
+  "element/Figure/016": {
+   "group": "g0015",
+   "split": "train"
+  },
+  "element/Figure/017": {
+   "group": "g0016",
+   "split": "train"
+  },
+  "element/Figure/018": {
+   "group": "g0017",
+   "split": "train"
+  },
+  "element/Figure/019": {
+   "group": "g0018",
+   "split": "train"
+  },
+  "element/Figure/020": {
+   "group": "g0019",
+   "split": "train"
+  },
+  "element/Figure/021": {
+   "group": "g0020",
+   "split": "val"
+  },
+  "element/Figure/022": {
+   "group": "g0021",
+   "split": "train"
+  },
+  "element/Figure/023": {
+   "group": "g0022",
+   "split": "train"
+  },
+  "element/Figure/024": {
+   "group": "g0023",
+   "split": "test"
+  },
+  "element/Figure/025": {
+   "group": "g0024",
+   "split": "train"
+  },
+  "element/Figure/026": {
+   "group": "g0025",
+   "split": "train"
+  },
+  "element/Figure/027": {
+   "group": "g0026",
+   "split": "train"
+  },
+  "element/Figure/028": {
+   "group": "g0027",
+   "split": "train"
+  },
+  "element/Figure/029": {
+   "group": "g0028",
+   "split": "train"
+  },
+  "element/Figure/030": {
+   "group": "g0029",
+   "split": "train"
+  },
+  "element/Animal/001": {
+   "group": "g0030",
+   "split": "test"
+  },
+  "element/Animal/002": {
+   "group": "g0031",
+   "split": "test"
+  },
+  "element/Animal/003": {
+   "group": "g0032",
+   "split": "train"
+  },
+  "element/Animal/004": {
+   "group": "g0033",
+   "split": "train"
+  },
+  "element/Animal/005": {
+   "group": "g0034",
+   "split": "train"
+  },
+  "element/Animal/006": {
+   "group": "g0035",
+   "split": "train"
+  },
+  "element/Animal/007": {
+   "group": "g0036",
+   "split": "train"
+  },
+  "element/Animal/008": {
+   "group": "g0037",
+   "split": "val"
+  },
+  "element/Animal/009": {
+   "group": "g0038",
+   "split": "train"
+  },
+  "element/Animal/010": {
+   "group": "g0039",
+   "split": "train"
+  },
+  "element/Animal/011": {
+   "group": "g0040",
+   "split": "train"
+  },
+  "element/Animal/012": {
+   "group": "g0041",
+   "split": "val"
+  },
+  "element/Animal/013": {
+   "group": "g0042",
+   "split": "test"
+  },
+  "element/Animal/014": {
+   "group": "g0043",
+   "split": "train"
+  },
+  "element/Animal/015": {
+   "group": "g0044",
+   "split": "train"
+  },
+  "element/Animal/016": {
+   "group": "g0045",
+   "split": "train"
+  },
+  "element/Animal/017": {
+   "group": "g0046",
+   "split": "train"
+  },
+  "element/Animal/018": {
+   "group": "g0047",
+   "split": "train"
+  },
+  "element/Animal/019": {
+   "group": "g0048",
+   "split": "train"
+  },
+  "element/Animal/020": {
+   "group": "g0049",
+   "split": "train"
+  },
+  "element/Animal/021": {
+   "group": "g0050",
+   "split": "train"
+  },
+  "element/Animal/022": {
+   "group": "g0051",
+   "split": "val"
+  },
+  "element/Animal/023": {
+   "group": "g0035",
+   "split": "train"
+  },
+  "element/Animal/024": {
+   "group": "g0052",
+   "split": "train"
+  },
+  "element/Animal/025": {
+   "group": "g0053",
+   "split": "train"
+  },
+  "element/Animal/026": {
+   "group": "g0054",
+   "split": "train"
+  },
+  "element/Animal/027": {
+   "group": "g0055",
+   "split": "train"
+  },
+  "element/Animal/028": {
+   "group": "g0056",
+   "split": "train"
+  },
+  "element/Animal/029": {
+   "group": "g0057",
+   "split": "train"
+  },
+  "element/Animal/030": {
+   "group": "g0058",
+   "split": "train"
+  },
+  "element/Animal/031": {
+   "group": "g0059",
+   "split": "train"
+  },
+  "element/Animal/032": {
+   "group": "g0060",
+   "split": "train"
+  },
+  "element/Animal/033": {
+   "group": "g0061",
+   "split": "train"
+  },
+  "element/Animal/034": {
+   "group": "g0062",
+   "split": "train"
+  },
+  "element/Animal/035": {
+   "group": "g0063",
+   "split": "train"
+  },
+  "element/Animal/036": {
+   "group": "g0064",
+   "split": "test"
+  },
+  "element/Animal/037": {
+   "group": "g0065",
+   "split": "train"
+  },
+  "element/Animal/038": {
+   "group": "g0066",
+   "split": "train"
+  },
+  "element/Animal/039": {
+   "group": "g0067",
+   "split": "train"
+  },
+  "element/Animal/040": {
+   "group": "g0068",
+   "split": "train"
+  },
+  "element/Animal/041": {
+   "group": "g0069",
+   "split": "val"
+  },
+  "element/Animal/042": {
+   "group": "g0070",
+   "split": "train"
+  },
+  "element/Animal/043": {
+   "group": "g0071",
+   "split": "train"
+  },
+  "element/Animal/044": {
+   "group": "g0072",
+   "split": "train"
+  },
+  "element/Animal/045": {
+   "group": "g0073",
+   "split": "train"
+  },
+  "element/Animal/046": {
+   "group": "g0074",
+   "split": "train"
+  },
+  "element/Object/001": {
+   "group": "g0075",
+   "split": "train"
+  },
+  "element/Object/002": {
+   "group": "g0076",
+   "split": "train"
+  },
+  "element/Object/003": {
+   "group": "g0077",
+   "split": "train"
+  },
+  "element/Object/004": {
+   "group": "g0078",
+   "split": "train"
+  },
+  "element/Object/005": {
+   "group": "g0079",
+   "split": "train"
+  },
+  "element/Object/006": {
+   "group": "g0080",
+   "split": "train"
+  },
+  "element/Object/007": {
+   "group": "g0081",
+   "split": "train"
+  },
+  "element/Object/008": {
+   "group": "g0082",
+   "split": "train"
+  },
+  "element/Object/009": {
+   "group": "g0083",
+   "split": "test"
+  },
+  "element/Object/010": {
+   "group": "g0084",
+   "split": "train"
+  },
+  "element/Object/011": {
+   "group": "g0085",
+   "split": "train"
+  },
+  "element/Object/012": {
+   "group": "g0086",
+   "split": "train"
+  },
+  "element/Object/013": {
+   "group": "g0087",
+   "split": "train"
+  },
+  "element/Object/014": {
+   "group": "g0088",
+   "split": "train"
+  },
+  "element/Object/015": {
+   "group": "g0089",
+   "split": "train"
+  },
+  "element/Object/016": {
+   "group": "g0090",
+   "split": "train"
+  },
+  "element/Object/017": {
+   "group": "g0091",
+   "split": "train"
+  },
+  "element/Object/018": {
+   "group": "g0092",
+   "split": "train"
+  },
+  "element/Object/019": {
+   "group": "g0093",
+   "split": "val"
+  },
+  "element/Object/020": {
+   "group": "g0094",
+   "split": "train"
+  },
+  "element/Object/021": {
+   "group": "g0095",
+   "split": "train"
+  },
+  "element/Object/022": {
+   "group": "g0096",
+   "split": "train"
+  },
+  "element/Object/023": {
+   "group": "g0097",
+   "split": "train"
+  },
+  "element/Object/024": {
+   "group": "g0098",
+   "split": "val"
+  },
+  "element/Object/025": {
+   "group": "g0099",
+   "split": "test"
+  },
+  "element/Plant/001": {
+   "group": "g0100",
+   "split": "train"
+  },
+  "element/Plant/002": {
+   "group": "g0101",
+   "split": "train"
+  },
+  "element/Plant/003": {
+   "group": "g0102",
+   "split": "train"
+  },
+  "element/Plant/004": {
+   "group": "g0103",
+   "split": "train"
+  },
+  "element/Plant/005": {
+   "group": "g0104",
+   "split": "train"
+  },
+  "element/Plant/006": {
+   "group": "g0105",
+   "split": "train"
+  },
+  "element/Plant/007": {
+   "group": "g0106",
+   "split": "train"
+  },
+  "element/Plant/008": {
+   "group": "g0107",
+   "split": "train"
+  },
+  "element/Plant/009": {
+   "group": "g0108",
+   "split": "train"
+  },
+  "element/Plant/010": {
+   "group": "g0109",
+   "split": "train"
+  },
+  "element/Plant/011": {
+   "group": "g0110",
+   "split": "val"
+  },
+  "element/Plant/012": {
+   "group": "g0111",
+   "split": "train"
+  },
+  "element/Plant/013": {
+   "group": "g0112",
+   "split": "train"
+  },
+  "element/Plant/014": {
+   "group": "g0113",
+   "split": "train"
+  },
+  "element/Plant/015": {
+   "group": "g0114",
+   "split": "train"
+  },
+  "element/Plant/016": {
+   "group": "g0115",
+   "split": "test"
+  },
+  "element/Plant/017": {
+   "group": "g0116",
+   "split": "train"
+  },
+  "element/Plant/018": {
+   "group": "g0117",
+   "split": "val"
+  },
+  "element/Plant/019": {
+   "group": "g0118",
+   "split": "train"
+  },
+  "element/Plant/020": {
+   "group": "g0119",
+   "split": "train"
+  },
+  "element/Plant/021": {
+   "group": "g0120",
+   "split": "train"
+  },
+  "element/Plant/022": {
+   "group": "g0121",
+   "split": "test"
+  },
+  "element/Plant/023": {
+   "group": "g0122",
+   "split": "val"
+  },
+  "element/Plant/024": {
+   "group": "g0123",
+   "split": "train"
+  },
+  "element/Plant/025": {
+   "group": "g0124",
+   "split": "train"
+  },
+  "element/Plant/026": {
+   "group": "g0125",
+   "split": "test"
+  },
+  "element/Plant/027": {
+   "group": "g0126",
+   "split": "train"
+  },
+  "element/Plant/028": {
+   "group": "g0127",
+   "split": "train"
+  },
+  "element/Plant/029": {
+   "group": "g0128",
+   "split": "val"
+  },
+  "element/Plant/030": {
+   "group": "g0129",
+   "split": "train"
+  },
+  "element/Plant/031": {
+   "group": "g0130",
+   "split": "train"
+  },
+  "element/Plant/032": {
+   "group": "g0131",
+   "split": "test"
+  },
+  "element/Plant/033": {
+   "group": "g0132",
+   "split": "train"
+  },
+  "element/Plant/034": {
+   "group": "g0133",
+   "split": "train"
+  },
+  "element/Plant/035": {
+   "group": "g0134",
+   "split": "train"
+  },
+  "element/Plant/036": {
+   "group": "g0135",
+   "split": "train"
+  },
+  "element/Plant/037": {
+   "group": "g0136",
+   "split": "train"
+  },
+  "element/Plant/038": {
+   "group": "g0137",
+   "split": "train"
+  },
+  "element/Window flower/001": {
+   "group": "g0138",
+   "split": "train"
+  },
+  "element/Window flower/002": {
+   "group": "g0139",
+   "split": "train"
+  },
+  "element/Window flower/003": {
+   "group": "g0140",
+   "split": "test"
+  },
+  "element/Window flower/004": {
+   "group": "g0141",
+   "split": "train"
+  },
+  "element/Window flower/005": {
+   "group": "g0142",
+   "split": "train"
+  },
+  "element/Window flower/006": {
+   "group": "g0143",
+   "split": "train"
+  },
+  "element/Window flower/007": {
+   "group": "g0144",
+   "split": "train"
+  },
+  "element/Window flower/008": {
+   "group": "g0145",
+   "split": "train"
+  },
+  "element/Window flower/009": {
+   "group": "g0146",
+   "split": "val"
+  },
+  "element/Window flower/010": {
+   "group": "g0147",
+   "split": "train"
+  },
+  "element/Window flower/011": {
+   "group": "g0148",
+   "split": "train"
+  },
+  "element/Window flower/012": {
+   "group": "g0149",
+   "split": "train"
+  },
+  "element/Window flower/013": {
+   "group": "g0150",
+   "split": "train"
+  },
+  "element/Window flower/014": {
+   "group": "g0141",
+   "split": "train"
+  },
+  "element/Window flower/015": {
+   "group": "g0151",
+   "split": "train"
+  },
+  "element/Window flower/016": {
+   "group": "g0152",
+   "split": "train"
+  },
+  "element/Window flower/017": {
+   "group": "g0153",
+   "split": "test"
+  },
+  "element/Window flower/018": {
+   "group": "g0154",
+   "split": "train"
+  },
+  "element/Window flower/019": {
+   "group": "g0155",
+   "split": "val"
+  },
+  "element/Window flower/020": {
+   "group": "g0156",
+   "split": "train"
+  },
+  "element/Border/001": {
+   "group": "g0157",
+   "split": "val"
+  },
+  "element/Border/002": {
+   "group": "g0158",
+   "split": "train"
+  },
+  "element/Border/003": {
+   "group": "g0159",
+   "split": "train"
+  },
+  "element/Border/004": {
+   "group": "g0160",
+   "split": "train"
+  },
+  "element/Border/005": {
+   "group": "g0161",
+   "split": "train"
+  },
+  "element/Border/006": {
+   "group": "g0162",
+   "split": "val"
+  },
+  "element/Border/007": {
+   "group": "g0163",
+   "split": "train"
+  },
+  "element/Border/008": {
+   "group": "g0164",
+   "split": "train"
+  },
+  "element/Border/009": {
+   "group": "g0165",
+   "split": "train"
+  },
+  "element/Border/010": {
+   "group": "g0166",
+   "split": "train"
+  },
+  "element/Border/011": {
+   "group": "g0167",
+   "split": "train"
+  },
+  "element/Border/012": {
+   "group": "g0168",
+   "split": "train"
+  },
+  "element/Border/013": {
+   "group": "g0169",
+   "split": "test"
+  },
+  "element/Border/014": {
+   "group": "g0170",
+   "split": "train"
+  },
+  "element/Border/015": {
+   "group": "g0171",
+   "split": "train"
+  },
+  "element/Border/016": {
+   "group": "g0172",
+   "split": "train"
+  },
+  "element/Border/017": {
+   "group": "g0173",
+   "split": "test"
+  },
+  "element/Border/018": {
+   "group": "g0174",
+   "split": "train"
+  },
+  "element/Border/019": {
+   "group": "g0175",
+   "split": "train"
+  },
+  "element/Border/020": {
+   "group": "g0176",
+   "split": "train"
+  },
+  "symbol/Dot/001": {
+   "group": "g0177",
+   "split": "val"
+  },
+  "symbol/Dot/002": {
+   "group": "g0178",
+   "split": "train"
+  },
+  "symbol/Dot/003": {
+   "group": "g0179",
+   "split": "train"
+  },
+  "symbol/Dot/004": {
+   "group": "g0180",
+   "split": "test"
+  },
+  "symbol/Dot/005": {
+   "group": "g0179",
+   "split": "train"
+  },
+  "symbol/Dot/006": {
+   "group": "g0181",
+   "split": "train"
+  },
+  "symbol/Heya/001": {
+   "group": "g0182",
+   "split": "train"
+  },
+  "symbol/Heya/002": {
+   "group": "g0183",
+   "split": "test"
+  },
+  "symbol/Heya/003": {
+   "group": "g0184",
+   "split": "train"
+  },
+  "symbol/Heya/004": {
+   "group": "g0185",
+   "split": "train"
+  },
+  "symbol/Heya/005": {
+   "group": "g0186",
+   "split": "val"
+  },
+  "symbol/Sun/001": {
+   "group": "g0187",
+   "split": "train"
+  },
+  "symbol/Sun/002": {
+   "group": "g0188",
+   "split": "train"
+  },
+  "symbol/Sun/003": {
+   "group": "g0189",
+   "split": "test"
+  },
+  "symbol/Sun/004": {
+   "group": "g0190",
+   "split": "train"
+  },
+  "symbol/Sun/005": {
+   "group": "g0191",
+   "split": "val"
+  },
+  "symbol/Sun/006": {
+   "group": "g0090",
+   "split": "train"
+  },
+  "symbol/HeadOrnament/001": {
+   "group": "g0192",
+   "split": "train"
+  },
+  "symbol/HeadOrnament/002": {
+   "group": "g0193",
+   "split": "train"
+  },
+  "symbol/HeadOrnament/003": {
+   "group": "g0194",
+   "split": "train"
+  },
+  "symbol/HeadOrnament/004": {
+   "group": "g0195",
+   "split": "val"
+  },
+  "symbol/HeadOrnament/005": {
+   "group": "g0196",
+   "split": "test"
+  },
+  "symbol/HangingCoin/001": {
+   "group": "g0197",
+   "split": "test"
+  },
+  "symbol/HangingCoin/002": {
+   "group": "g0198",
+   "split": "train"
+  },
+  "symbol/HangingCoin/003": {
+   "group": "g0199",
+   "split": "train"
+  },
+  "symbol/SquareAuspiciousCloud/001": {
+   "group": "g0200",
+   "split": "test"
+  },
+  "symbol/SquareAuspiciousCloud/002": {
+   "group": "g0201",
+   "split": "val"
+  },
+  "symbol/SquareAuspiciousCloud/003": {
+   "group": "g0202",
+   "split": "train"
+  },
+  "symbol/SquareAuspiciousCloud/004": {
+   "group": "g0203",
+   "split": "train"
+  },
+  "symbol/SquareAuspiciousCloud/005": {
+   "group": "g0204",
+   "split": "train"
+  },
+  "symbol/Crescent/001": {
+   "group": "g0205",
+   "split": "test"
+  },
+  "symbol/Crescent/002": {
+   "group": "g0206",
+   "split": "train"
+  },
+  "symbol/Crescent/003": {
+   "group": "g0207",
+   "split": "train"
+  },
+  "symbol/Tree/001": {
+   "group": "g0208",
+   "split": "train"
+  },
+  "symbol/Tree/002": {
+   "group": "g0209",
+   "split": "test"
+  },
+  "symbol/Tree/003": {
+   "group": "g0210",
+   "split": "train"
+  },
+  "symbol/Tree/004": {
+   "group": "g0211",
+   "split": "val"
+  },
+  "symbol/Tree/005": {
+   "group": "g0212",
+   "split": "train"
+  },
+  "symbol/Tree/006": {
+   "group": "g0124",
+   "split": "train"
+  },
+  "symbol/Tree/007": {
+   "group": "g0127",
+   "split": "train"
+  },
+  "symbol/Peach/001": {
+   "group": "g0213",
+   "split": "train"
+  },
+  "symbol/Peach/002": {
+   "group": "g0214",
+   "split": "test"
+  },
+  "symbol/Peach/003": {
+   "group": "g0215",
+   "split": "train"
+  },
+  "symbol/Plum/001": {
+   "group": "g0216",
+   "split": "train"
+  },
+  "symbol/Plum/002": {
+   "group": "g0217",
+   "split": "train"
+  },
+  "symbol/Plum/003": {
+   "group": "g0218",
+   "split": "test"
+  },
+  "symbol/Plum/004": {
+   "group": "g0120",
+   "split": "train"
+  },
+  "symbol/Plum/005": {
+   "group": "g0219",
+   "split": "train"
+  },
+  "symbol/Water/001": {
+   "group": "g0220",
+   "split": "test"
+  },
+  "symbol/Water/002": {
+   "group": "g0221",
+   "split": "train"
+  },
+  "symbol/Water/003": {
+   "group": "g0222",
+   "split": "train"
+  },
+  "symbol/Water/004": {
+   "group": "g0223",
+   "split": "train"
+  },
+  "symbol/Peony/001": {
+   "group": "g0224",
+   "split": "train"
+  },
+  "symbol/Peony/002": {
+   "group": "g0225",
+   "split": "train"
+  },
+  "symbol/Peony/003": {
+   "group": "g0226",
+   "split": "test"
+  },
+  "symbol/Peony/004": {
+   "group": "g0112",
+   "split": "train"
+  },
+  "symbol/Peony/005": {
+   "group": "g0227",
+   "split": "train"
+  },
+  "symbol/Lotus/001": {
+   "group": "g0228",
+   "split": "train"
+  },
+  "symbol/Lotus/002": {
+   "group": "g0229",
+   "split": "test"
+  },
+  "symbol/Lotus/003": {
+   "group": "g0230",
+   "split": "train"
+  },
+  "symbol/Lotus/004": {
+   "group": "g0231",
+   "split": "val"
+  },
+  "symbol/Lotus/005": {
+   "group": "g0232",
+   "split": "train"
+  },
+  "symbol/Chrysanthemum/001": {
+   "group": "g0136",
+   "split": "train"
+  },
+  "symbol/Chrysanthemum/002": {
+   "group": "g0233",
+   "split": "train"
+  },
+  "symbol/Chrysanthemum/003": {
+   "group": "g0234",
+   "split": "test"
+  },
+  "symbol/Chrysanthemum/004": {
+   "group": "g0235",
+   "split": "train"
+  },
+  "symbol/Chrysanthemum/005": {
+   "group": "g0236",
+   "split": "train"
+  },
+  "symbol/Butterfly/001": {
+   "group": "g0237",
+   "split": "train"
+  },
+  "symbol/Butterfly/002": {
+   "group": "g0072",
+   "split": "train"
+  },
+  "symbol/Butterfly/003": {
+   "group": "g0238",
+   "split": "train"
+  },
+  "symbol/Butterfly/004": {
+   "group": "g0239",
+   "split": "test"
+  },
+  "symbol/Butterfly/005": {
+   "group": "g0240",
+   "split": "train"
+  },
+  "symbol/StringofCoins/001": {
+   "group": "g0241",
+   "split": "train"
+  },
+  "symbol/StringofCoins/002": {
+   "group": "g0242",
+   "split": "test"
+  },
+  "symbol/StringofCoins/003": {
+   "group": "g0243",
+   "split": "train"
+  },
+  "symbol/StringofCoins/004": {
+   "group": "g0244",
+   "split": "train"
+  },
+  "symbol/StringofCoins/005": {
+   "group": "g0245",
+   "split": "val"
+  },
+  "symbol/Glands/001": {
+   "group": "g0246",
+   "split": "test"
+  },
+  "symbol/Glands/002": {
+   "group": "g0247",
+   "split": "train"
+  },
+  "symbol/Glands/003": {
+   "group": "g0248",
+   "split": "train"
+  },
+  "symbol/Glands/004": {
+   "group": "g0249",
+   "split": "train"
+  },
+  "symbol/Curtain/001": {
+   "group": "g0158",
+   "split": "train"
+  },
+  "symbol/Curtain/002": {
+   "group": "g0172",
+   "split": "train"
+  },
+  "symbol/Curtain/003": {
+   "group": "g0250",
+   "split": "train"
+  },
+  "symbol/Curtain/004": {
+   "group": "g0251",
+   "split": "train"
+  },
+  "symbol/Wind/001": {
+   "group": "g0162",
+   "split": "val"
+  },
+  "symbol/Wind/002": {
+   "group": "g0168",
+   "split": "train"
+  },
+  "symbol/Wind/003": {
+   "group": "g0170",
+   "split": "train"
+  },
+  "symbol/Wind/004": {
+   "group": "g0173",
+   "split": "test"
+  },
+  "symbol/Wind/005": {
+   "group": "g0252",
+   "split": "train"
+  },
+  "symbol/Wind/006": {
+   "group": "g0253",
+   "split": "train"
+  },
+  "symbol/Fish/001": {
+   "group": "g0254",
+   "split": "train"
+  },
+  "symbol/Fish/002": {
+   "group": "g0074",
+   "split": "train"
+  },
+  "symbol/Fish/003": {
+   "group": "g0062",
+   "split": "train"
+  },
+  "symbol/Fish/004": {
+   "group": "g0255",
+   "split": "train"
+  },
+  "symbol/Fish/005": {
+   "group": "g0045",
+   "split": "train"
+  },
+  "symbol/Bird/001": {
+   "group": "g0040",
+   "split": "train"
+  },
+  "symbol/Bird/002": {
+   "group": "g0256",
+   "split": "train"
+  },
+  "symbol/Bird/003": {
+   "group": "g0257",
+   "split": "test"
+  },
+  "symbol/Bird/004": {
+   "group": "g0258",
+   "split": "train"
+  },
+  "symbol/Bird/005": {
+   "group": "g0259",
+   "split": "train"
+  },
+  "symbol/Bird/006": {
+   "group": "g0260",
+   "split": "val"
+  },
+  "symbol/Bird/007": {
+   "group": "g0063",
+   "split": "train"
+  }
+ }
+}

@@ -8,13 +8,24 @@ A research project exploring **style–content separation for Ku Shulan papercut
 
 ## Research workflow
 
+[![Framework: data curation, block-wise B-LoRA fine-tuning, style–content composition, evaluation](assets/framework/framework.png)](assets/framework/framework.pdf)
+
+*Paper-style framework figure ([vector PDF](assets/framework/framework.pdf); LaTeX snippet and caption in [assets/framework](assets/framework/README.md)). It embeds only thumbnails already in the repository and no unverified scores. The project-supplied workflow figure follows.*
+
 [![Research workflow: dataset construction, style–content decoupled generation, and evaluation](assets/research-pipeline.jpg)](assets/research-pipeline.jpg)
 
 *Project-supplied overview. Numerical claims are preserved as shown in the figure; the evidence available in this repository and remaining verification gaps are documented in [Experiments](EXPERIMENTS.md).*
 
 1. **Data preparation:** organize representative papercut elements and pattern symbols, preserving image versions, processing notes, and caption documents. The figure describes line-art extraction, thickening, recoloring, and annotation.
 2. **Generation:** combine the content block from one B-LoRA experiment with the style block from another, using SDXL as the backbone. Existing adapters and the upstream inference entry point are included.
-3. **Evaluation design:** assess structural similarity, image/text alignment, and expert judgments of elements, style, and symbols. Metric scripts and per-sample ratings are not yet included; the figure's scores are not independently reproduced here.
+3. **Evaluation:** `tools/evaluate.py` implements Edge-F1, silhouette IoU, optional DINOv2 / CLIP-I / CLIP-T, palette distance, and Kendall's W for expert ratings. Pixel-aligned metrics are always reported against a mismatched-content control. On the three archived results they do not beat the control, because plain B-LoRA sampling is not spatially conditioned (see [Experiments](EXPERIMENTS.md)). The original figure's scores are not reproduced here.
+
+## Research tools
+
+- `tools/build_records.py`: 282 image–caption–category records (`metadata/records.jsonl`), all matched. 270 images are byte-unique; captions are split into content and style/symbol terms.
+- `tools/split.py`: groups exact and near-duplicates (261 groups), then produces a stratified split (`metadata/splits.json`).
+- `tools/generate.py`: seeded, logged B-LoRA generation (`run.json`, `pairs.csv`).
+- `tools/evaluate.py`: metrics with bootstrap CIs and a control baseline; rater agreement.
 
 ## Available assets
 

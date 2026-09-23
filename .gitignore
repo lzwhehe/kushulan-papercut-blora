@@ -12,6 +12,7 @@ venv/
 !.env.example
 .pytest_cache/
 outputs/
+runs/
 .migration/
 # Original remains on disk; its lossless parts are tracked instead.
 data/整理的数据-常用_副本/库淑兰剪纸数据采集/1.库淑兰剪纸作品.zip
