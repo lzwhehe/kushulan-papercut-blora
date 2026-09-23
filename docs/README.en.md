@@ -1,5 +1,7 @@
 # KUSHULAN Papercut B-LoRA
 
+![KUSHULAN Papercut B-LoRA — style–content disentanglement research](assets/project-banner.png)
+
 A research project exploring **style–content separation for Ku Shulan papercut generation with SDXL and B-LoRA**. The workflow connects folk-art data preparation, content and style adaptation, and evaluation of structure, visual style, and decorative symbols.
 
 [中文介绍](../README.md) · [Dataset](DATASET.md) · [Experiments](EXPERIMENTS.md) · [Download and restoration](MIGRATION.md)

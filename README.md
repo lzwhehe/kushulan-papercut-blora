@@ -1,6 +1,6 @@
 # KUSHULAN Papercut B-LoRA
 
-### 库淑兰剪纸的风格与内容分离生成研究
+![KUSHULAN Papercut B-LoRA — 库淑兰剪纸风格与内容分离研究](docs/assets/project-banner.png)
 
 [![Migration tools](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml/badge.svg)](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml)
 [![SDXL](https://img.shields.io/badge/Backbone-SDXL-5865F2)](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
