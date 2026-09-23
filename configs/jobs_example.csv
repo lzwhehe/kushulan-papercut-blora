@@ -1,0 +1,4 @@
+id,prompt,content_image,style_image
+fish,A fish in ksl style,../docs/assets/results/fish-content.png,../docs/assets/results/fish-style.png
+bird,A bird in ksl style,../docs/assets/results/bird-content.png,../docs/assets/results/bird-style.jpeg
+motif,A symmetric motif in ksl style,../docs/assets/results/motif-content.png,../docs/assets/results/motif-style.jpeg
