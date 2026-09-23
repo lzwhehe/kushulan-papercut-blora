@@ -8,7 +8,7 @@
 
 本项目以库淑兰剪纸为研究对象，探索如何在保留人物、动物、植物等元素结构的同时，迁移剪纸的色彩、纹样与装饰风格。研究流程围绕 **数据整理 → SDXL / B-LoRA 风格与内容分离 → 生成与评估** 展开，将传统剪纸资料与生成式模型实验连接起来。
 
-仓库提供 **179 张代表元素、103 张纹样符号、两轮 LoRA 实验权重与检查点，以及 8 张已有生成样例**，并附带提示词资料、官方训练/推理入口和逐文件校验工具，便于查看研究过程与继续实验。
+仓库提供 **179 张代表元素、103 张纹样符号、两轮 LoRA 实验权重与检查点，以及内容—风格—生成结果对照**，并附带提示词资料、官方训练/推理入口和逐文件校验工具，便于查看研究过程与继续实验。
 
 [English](docs/README.en.md) · [方法流程](#方法流程) · [生成结果](#生成结果) · [快速开始](#快速开始) · [数据说明](docs/DATASET.md) · [实验记录](docs/EXPERIMENTS.md) · [完整下载](docs/MIGRATION.md)
 
@@ -32,12 +32,15 @@
 
 ## 生成结果
 
-以下图片来自原项目 `Experiment/test-round1/res/`，为既有结果，并非本次迁移新生成。
+以下选自研究记录 [《新结果与7.2测试结果对比》](https://www.yuque.com/ariel-cgurv/br3z17/sba8ooeg1ir3fpaz) 的 **“7.5结果”**：从左到右依次为内容线稿、风格参考和生成图。展示原表前三组，每组采用原表的第一张结果，便于观察形态、配色与装饰纹样之间的关系。
 
-| A cat in ksl style | A kushulan_cat in kushulan animal collection style |
-| --- | --- |
-| ![Original cat result](Experiment/test-round1/res/A%20cat%20in%20ksl%20style_0.jpg) | ![Original collection result](Experiment/test-round1/res/A%20kushulan_cat%20in%20kushulan%20animal%20collection%20style_0.jpg) |
-| ![Original cat variant](Experiment/test-round1/res/A%20cat%20in%20ksl%20style_1.jpg) | ![Original collection variant](Experiment/test-round1/res/A%20kushulan_cat%20in%20kushulan%20animal%20collection%20style_1.jpg) |
+| 内容线稿 · Content | 风格参考 · Style | 生成结果 · Output |
+| :---: | :---: | :---: |
+| <img src="docs/assets/results/fish-content.png" width="240" alt="鱼形内容线稿"> | <img src="docs/assets/results/fish-style.png" width="240" alt="猫形剪纸风格参考"> | <img src="docs/assets/results/fish-result.jpeg" width="240" alt="7.5实验的鱼形生成结果"> |
+| <img src="docs/assets/results/bird-content.png" width="240" alt="展翅鸟形内容线稿"> | <img src="docs/assets/results/bird-style.jpeg" width="240" alt="长尾动物剪纸风格参考"> | <img src="docs/assets/results/bird-result.jpeg" width="240" alt="7.5实验的鸟形生成结果"> |
+| <img src="docs/assets/results/motif-content.png" width="240" alt="左右对称纹样内容线稿"> | <img src="docs/assets/results/motif-style.jpeg" width="240" alt="蜘蛛形剪纸风格参考"> | <img src="docs/assets/results/motif-result.jpeg" width="240" alt="7.5实验的对称纹样生成结果"> |
+
+这些是研究文档中的既有实验图片，原图已保存到仓库，未重新生成或修饰。图像与当前两份本地权重的逐次运行对应关系尚待补全；原始 8 张猫图仍保留在 `Experiment/test-round1/res/`。更多对照、提示词与轮廓线实验的资料说明见 [生成结果与对比记录](docs/RESULTS.md)。
 
 ## 已有数据与实验资产
 
@@ -50,7 +53,7 @@
 | 实验 | 两轮，各有 checkpoint-500 和 checkpoint-1000 |
 | 导出权重 | `ksl_style.safetensors`、`ksl_content.safetensors` |
 | 权重结构 | 每份 320 个 tensor，LoRA rank 64，覆盖两个目标注意力块 |
-| 已有生成图 | 8 张，位于第一轮实验目录 |
+| 生成结果展示 | 语雀“7.5结果”中的 3 组内容/风格/结果对照；第一轮目录另保留原始 8 张猫图 |
 | 迁移清单 | 3,443 个有效源文件，9,948,489,017 bytes，逐文件 SHA-256 |
 
 **复现状态：** 数据、权重与检查点已归档并校验。原始训练脚本与运行日志未在源资料中找到；`vendor/B-LoRA/` 为后续补充的固定版本官方实现。本次迁移未重新执行 GPU 训练或推理。训练配方、历史参数与评估结果的可复核范围见 [实验记录](docs/EXPERIMENTS.md)。

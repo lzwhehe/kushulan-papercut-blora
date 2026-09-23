@@ -1,0 +1,103 @@
+{
+  "source_document": {
+    "title": "新结果与7.2测试结果对比 副本",
+    "url": "https://www.yuque.com/ariel-cgurv/br3z17/sba8ooeg1ir3fpaz",
+    "gallery_selection": "First three image rows under 7.5结果; first result column in each row. Content/style/result order is retained.",
+    "accessed": "2026-09-23"
+  },
+  "additional_source": {
+    "title": "对比实验 副本",
+    "url": "https://www.yuque.com/ariel-cgurv/br3z17/nnegag2lcp019x2w",
+    "pdf_filename": "对比实验 副本 · 语雀.pdf",
+    "pdf_sha256": "b0d0684c77aa5a3b952bd412431183cf26ea2fd162adb8976114741eb54ea422",
+    "pages": 17,
+    "usage": "Read for prompt-complexity and outline-thickness comparison context; PDF not redistributed."
+  },
+  "transformation": "Original downloaded image bytes, unchanged. Display scaling only in Markdown/HTML.",
+  "images": [
+    {
+      "path": "docs/assets/results/fish-content.png",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/png/22943174/1751973779537-af2c7e98-a95d-45c9-9979-67c4c86719ea.png",
+      "bytes": 92713,
+      "sha256": "f5dc412cc848f45df7642b9d49dc4d3388902a2553e6deaaf8800a18424bf66e",
+      "role": "fish-content"
+    },
+    {
+      "path": "docs/assets/results/fish-style.png",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/png/22943174/1751973788569-a68e3732-036e-47c0-9af7-548f87a1a424.png",
+      "bytes": 1338802,
+      "sha256": "98716c377a0a7c4095658f3924a932cb24e902d855d079b1dad8685f63ffc14e",
+      "role": "fish-style"
+    },
+    {
+      "path": "docs/assets/results/fish-result.jpeg",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/jpeg/22943174/1751973823667-7f91ea04-9f0a-4184-9e16-420f7ca0df34.jpeg",
+      "bytes": 97666,
+      "sha256": "7440cd3e0cdf265fc09eb72609ccff6d60a51262bc617f7085955b00dff7a44f",
+      "role": "fish-result"
+    },
+    {
+      "path": "docs/assets/results/bird-content.png",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/png/22943174/1751973867609-ac18dc61-fc7b-497f-9f2d-24ec87c61ebc.png",
+      "bytes": 989846,
+      "sha256": "11ac70b1241f7e67bc16aa75576d1d244c78066c2c118de315db2520746b1bd8",
+      "role": "bird-content"
+    },
+    {
+      "path": "docs/assets/results/bird-style.jpeg",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/jpeg/22943174/1751973861581-a23c23a4-b4cf-4d7e-9a59-7f93d4827556.jpeg",
+      "bytes": 235868,
+      "sha256": "23cfd6f9c2546b9cf137f5f1ecf03df26b287bcd6be06bfa00096eec03564292",
+      "role": "bird-style"
+    },
+    {
+      "path": "docs/assets/results/bird-result.jpeg",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/jpeg/22943174/1751973844831-0c90b8a3-bf26-4fcd-96c9-34d90ccb3a4a.jpeg",
+      "bytes": 114681,
+      "sha256": "0e2350d49c454f578f281186b5621114ec365435075c82cc7e518b4f345df8cc",
+      "role": "bird-result"
+    },
+    {
+      "path": "docs/assets/results/motif-content.png",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/png/22943174/1751973875013-4d9f64d1-71fd-4900-bf17-c175e37d93a8.png",
+      "bytes": 96171,
+      "sha256": "9db022cf8552e2cf1cbcce195772a602a861cfef6b752567abe6cd81cbdc6a43",
+      "role": "motif-content"
+    },
+    {
+      "path": "docs/assets/results/motif-style.jpeg",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/jpeg/22943174/1751973879995-a1b9bed7-fa28-459e-b53d-62274d677463.jpeg",
+      "bytes": 366334,
+      "sha256": "63ffb1078b581c0d1f1b8bc87df9002995db4e53f46882f6d07d5b54bc3a31fe",
+      "role": "motif-style"
+    },
+    {
+      "path": "docs/assets/results/motif-result.jpeg",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/jpeg/22943174/1751973980239-d5e2bb8f-2ea0-4a6a-afa0-5923da343381.jpeg",
+      "bytes": 108013,
+      "sha256": "a9c78440eb0ed10372ad8887a132b162b85f63153f69f46d1707f627071713e5",
+      "role": "motif-result"
+    },
+    {
+      "path": "docs/assets/results/teapot-fish-comparison.png",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/png/22943174/1751977665301-798aae43-0ba4-41ee-beda-be61bb08f3f0.png",
+      "bytes": 1109990,
+      "sha256": "73a1276785a7ad3fa7df523a7b7e1dfc3cd75710e70cbda955192a21b8c9d27d",
+      "role": "teapot-fish-comparison"
+    },
+    {
+      "path": "docs/assets/results/motif-comparison.png",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/png/22943174/1751977485504-638830e4-0927-4e7d-8b41-285f36d43738.png",
+      "bytes": 610127,
+      "sha256": "bef4a5dc4111aa1e72833a321039a9e8f3a43419ddc236d8fcefef75ae297f69",
+      "role": "motif-comparison"
+    },
+    {
+      "path": "docs/assets/results/figure-comparison.png",
+      "source_asset_url": "https://cdn.nlark.com/yuque/0/2025/png/22943174/1751977600431-e90d324d-e973-479e-b752-30422e246863.png",
+      "bytes": 724871,
+      "sha256": "a664425b74bb800ddb4869d328e17539ba22ead74e5e0770c3a8de82fa76a330",
+      "role": "figure-comparison"
+    }
+  ]
+}

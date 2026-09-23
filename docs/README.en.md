@@ -16,6 +16,8 @@ A research project exploring **style–content separation for Ku Shulan papercut
 
 ## Available assets
 
+The [result gallery](../README.md#生成结果) now shows three content/style/output triplets from the **“7.5 results”** section of the project's Yuque research notes: fish, bird, and a symmetric motif. These are the first three image rows, using the first output in each row. Original images are stored in the repository; no Yuque login is needed to view them here. See [result provenance and comparison notes](RESULTS.md). The original eight cat outputs remain in `Experiment/test-round1/res/`; the online examples have not yet been mapped to individual local checkpoints.
+
 The curated directories contain 179 representative elements across six categories and 103 pattern images across 21 categories. Both exported adapters contain 320 tensors with rank 64, targeting the content and style blocks used by the official B-LoRA implementation.
 
 The migration preserves 3,443 original research files (9,948,489,017 bytes), excluding operating-system metadata and temporary lock files. Large assets use Git LFS. One 3.49 GB ZIP is stored as four lossless parts with SHA-256 verification.
