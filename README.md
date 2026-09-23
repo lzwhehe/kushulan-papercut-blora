@@ -1,12 +1,36 @@
 # KUSHULAN Papercut B-LoRA
 
-基于库淑兰剪纸资料的 **SDXL / B-LoRA 风格与内容分离实验归档**。本仓库完整迁移原项目中的数据、提示词文档、两轮训练检查点和生成样例，并补充可校验的数据清单、官方训练/推理入口和克隆还原说明。
+### 库淑兰剪纸的风格与内容分离生成研究
 
-**当前状态：实验资产已保存，原始训练脚本与运行日志未在本地资料中找到。** `vendor/B-LoRA/` 是迁移时引入的官方实现，不冒充原实验代码；尚未在本次迁移中重新进行 GPU 训练或推理。图中的自动评估分数、专家评分和训练样本配方尚未由日志复核。
+[![Migration tools](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml/badge.svg)](https://github.com/lzwhehe/kushulan-papercut-blora/actions/workflows/ci.yml)
+[![SDXL](https://img.shields.io/badge/Backbone-SDXL-5865F2)](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
+[![B-LoRA](https://img.shields.io/badge/Method-B--LoRA-BD3B36)](https://github.com/yardenfren1996/B-LoRA)
 
-[English overview](docs/README.en.md) · [完整下载与还原](docs/MIGRATION.md) · [数据说明](docs/DATASET.md) · [实验记录](docs/EXPERIMENTS.md) · [上游来源](vendor/B-LoRA/PROVENANCE.md)
+本项目以库淑兰剪纸为研究对象，探索如何在保留人物、动物、植物等元素结构的同时，迁移剪纸的色彩、纹样与装饰风格。研究流程围绕 **数据整理 → SDXL / B-LoRA 风格与内容分离 → 生成与评估** 展开，将传统剪纸资料与生成式模型实验连接起来。
 
-## 已有生成结果
+仓库提供 **179 张代表元素、103 张纹样符号、两轮 LoRA 实验权重与检查点，以及 8 张已有生成样例**，并附带提示词资料、官方训练/推理入口和逐文件校验工具，便于查看研究过程与继续实验。
+
+[English](docs/README.en.md) · [方法流程](#方法流程) · [生成结果](#生成结果) · [快速开始](#快速开始) · [数据说明](docs/DATASET.md) · [实验记录](docs/EXPERIMENTS.md) · [完整下载](docs/MIGRATION.md)
+
+## 方法流程
+
+[![库淑兰剪纸研究流程：半结构化数据构建、风格与内容分离生成、自动指标与专家评价](docs/assets/research-pipeline.jpg)](docs/assets/research-pipeline.jpg)
+
+*研究流程概览，点击图片可查看原图。图中数值保留所提供流程图的原始口径；与当前仓库资料的对应关系和待复核项见 [实验记录](docs/EXPERIMENTS.md#与参考图的对应关系)。*
+
+### 1. 剪纸元素与纹样整理
+
+从原始作品中整理代表元素与纹样符号，按人物、动物、植物、日常器物、窗花和边框组织数据。流程图进一步描述了线稿提取、轮廓加粗、人工重着色和语义标注方案；仓库保留各阶段已有图像版本、处理文档与提示词资料。
+
+### 2. 风格与内容分离生成
+
+以 SDXL 为基础，使用 B-LoRA 的目标注意力块分别提取内容与风格信息，在推理时组合来自不同实验的权重。线稿与内容描述用于表达元素结构，风格参考与包含纹样语义的提示词用于描述色彩和装饰特征。现有两份导出权重均包含内容块与风格块，可通过官方推理入口选择组合。
+
+### 3. 结构、风格与符号表达评估
+
+流程图中的评估设计结合 Edge F1、silhouette IoU、CLIP-I / CLIP-T，以及结构、元素、风格和符号维度的专家评分。当前仓库保存了生成样例；配对评估数据、评分表与指标复现脚本尚待补充，图中分数不作为本仓库已复跑验证的结论。
+
+## 生成结果
 
 以下图片来自原项目 `Experiment/test-round1/res/`，为既有结果，并非本次迁移新生成。
 
@@ -15,7 +39,7 @@
 | ![Original cat result](Experiment/test-round1/res/A%20cat%20in%20ksl%20style_0.jpg) | ![Original collection result](Experiment/test-round1/res/A%20kushulan_cat%20in%20kushulan%20animal%20collection%20style_0.jpg) |
 | ![Original cat variant](Experiment/test-round1/res/A%20cat%20in%20ksl%20style_1.jpg) | ![Original collection variant](Experiment/test-round1/res/A%20kushulan_cat%20in%20kushulan%20animal%20collection%20style_1.jpg) |
 
-## 项目内容
+## 已有数据与实验资产
 
 | 内容 | 本地核实结果 |
 | --- | --- |
@@ -29,15 +53,7 @@
 | 已有生成图 | 8 张，位于第一轮实验目录 |
 | 迁移清单 | 3,443 个有效源文件，9,948,489,017 bytes，逐文件 SHA-256 |
 
-```mermaid
-flowchart LR
-    A[原始剪纸资料与处理文档] --> B[179 个代表元素与 103 个纹样]
-    B --> C[图像与提示词整理]
-    C -.原实验脚本与日志待补.-> D[两轮 B-LoRA 权重与检查点]
-    D --> E[内容块与风格块组合推理]
-    E --> F[已有 8 张生成结果]
-    F -.待建立配对与标注.-> G[结构指标与专家评估]
-```
+**复现状态：** 数据、权重与检查点已归档并校验。原始训练脚本与运行日志未在源资料中找到；`vendor/B-LoRA/` 为后续补充的固定版本官方实现。本次迁移未重新执行 GPU 训练或推理。训练配方、历史参数与评估结果的可复核范围见 [实验记录](docs/EXPERIMENTS.md)。
 
 ## 快速开始
 
@@ -94,7 +110,7 @@ metadata/              原始文件 SHA-256 清单与汇总
 vendor/B-LoRA/         固定版本的上游训练/推理代码及原许可证
 tools/                  分块、还原、清单构建与验证工具
 tests/                  迁移工具的单元测试
-docs/                   数据、实验和迁移说明
+docs/                   研究流程图、数据、实验和迁移说明
 ```
 
 原始文件名中的 `.jpg.jpg`、中文目录及重复备份均予以保留，以避免破坏已有提示词与实验资料的对应关系。仅排除 `.DS_Store`、AppleDouble `._*` 和 Office `~$*` 等系统/临时文件。
@@ -103,4 +119,4 @@ docs/                   数据、实验和迁移说明
 
 本项目使用 [B-LoRA 官方实现](https://github.com/yardenfren1996/B-LoRA)，方法来自 Frenkel 等人的 [Implicit Style-Content Separation using B-LoRA](https://arxiv.org/abs/2403.14572)。本仓库的贡献是剪纸场景资料整理、已有实验资产保存与迁移工程；B-LoRA 方法和官方代码归原作者所有。
 
-新增迁移工具与原创说明采用 [MIT License](LICENSE)。第三方代码保留其原许可证。剪纸作品、原始文档、数据与模型权重不自动适用代码的 MIT 许可；目前未在原始资料中找到单独的数据授权文件，见 [数据说明](docs/DATASET.md)。
+新增迁移工具与原创说明采用 [MIT License](LICENSE)。第三方代码保留其原许可证。研究流程图、剪纸作品、原始文档、数据与模型权重不自动适用代码的 MIT 许可；目前未在原始资料中找到单独的数据授权文件，见 [数据说明](docs/DATASET.md)。

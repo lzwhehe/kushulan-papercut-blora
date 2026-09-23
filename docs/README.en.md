@@ -1,6 +1,20 @@
 # KUSHULAN Papercut B-LoRA
 
-A faithful archive of a Chinese folk papercut research project: image collections, caption documents, two B-LoRA experiment runs, checkpoints, and eight existing generated images.
+A research project exploring **style–content separation for Ku Shulan papercut generation with SDXL and B-LoRA**. The workflow connects folk-art data preparation, content and style adaptation, and evaluation of structure, visual style, and decorative symbols.
+
+[中文介绍](../README.md) · [Dataset](DATASET.md) · [Experiments](EXPERIMENTS.md) · [Download and restoration](MIGRATION.md)
+
+## Research workflow
+
+[![Research workflow: dataset construction, style–content decoupled generation, and evaluation](assets/research-pipeline.jpg)](assets/research-pipeline.jpg)
+
+*Project-supplied overview. Numerical claims are preserved as shown in the figure; the evidence available in this repository and remaining verification gaps are documented in [Experiments](EXPERIMENTS.md).*
+
+1. **Data preparation:** organize representative papercut elements and pattern symbols, preserving image versions, processing notes, and caption documents. The figure describes line-art extraction, thickening, recoloring, and annotation.
+2. **Generation:** combine the content block from one B-LoRA experiment with the style block from another, using SDXL as the backbone. Existing adapters and the upstream inference entry point are included.
+3. **Evaluation design:** assess structural similarity, image/text alignment, and expert judgments of elements, style, and symbols. Metric scripts and per-sample ratings are not yet included; the figure's scores are not independently reproduced here.
+
+## Available assets
 
 The curated directories contain 179 representative elements across six categories and 103 pattern images across 21 categories. Both exported adapters contain 320 tensors with rank 64, targeting the content and style blocks used by the official B-LoRA implementation.
 
