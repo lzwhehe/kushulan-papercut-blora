@@ -108,19 +108,26 @@ def nearest_palette(lab: np.ndarray, pal_lab: np.ndarray):
 
 
 # ----------------------------------------------------------------- cut projection
-def cut_project(rgb: np.ndarray, pal: Palette, min_area_frac: float = 2e-4, smooth: int = 2):
+def cut_project(rgb: np.ndarray, pal: Palette, min_area_frac: float = 2e-4, smooth: int = 2,
+                ground: np.ndarray | None = None):
     """Project an image onto a cuttable layered papercut.
 
     1. assign each pixel to the nearest palette colour (white = background);
     2. majority (mode) filter to remove single-pixel speckle;
     3. merge islands smaller than ``min_area_frac`` of the image into the
        surrounding label, i.e. pieces that are too small to cut by hand.
+    If ``ground`` (bool mask, True = outside the figure) is given, those pixels are
+    bare paper (figure-on-ground) before steps 2-3.
     Returns (projected_rgb, label_map, stats).
     """
     lab = to_lab(rgb)
     pal_lab = pal.lab_with_white
     labels, _ = nearest_palette(lab, pal_lab)
     raw_labels = labels.copy()
+    if ground is not None:
+        g = ground if ground.shape == labels.shape else np.asarray(
+            Image.fromarray(ground.astype(np.uint8) * 255).resize(labels.shape[::-1], Image.NEAREST)) > 0
+        labels[g] = len(pal_lab) - 1
     if smooth:
         labels = _mode_filter(labels, len(pal_lab), smooth)
     h, w = labels.shape
@@ -240,6 +247,12 @@ def craft_metrics(rgb: np.ndarray, pal: Palette, grad_tau: float = 6.0) -> dict:
 
 
 # ---------------------------------------------------------- structure metrics
+def ground_from_lineart(lines: np.ndarray, margin: int = 12) -> np.ndarray:
+    """Bare-paper region: outside the drawing's silhouette dilated by ``margin`` px (at 512)."""
+    sil = silhouette_from_lineart(lines)
+    return ~ndi.binary_dilation(sil, morphology.disk(margin))
+
+
 def lineart_mask(rgb: np.ndarray, thresh: float = 0.6) -> np.ndarray:
     g = rgb.mean(-1)
     m = g < thresh

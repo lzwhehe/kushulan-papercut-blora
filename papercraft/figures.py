@@ -34,7 +34,9 @@ def grid(rows, cols, out, cell=1.25, row_labels=None, col_labels=None):
             ax = axes[i, j]
             ax.set_xticks([]), ax.set_yticks([])
             for s in ax.spines.values():
-                s.set_visible(False)
+                s.set_visible(p is not None)
+                s.set_linewidth(0.4)
+                s.set_edgecolor("#b0b0b0")
             if p is None:
                 continue
             ax.imshow(p if isinstance(p, Image.Image) else _img(p))
@@ -82,27 +84,34 @@ def palette_panel(ax, pal: priors.Palette):
     ax.set_xlabel("share of foreground pixels", fontsize=6.5)
 
 
-def layers_figure(img_path, out, pal: priors.Palette, size=768):
+def layers_figure(img_path, out, pal: priors.Palette, size=512, ground=None, ncol=4):
     rgb = priors.load_rgb(img_path, size)
-    proj, labels, _, st = priors.cut_project(rgb, pal)
+    proj, labels, _, st = priors.cut_project(rgb, pal, ground=ground)
     pal_lab = pal.lab_with_white
     present = [k for k in np.argsort(pal_lab[:, 0]) if k != len(pal_lab) - 1 and (labels == k).mean() > 1e-3]
     n = len(present)
-    fig, axes = plt.subplots(1, 2 + n, figsize=(1.3 * (2 + n), 1.45))
-    axes[0].imshow(rgb), axes[0].set_title("generated", fontsize=6.5)
-    axes[1].imshow(proj), axes[1].set_title(f"cut projection ({n} sheets)", fontsize=6.5)
+    nrow = int(np.ceil(n / ncol))
+    fig = plt.figure(figsize=(7.2, 7.2 * max(nrow, 2) / (ncol + 4)))
+    gs = fig.add_gridspec(max(nrow, 2), ncol + 4, wspace=0.05, hspace=0.12)
+    ax = fig.add_subplot(gs[:, 0:2]); ax.imshow(rgb); ax.set_title("a  generated", fontsize=7, loc="left")
+    ax2 = fig.add_subplot(gs[:, 2:4]); ax2.imshow(proj)
+    ax2.set_title(f"b  cut projection ({n} sheets)", fontsize=7, loc="left")
     cols = np.clip(priors.color.lab2rgb(pal_lab[None])[0], 0, 1)
-    for ax, k in zip(axes[2:], present):
+    fgpix = max((labels != len(pal_lab) - 1).sum(), 1)
+    axes = [ax, ax2]
+    for i, k in enumerate(present):
+        a_ = fig.add_subplot(gs[i // ncol, 4 + i % ncol])
         m = labels == k
         sheet = np.ones_like(rgb)
         sheet[m] = cols[k]
-        ax.imshow(sheet)
-        ax.set_title(f"sheet {'#%02x%02x%02x' % tuple((cols[k] * 255).astype(int))}", fontsize=5.5)
-    for ax in axes:
-        ax.set_xticks([]), ax.set_yticks([])
-        for s in ax.spines.values():
+        a_.imshow(sheet)
+        hexc = "#%02x%02x%02x" % tuple((cols[k] * 255).astype(int))
+        a_.set_title(f"{hexc} {100 * m.sum() / fgpix:.0f}%", fontsize=5, pad=1)
+        axes.append(a_)
+    for a_ in axes:
+        a_.set_xticks([]), a_.set_yticks([])
+        for s in a_.spines.values():
             s.set_linewidth(0.3)
-    plt.tight_layout(w_pad=0.2)
     fig.savefig(out, bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
     return st

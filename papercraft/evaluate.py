@@ -47,12 +47,13 @@ def cpu_metrics(args):
     path, content_id, project, cdir = args
     rgb = priors.load_rgb(path, 512)
     rec = {}
-    if project:
-        rgb, labels, _, st = priors.cut_project(rgb, _pal())
-        rec.update(layers=st["layers"])
-    rec.update(priors.craft_metrics(rgb, _pal()))
     la = priors.load_rgb(Path(cdir) / f"{content_id}.png", 512)
     lines = la.mean(-1) < 0.85
+    if project:
+        rgb, labels, _, st = priors.cut_project(rgb, _pal(), ground=priors.ground_from_lineart(lines))
+        rec.update(layers=st["layers"])
+        np.save(Path(path).with_suffix(".labels.npy"), labels.astype(np.uint8))
+    rec.update(priors.craft_metrics(rgb, _pal()))
     rec.update(priors.edge_f1(priors.edge_map(rgb), lines, tol=3))
     rec["sil_iou"] = priors.silhouette_iou(rgb, priors.silhouette_from_lineart(lines))
     return rec
@@ -154,10 +155,12 @@ def main():
     for gdir, parsed in jobs.items():
         cpu = cpu_all[gdir]
         ims = []
-        for f, *_ in parsed:
+        for f, cid, _, _ in parsed:
             rgb = priors.load_rgb(f, 512)
             if a.project:
-                rgb = priors.cut_project(rgb, _pal())[0]
+                lab = np.load(f.with_suffix(".labels.npy"))
+                pl = _pal().lab_with_white
+                rgb = np.clip(priors.color.lab2rgb(pl[lab][None])[0], 0, 1)
             ims.append(Image.fromarray((rgb * 255).astype(np.uint8)))
         ce, de = emb.images(ims)
         te = emb.texts([f"a papercut of {contents[cid]['subject']}" for _, cid, _, _ in parsed])
