@@ -1,0 +1,1307 @@
+{
+ "train": [
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/1.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/10.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/11.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/13.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/14.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/15.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/16.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/17.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/19.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/2.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/20.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/21.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/22.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/23.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/24.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/25.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/26.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/27.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/28.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/29.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/3.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/30.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/31.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/32.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/33.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/34.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/35.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/36.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/37.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/39.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/4.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/40.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/41.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/42.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/43.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/44.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/45.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/46.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/5.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/6.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/7.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/8.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/9.jpg",
+   "caption": "a animal"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/1.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/10.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/11.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/12.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/13.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/14.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/15.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/16.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/17.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/18.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/19.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/2.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/20.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/21.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/22.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/23.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/24.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/4.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/5.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/7.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/8.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/9.jpg",
+   "caption": "a daily object"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/1.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/10.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/11.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/13.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/14.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/15.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/16.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/17.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/18.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/19.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/20.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/3.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/4.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/5.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/6.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/7.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/8.jpg",
+   "caption": "a decorative border"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/1.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/10.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/11.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/12.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/13.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/14.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/15.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/17.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/18.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/19.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/2.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/20.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/21.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/22.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/24.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/25.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/27.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/28.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/29.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/30.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/4.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/6.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/7.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/8.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/9.jpg",
+   "caption": "a folk figure"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/1.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/10.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/11.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/12.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/13.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/14.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/15.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/16.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/18.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/19.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/2.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/20.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/21.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/22.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/23.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/24.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/25.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/26.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/27.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/28.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/3.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/30.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/31.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/32.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/33.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/34.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/35.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/36.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/37.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/38.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/4.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/5.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/6.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/7.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/9.jpg",
+   "caption": "a plant"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/10.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/12.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/13.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/14.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/16.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/17.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/18.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/2.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/20.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/6.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/7.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/8.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/9.jpg",
+   "caption": "a round window flower"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/1.jpg",
+   "caption": "a bird motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/2.jpg",
+   "caption": "a bird motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/4.jpg",
+   "caption": "a bird motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/5.jpg",
+   "caption": "a bird motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/6.jpg",
+   "caption": "a bird motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/7.jpg",
+   "caption": "a bird motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Butterfly/1.jpg",
+   "caption": "a butterfly motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Butterfly/2.jpg",
+   "caption": "a butterfly motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Butterfly/3.jpg",
+   "caption": "a butterfly motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Butterfly/4.jpg",
+   "caption": "a butterfly motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Butterfly/5.jpg",
+   "caption": "a butterfly motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Chrysanthemum/1.jpg",
+   "caption": "a chrysanthemum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Chrysanthemum/2.jpg",
+   "caption": "a chrysanthemum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Chrysanthemum/3.jpg",
+   "caption": "a chrysanthemum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Chrysanthemum/4.jpg",
+   "caption": "a chrysanthemum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Chrysanthemum/5.jpg",
+   "caption": "a chrysanthemum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Crescent/1.jpg",
+   "caption": "a crescent motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Crescent/2.jpg",
+   "caption": "a crescent motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Crescent/3.jpg",
+   "caption": "a crescent motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Curtain/1.jpg",
+   "caption": "a curtain motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Curtain/2.jpg",
+   "caption": "a curtain motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Curtain/3.jpg",
+   "caption": "a curtain motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Curtain/4.jpg",
+   "caption": "a curtain motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Dot/1.jpg",
+   "caption": "a dot motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Dot/2.jpg",
+   "caption": "a dot motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Dot/3.jpg",
+   "caption": "a dot motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Dot/4.jpg",
+   "caption": "a dot motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Dot/5.jpg",
+   "caption": "a dot motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Dot/6.jpg",
+   "caption": "a dot motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Fish/1.jpg",
+   "caption": "a fish motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Fish/2.jpg",
+   "caption": "a fish motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Fish/3.jpg",
+   "caption": "a fish motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Fish/4.jpg",
+   "caption": "a fish motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Fish/5.jpg",
+   "caption": "a fish motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Glands/1.jpg",
+   "caption": "a glands motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Glands/2.jpg",
+   "caption": "a glands motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Glands/3.jpg",
+   "caption": "a glands motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Glands/4.jpg",
+   "caption": "a glands motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HangingCoin/1.jpg",
+   "caption": "a hanging coin motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HangingCoin/2.jpg",
+   "caption": "a hanging coin motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HangingCoin/3.jpg",
+   "caption": "a hanging coin motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HeadOrnament/1.jpg",
+   "caption": "a head ornament motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HeadOrnament/2.jpg",
+   "caption": "a head ornament motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HeadOrnament/3.jpg",
+   "caption": "a head ornament motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HeadOrnament/4.jpg",
+   "caption": "a head ornament motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/HeadOrnament/5.jpg",
+   "caption": "a head ornament motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Heya/1.jpg",
+   "caption": "a heya motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Heya/2.jpg",
+   "caption": "a heya motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Heya/3.jpg",
+   "caption": "a heya motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Heya/4.jpg",
+   "caption": "a heya motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Heya/5.jpg",
+   "caption": "a heya motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Lotus/1.jpg",
+   "caption": "a lotus motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Lotus/2.jpg",
+   "caption": "a lotus motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Lotus/3.jpg",
+   "caption": "a lotus motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Lotus/4.jpg",
+   "caption": "a lotus motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Lotus/5.jpg",
+   "caption": "a lotus motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peach/1.jpg",
+   "caption": "a peach motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peach/2.jpg",
+   "caption": "a peach motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peach/3.jpg",
+   "caption": "a peach motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peony/1.jpg",
+   "caption": "a peony motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peony/2.jpg",
+   "caption": "a peony motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peony/3.jpg",
+   "caption": "a peony motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peony/4.jpg",
+   "caption": "a peony motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Peony/5.jpg",
+   "caption": "a peony motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Plum/1.jpg",
+   "caption": "a plum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Plum/2.jpg",
+   "caption": "a plum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Plum/3.jpg",
+   "caption": "a plum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Plum/4.jpg",
+   "caption": "a plum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Plum/5.jpg",
+   "caption": "a plum motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/SquareAuspiciousCloud/1.jpg",
+   "caption": "a square auspicious cloud motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/SquareAuspiciousCloud/2.jpg",
+   "caption": "a square auspicious cloud motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/SquareAuspiciousCloud/3.jpg",
+   "caption": "a square auspicious cloud motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/SquareAuspiciousCloud/4.jpg",
+   "caption": "a square auspicious cloud motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/SquareAuspiciousCloud/5.jpg",
+   "caption": "a square auspicious cloud motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/StringofCoins/1.jpg",
+   "caption": "a stringof coins motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/StringofCoins/2.jpg",
+   "caption": "a stringof coins motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/StringofCoins/3.jpg",
+   "caption": "a stringof coins motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/StringofCoins/4.jpg",
+   "caption": "a stringof coins motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/StringofCoins/5.jpg",
+   "caption": "a stringof coins motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Sun/1.jpg",
+   "caption": "a sun motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Sun/2.jpg",
+   "caption": "a sun motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Sun/3.jpg",
+   "caption": "a sun motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Sun/4.jpg",
+   "caption": "a sun motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Sun/5.jpg",
+   "caption": "a sun motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Sun/6.jpg",
+   "caption": "a sun motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/1.jpg",
+   "caption": "a tree motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/2.jpg",
+   "caption": "a tree motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/3.jpg",
+   "caption": "a tree motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/4.jpg",
+   "caption": "a tree motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/5.jpg",
+   "caption": "a tree motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/6.jpg",
+   "caption": "a tree motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/7.jpg",
+   "caption": "a tree motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Water/1.jpg",
+   "caption": "a water motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Water/2.jpg",
+   "caption": "a water motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Water/3.jpg",
+   "caption": "a water motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Water/4.jpg",
+   "caption": "a water motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Wind/1.jpg",
+   "caption": "a wind motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Wind/2.jpg",
+   "caption": "a wind motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Wind/3.jpg",
+   "caption": "a wind motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Wind/4.jpg",
+   "caption": "a wind motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Wind/5.jpg",
+   "caption": "a wind motif"
+  },
+  {
+   "path": "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Wind/6.jpg",
+   "caption": "a wind motif"
+  }
+ ],
+ "held_out": [
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/3.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/12.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/18.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/38.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/25.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/3.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/6.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/12.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/2.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/9.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/16.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/23.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/26.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/3.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/5.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/17.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/29.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/8.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/1.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/11.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/15.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/19.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/3.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/4.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/5.jpg"
+ ],
+ "test_indomain": [
+  {
+   "id": "人物-16",
+   "category": "person",
+   "outline": "data/涂方圆/库淑兰-对照图/人物-16-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/人物-16-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/16.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "人物-26",
+   "category": "person",
+   "outline": "data/涂方圆/库淑兰-对照图/人物-26-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/人物-26-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/26.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "人物-3",
+   "category": "person",
+   "outline": "data/涂方圆/库淑兰-对照图/人物-3-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/人物-3-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/3.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "人物-4",
+   "category": "person",
+   "outline": "data/涂方圆/库淑兰-对照图/人物-4-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/人物-4-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/23.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "人物-5",
+   "category": "person",
+   "outline": "data/涂方圆/库淑兰-对照图/人物-5-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/人物-5-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/5.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "动物-18",
+   "category": "animal",
+   "outline": "data/涂方圆/库淑兰-对照图/动物-18-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/动物-18-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/18.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "动物-38",
+   "category": "animal",
+   "outline": "data/涂方圆/库淑兰-对照图/动物-38-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/动物-38-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/38.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "动物-鸟-3",
+   "category": "animal",
+   "outline": "data/涂方圆/库淑兰-对照图/动物-鸟-3-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/动物-鸟-3-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/12.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Bird/3.jpg"
+   ],
+   "match_sim": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "日常-25",
+   "category": "daily object",
+   "outline": "data/涂方圆/库淑兰-对照图/日常-25-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/日常-25-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/25.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "日常-3",
+   "category": "daily object",
+   "outline": "data/涂方圆/库淑兰-对照图/日常-3-轮廓线.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/日常-3-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/3.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "日常-6",
+   "category": "daily object",
+   "outline": "data/涂方圆/库淑兰-对照图/日常-6-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/日常-6-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/6.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "植物-17",
+   "category": "plant",
+   "outline": "data/涂方圆/库淑兰-对照图/植物-17-轮廓线.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/植物-17-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/17.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "植物-29",
+   "category": "plant",
+   "outline": "data/涂方圆/库淑兰-对照图/植物-29-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/植物-29-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/29.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "植物-8",
+   "category": "plant",
+   "outline": "data/涂方圆/库淑兰-对照图/植物-8-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/植物-8-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/8.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "窗花-3",
+   "category": "window flower",
+   "outline": "data/涂方圆/库淑兰-对照图/窗花-3-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/窗花-3-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/11.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/15.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/19.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/3.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/5.jpg"
+   ],
+   "match_sim": [
+    0.95,
+    0.936,
+    0.935,
+    1.0,
+    0.944
+   ]
+  },
+  {
+   "id": "窗花-4",
+   "category": "window flower",
+   "outline": "data/涂方圆/库淑兰-对照图/窗花-4-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/窗花-4-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/1.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/4.jpg"
+   ],
+   "match_sim": [
+    0.939,
+    1.0
+   ]
+  },
+  {
+   "id": "边框-12",
+   "category": "border",
+   "outline": "data/涂方圆/库淑兰-对照图/边框-12-轮廓.jpg",
+   "reference": "data/涂方圆/库淑兰-对照图/边框-12-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/12.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "边框-2",
+   "category": "border",
+   "outline": "data/涂方圆/库淑兰-对照图/边框-2-轮廓.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/边框-2-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/2.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  },
+  {
+   "id": "边框-9",
+   "category": "border",
+   "outline": "data/涂方圆/库淑兰-对照图/边框-9-轮廓线.jpeg",
+   "reference": "data/涂方圆/库淑兰-对照图/边框-9-处理后.jpg",
+   "matched_catalogue": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/9.jpg"
+   ],
+   "match_sim": [
+    1.0
+   ]
+  }
+ ],
+ "style_refs": [
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/7.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/25.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/32.jpg",
+  "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/8.jpg"
+ ]
+}

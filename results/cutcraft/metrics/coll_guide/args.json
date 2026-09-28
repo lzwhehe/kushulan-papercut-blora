@@ -1,0 +1,27 @@
+{
+ "method": "coll_cn",
+ "lora": "/home/ubuntu/kushulan-papercut-blora/outputs/style/coll",
+ "styles": [
+  0,
+  1
+ ],
+ "guide": true,
+ "guide_strength": 1.0,
+ "guide_iter": 2,
+ "w_pal": 1.0,
+ "w_flat": 1.0,
+ "w_edge": 1.0,
+ "w_ground": 1.0,
+ "ground_margin": 12,
+ "cn_end": 1.0,
+ "cn_scale": 0.6,
+ "steps": 50,
+ "cfg": 5.0,
+ "seeds": [
+  0,
+  1
+ ],
+ "contents": null,
+ "contents_json": "/home/ubuntu/kushulan-papercut-blora/outputs/contents/contents.json",
+ "out": "/home/ubuntu/kushulan-papercut-blora/outputs/gen/coll_guide"
+}

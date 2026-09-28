@@ -45,7 +45,8 @@ def grid(rows, cols, out, cell=1.25, row_labels=None, col_labels=None):
             if j == 0 and row_labels:
                 ax.set_ylabel(row_labels[i], fontsize=6.5)
     plt.subplots_adjust(wspace=0.03, hspace=0.03, left=0.03, right=0.995, top=0.95, bottom=0.005)
-    fig.savefig(out, bbox_inches="tight", pad_inches=0.02)
+    kw = {"pil_kwargs": {"quality": 90}} if str(out).endswith(".jpg") else {}
+    fig.savefig(out, bbox_inches="tight", pad_inches=0.02, **kw)
     plt.close(fig)
 
 
@@ -112,6 +113,7 @@ def layers_figure(img_path, out, pal: priors.Palette, size=512, ground=None, nco
         a_.set_xticks([]), a_.set_yticks([])
         for s in a_.spines.values():
             s.set_linewidth(0.3)
-    fig.savefig(out, bbox_inches="tight", pad_inches=0.02)
+    kw = {"pil_kwargs": {"quality": 92}} if str(out).endswith(".jpg") else {}
+    fig.savefig(out, bbox_inches="tight", pad_inches=0.02, dpi=250, **kw)
     plt.close(fig)
     return st

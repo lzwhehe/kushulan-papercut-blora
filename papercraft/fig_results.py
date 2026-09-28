@@ -51,7 +51,7 @@ def failure_modes(out):
     D = ROOT / "outputs"
     ids = ["dev_lion", "dev_peach_branch", "dev_lady_holding_a_fan"]
     cols = [("dev/cn0.6", "coll"), ("dev/guide0", "energy reg. (foreign)"),
-            ("dev/cutcraft_pd_g0.2", "projection self-distill."), ("dev3/cutline_cn0.6", "cut-line"),
+            ("dev/cutcraft_pd_g0", "projection self-distill."), ("dev3/cutline_cn0.6", "cut-line"),
             ("dev3/cutline_g1.0", "cut-line + CraftGuide")]
     rows = [[D / "contents_dev" / f"{i}.png"] + [D / c / f"{i}_s_seed1.png" for c, _ in cols] for i in ids]
     labels = ["line drawing"] + [l for _, l in cols]
@@ -66,6 +66,25 @@ if __name__ == "__main__":
     what = sys.argv[1:] or ["qual", "fail"]
     if "qual" in what:
         qualitative(["repo_fish", "repo_bird", "repo_motif", "ood_rooster", "ood_teapot", "ood_rabbit",
-                     "ind_动物-18", "ind_日常-25"], FIG / "fig4_qualitative.png")
+                     "ind_动物-18", "ind_日常-25"], FIG / "fig4_qualitative.jpg")
     if "fail" in what:
-        failure_modes(FIG / "fig3_training_variants.png")
+        failure_modes(FIG / "fig3_training_variants.jpg")
+
+
+def gallery(out, seed=0, ncol=6):
+    """All 34 test drawings: line drawing | CutCraft | cut projection (Supplementary)."""
+    contents = json.loads((ROOT / "outputs/contents/contents.json").read_text())
+    cells = []
+    for c in contents:
+        cc = out_img("cutcraft", c["id"], seed)
+        cells.append([ROOT / f"outputs/contents/{c['id']}.png", cc, projected(cc, c["id"]) if cc else None])
+    rows = []
+    per = ncol // 3
+    for i in range(0, len(cells), per):
+        r = []
+        for trip in cells[i:i + per]:
+            r += trip
+        r += [None] * (ncol - len(r))
+        rows.append(r)
+    labels = ["drawing", "CutCraft", "cut proj."] * per
+    F.grid(rows, labels, out, cell=0.9, col_labels=labels)

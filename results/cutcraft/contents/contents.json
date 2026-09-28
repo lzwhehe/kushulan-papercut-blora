@@ -1,0 +1,234 @@
+[
+ {
+  "id": "ind_人物-16",
+  "set": "indomain",
+  "subject": "a folk figure",
+  "category": "person",
+  "reference": "data/涂方圆/库淑兰-对照图/人物-16-处理后.jpg"
+ },
+ {
+  "id": "ind_人物-26",
+  "set": "indomain",
+  "subject": "a folk figure",
+  "category": "person",
+  "reference": "data/涂方圆/库淑兰-对照图/人物-26-处理后.jpg"
+ },
+ {
+  "id": "ind_人物-3",
+  "set": "indomain",
+  "subject": "a folk figure",
+  "category": "person",
+  "reference": "data/涂方圆/库淑兰-对照图/人物-3-处理后.jpg"
+ },
+ {
+  "id": "ind_人物-4",
+  "set": "indomain",
+  "subject": "a folk figure",
+  "category": "person",
+  "reference": "data/涂方圆/库淑兰-对照图/人物-4-处理后.jpg"
+ },
+ {
+  "id": "ind_人物-5",
+  "set": "indomain",
+  "subject": "a folk figure",
+  "category": "person",
+  "reference": "data/涂方圆/库淑兰-对照图/人物-5-处理后.jpg"
+ },
+ {
+  "id": "ind_动物-18",
+  "set": "indomain",
+  "subject": "an animal",
+  "category": "animal",
+  "reference": "data/涂方圆/库淑兰-对照图/动物-18-处理后.jpg"
+ },
+ {
+  "id": "ind_动物-38",
+  "set": "indomain",
+  "subject": "an animal",
+  "category": "animal",
+  "reference": "data/涂方圆/库淑兰-对照图/动物-38-处理后.jpg"
+ },
+ {
+  "id": "ind_动物-鸟-3",
+  "set": "indomain",
+  "subject": "an animal",
+  "category": "animal",
+  "reference": "data/涂方圆/库淑兰-对照图/动物-鸟-3-处理后.jpg"
+ },
+ {
+  "id": "ind_日常-25",
+  "set": "indomain",
+  "subject": "a daily object",
+  "category": "daily object",
+  "reference": "data/涂方圆/库淑兰-对照图/日常-25-处理后.jpg"
+ },
+ {
+  "id": "ind_日常-3",
+  "set": "indomain",
+  "subject": "a daily object",
+  "category": "daily object",
+  "reference": "data/涂方圆/库淑兰-对照图/日常-3-处理后.jpg"
+ },
+ {
+  "id": "ind_日常-6",
+  "set": "indomain",
+  "subject": "a daily object",
+  "category": "daily object",
+  "reference": "data/涂方圆/库淑兰-对照图/日常-6-处理后.jpg"
+ },
+ {
+  "id": "ind_植物-17",
+  "set": "indomain",
+  "subject": "a plant",
+  "category": "plant",
+  "reference": "data/涂方圆/库淑兰-对照图/植物-17-处理后.jpg"
+ },
+ {
+  "id": "ind_植物-29",
+  "set": "indomain",
+  "subject": "a plant",
+  "category": "plant",
+  "reference": "data/涂方圆/库淑兰-对照图/植物-29-处理后.jpg"
+ },
+ {
+  "id": "ind_植物-8",
+  "set": "indomain",
+  "subject": "a plant",
+  "category": "plant",
+  "reference": "data/涂方圆/库淑兰-对照图/植物-8-处理后.jpg"
+ },
+ {
+  "id": "ind_窗花-3",
+  "set": "indomain",
+  "subject": "a round window flower",
+  "category": "window flower",
+  "reference": "data/涂方圆/库淑兰-对照图/窗花-3-处理后.jpg"
+ },
+ {
+  "id": "ind_窗花-4",
+  "set": "indomain",
+  "subject": "a round window flower",
+  "category": "window flower",
+  "reference": "data/涂方圆/库淑兰-对照图/窗花-4-处理后.jpg"
+ },
+ {
+  "id": "ind_边框-12",
+  "set": "indomain",
+  "subject": "a decorative border",
+  "category": "border",
+  "reference": "data/涂方圆/库淑兰-对照图/边框-12-处理后.jpg"
+ },
+ {
+  "id": "ind_边框-2",
+  "set": "indomain",
+  "subject": "a decorative border",
+  "category": "border",
+  "reference": "data/涂方圆/库淑兰-对照图/边框-2-处理后.jpg"
+ },
+ {
+  "id": "ind_边框-9",
+  "set": "indomain",
+  "subject": "a decorative border",
+  "category": "border",
+  "reference": "data/涂方圆/库淑兰-对照图/边框-9-处理后.jpg"
+ },
+ {
+  "id": "repo_fish",
+  "set": "repo",
+  "subject": "a fish"
+ },
+ {
+  "id": "repo_bird",
+  "set": "repo",
+  "subject": "a bird with spread wings"
+ },
+ {
+  "id": "repo_motif",
+  "set": "repo",
+  "subject": "a symmetric decorative motif"
+ },
+ {
+  "id": "ood_rooster",
+  "set": "ood",
+  "subject": "a rooster",
+  "seed": 103,
+  "border_ink": 0.0094
+ },
+ {
+  "id": "ood_rabbit",
+  "set": "ood",
+  "subject": "a rabbit",
+  "seed": 113,
+  "border_ink": 0.0024
+ },
+ {
+  "id": "ood_tiger",
+  "set": "ood",
+  "subject": "a tiger",
+  "seed": 122,
+  "border_ink": 0.019
+ },
+ {
+  "id": "ood_carp_fish",
+  "set": "ood",
+  "subject": "a carp fish",
+  "seed": 131,
+  "border_ink": 0.0067
+ },
+ {
+  "id": "ood_crane_bird",
+  "set": "ood",
+  "subject": "a crane bird",
+  "seed": 142,
+  "border_ink": 0.0168
+ },
+ {
+  "id": "ood_frog",
+  "set": "ood",
+  "subject": "a frog",
+  "seed": 153,
+  "border_ink": 0.0031
+ },
+ {
+  "id": "ood_cat",
+  "set": "ood",
+  "subject": "a cat",
+  "seed": 162,
+  "border_ink": 0.0012
+ },
+ {
+  "id": "ood_deer",
+  "set": "ood",
+  "subject": "a deer",
+  "seed": 173,
+  "border_ink": 0.0234
+ },
+ {
+  "id": "ood_teapot",
+  "set": "ood",
+  "subject": "a teapot",
+  "seed": 180,
+  "border_ink": 0.0
+ },
+ {
+  "id": "ood_bicycle",
+  "set": "ood",
+  "subject": "a bicycle",
+  "seed": 190,
+  "border_ink": 0.0061
+ },
+ {
+  "id": "ood_woman_beating_a_drum",
+  "set": "ood",
+  "subject": "a woman beating a drum",
+  "seed": 201,
+  "border_ink": 0.0275
+ },
+ {
+  "id": "ood_potted_chrysanthemum",
+  "set": "ood",
+  "subject": "a potted chrysanthemum",
+  "seed": 213,
+  "border_ink": 0.003
+ }
+]

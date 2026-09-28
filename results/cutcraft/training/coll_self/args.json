@@ -1,0 +1,20 @@
+{
+ "images": [],
+ "prompt": null,
+ "split": "/home/ubuntu/kushulan-papercut-blora/outputs/data/split.json",
+ "blocks": "style",
+ "out": "/home/ubuntu/kushulan-papercut-blora/outputs/style/coll_self",
+ "rank": 64,
+ "lr": 0.0001,
+ "steps": 2000,
+ "res": 1024,
+ "seed": 0,
+ "flip": true,
+ "craft": "self",
+ "lam_craft": 0.05,
+ "lam_keep": 5.0,
+ "p_foreign": 0.5,
+ "craft_tmax": 700,
+ "palette": "/home/ubuntu/kushulan-papercut-blora/outputs/data/palette.json",
+ "log_every": 50
+}

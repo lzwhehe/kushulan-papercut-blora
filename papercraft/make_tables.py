@@ -14,6 +14,7 @@ COLS = [("palette_de", r"$\Delta E_{\mathrm{pal}}\downarrow$", -1, 1), ("purity"
         ("cut_residual", r"res.$\downarrow$", -1, 1), ("fragments", r"frag.$\downarrow$", -1, 0),
         ("edge_f1", r"F1$\uparrow$", 1, 2), ("sil_iou", r"IoU$\uparrow$", 1, 2),
         ("clip_style", r"style$\uparrow$", 1, 3), ("kid", r"KID$\downarrow$", -1, 2),
+        ("palette_js", r"mix$\downarrow$", -1, 2), ("chroma", r"$C^*$", 1, 0),
         ("dino_styleref", r"leak$\downarrow$", -1, 2), ("dino_gt", r"GT$\uparrow$", 1, 2)]
 BY_CONSTRUCTION = {"palette_de", "purity", "cut_residual", "fragments"}
 
@@ -74,7 +75,7 @@ def table(rows, fname, base_key=None, subset=None):
             if proj and col in BY_CONSTRUCTION:
                 cells.append(r"\textit{proj.}")
             else:
-                cells.append(cell(df, base, col, dec, sign, label != base_key))
+                cells.append(cell(df, base, col, dec, sign, label != base_key and method != "ksl_original"))
         lines.append(label + " & " + " & ".join(cells) + r" \\")
     # keep \midrule markers in order
     out, it = [], iter(lines)
