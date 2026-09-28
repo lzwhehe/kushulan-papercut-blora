@@ -146,9 +146,29 @@ def supp_tables():
     write(rows, RAW, "table_ood.tex", subset=["repo", "ood"])
 
 
+
+def robust_table():
+    """Perturbed drawings (seed 0); structure scored against the original drawing, raw images only."""
+    cols = [("raw_line_recall_t3", 2), ("raw_sil_iou", 2), ("palette_de", 1), ("clip_style_dedup", 3), ("palette_js", 2), ("chroma", 0)]
+    rows = [("clean drawings", "cutcraft"), ("broken strokes (80 gaps)", "robust_broken"), ("thick strokes (9 px)", "robust_thick"),
+            ("thin strokes (1 px)", "robust_thin"), ("jittered strokes", "robust_jitter")]
+    lines = []
+    for lab, m in rows:
+        d = G / m
+        if not (d / "rev_metrics.csv").exists():
+            lines.append(lab + " & " + " & ".join([r"\pending{}"] * len(cols)) + r" \\")
+            continue
+        a = pd.read_csv(d / "metrics.csv").merge(pd.read_csv(d / "rev_metrics.csv").drop(columns=["content", "style", "seed", "set"], errors="ignore"), on="file")
+        a = a[a.seed == 0]
+        g = a.groupby("content")[[c for c, _ in cols]].mean()
+        lines.append(lab + " & " + " & ".join(fmt(float(g[c].mean()), k) for c, k in cols) + r" \\")
+    (OUT / "table_robust.tex").write_text("\n".join(lines) + "\n")
+    print("\n".join(lines))
+
 if __name__ == "__main__":
     svg_table()
     supp_tables()
+    robust_table()
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None),
            ("B-LoRA (repository workflow)", "blora"), ("B-LoRA + CraftGuide", "blora_guide"),
            ("Prompt only + ControlNet", "prompt_cn"), ("B-LoRA style block + ControlNet", "blora_style_cn"),
