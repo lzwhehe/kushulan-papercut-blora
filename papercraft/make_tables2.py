@@ -34,7 +34,7 @@ def table(rows, cols, fname, base=None):
     for lab, m in rows:
         df = frames[m]
         if df is None:
-            lines.append(lab + " & " + " & ".join(["n/a"] * len(cols)) + r" \\")
+            lines.append(lab + " & " + " & ".join([r"\pending{}"] * len(cols)) + r" \\")
             continue
         cells = []
         for c, dec in cols:
@@ -63,7 +63,11 @@ if __name__ == "__main__":
           C, "table_components.tex", base="cutcraft")
     table([("Collection block (coll)", "coll"), ("coll + self craft regulariser", "var_coll_self"),
            ("coll + self + foreign craft energy", "var_energy"), ("Projection self-distillation", "var_pd"),
-           ("Cut-line block", "cutline"), ("Cut-line block + self craft regulariser", "cutline_self")],
+           ("Cut-line block", "cutline"), ("Cut-line block + self craft regulariser", "cutline_self"),
+           ("Cut-line block, dense maps only", "cl_dense"), ("Cut-line block, coarse maps only", "cl_coarse"),
+           ("Canny edges of the image instead of cut lines", "cl_canny"),
+           ("Cut-line block, strict split (235 images)", "cutline_strict"),
+           ("Conv.\\ LoRA (all attention layers)", "fulllora"), ("Conv.\\ LoRA + cut-line training", "fulllora_cl")],
           [("fg_frac", 2), ("palette_de", 1), ("raw_line_recall_t3", 2), ("raw_sil_iou", 2), ("clip_style_dedup", 3), ("clip_text", 3),
            ("palette_js", 2), ("chroma", 0), ("kid", 2)], "table_variants.tex", base="cutline")
     table([("$\\eta=0$ (no guidance)", "cutline"), ("$\\eta=0.3$", "sens_g0.3"), ("$\\eta=0.6$", "sens_g0.6"),

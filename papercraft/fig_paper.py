@@ -361,6 +361,26 @@ def colourbars():
         plt.close(fig)
 
 
+
+def figS7():
+    """Conventional LoRA (all attention layers, same 257 images) with and without CraftGuide vs CutCraft."""
+    ids = ["ood_rooster", "ind_人物-5", "ood_tiger", "ind_植物-29", "repo_fish", "ood_teapot"]
+    cols = [("drawing", None), ("conv. LoRA\n+ ControlNet", "fulllora"), ("conv. LoRA\n+ CraftGuide", "fulllora_guide"),
+            ("conv. LoRA + guide\n+ projection", "fulllora_guide+proj"), ("CutCraft", "cutcraft"), ("CutCraft\n+ projection", "cutcraft+proj")]
+    rows = []
+    for cid in ids:
+        r = []
+        for lab, m in cols:
+            if m is None:
+                r.append(ROOT / f"outputs/contents/{cid}.png")
+            elif m.endswith("+proj"):
+                r.append(projected(gen(m[:-5], cid), cid))
+            else:
+                r.append(gen(m, cid))
+        rows.append(r)
+    rlab = ["rooster", "person 5", "tiger", "plant 29", "fish (repository)", "teapot"]
+    _grid(rows, "figS7_convlora.jpg", cell=1.3, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5)
+
 if __name__ == "__main__":
     for f in sys.argv[1:]:
         globals()[f]()
