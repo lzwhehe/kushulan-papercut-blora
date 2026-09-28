@@ -32,8 +32,9 @@ REVISION = "6f3ccc0b56e431dc6a0c2b2039706d7d26f22cb9"
 class QwenLatentDecoder:
     """Adapter with the TAESD interface expected by CraftEnergy: decode(packed latents).sample in [-1, 1]."""
 
-    def __init__(self, pipe, height=1024, width=1024):
-        self.pipe, self.h, self.w = pipe, height, width
+    def __init__(self, pipe, height=1024, width=1024, scale=1.0):
+        # scale < 1 average-pools the latent before decoding (pilot runs on small GPUs only)
+        self.pipe, self.h, self.w, self.scale = pipe, height, width, scale
         self.dtype = pipe.vae.dtype
         cfg = pipe.vae.config
         self.mean = torch.tensor(cfg.latents_mean).view(1, cfg.z_dim, 1, 1, 1)
@@ -43,6 +44,9 @@ class QwenLatentDecoder:
         p = self.pipe
         lat = p._unpack_latents(packed, self.h, self.w, p.vae_scale_factor).to(self.dtype)
         lat = lat * self.std.to(lat) + self.mean.to(lat)
+        if self.scale != 1.0:
+            k = int(round(1 / self.scale))
+            lat = F.avg_pool2d(lat[:, :, 0], k)[:, :, None]
         img = p.vae.decode(lat, return_dict=False)[0][:, :, 0]
 
         class _Out:
@@ -74,13 +78,31 @@ class FlowCraftGuide(CraftGuide):
         return self._orig(model_output, timestep, sample, *args, **kw)
 
 
-def load_pipe(lora=None, dev="cuda"):
+def load_pipe(lora=None, dev="cuda", quant4=False):
+    """quant4: NF4 transformer and text encoder + model CPU offload, for pilot runs on a 20 GB GPU only
+    (the reported experiment runs in bf16 on a 96 GB GPU)."""
     from diffusers import QwenImageEditPlusPipeline
-    pipe = QwenImageEditPlusPipeline.from_pretrained(MODEL, revision=REVISION, torch_dtype=torch.bfloat16)
+    if not quant4:
+        pipe = QwenImageEditPlusPipeline.from_pretrained(MODEL, revision=REVISION, torch_dtype=torch.bfloat16)
+        if lora:
+            pipe.load_lora_weights(lora, adapter_name="cutline")
+        pipe.set_progress_bar_config(disable=True)
+        return pipe.to(dev)
+    from diffusers import BitsAndBytesConfig as DBnb, QwenImageTransformer2DModel
+    from transformers import BitsAndBytesConfig as TBnb, Qwen2_5_VLForConditionalGeneration
+    tr = QwenImageTransformer2DModel.from_pretrained(
+        MODEL, revision=REVISION, subfolder="transformer", torch_dtype=torch.bfloat16,
+        quantization_config=DBnb(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16))
+    te = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+        MODEL, revision=REVISION, subfolder="text_encoder", torch_dtype=torch.bfloat16,
+        quantization_config=TBnb(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16))
+    pipe = QwenImageEditPlusPipeline.from_pretrained(MODEL, revision=REVISION, transformer=tr, text_encoder=te,
+                                                     torch_dtype=torch.bfloat16)
     if lora:
         pipe.load_lora_weights(lora, adapter_name="cutline")
     pipe.set_progress_bar_config(disable=True)
-    return pipe.to(dev)
+    pipe.enable_model_cpu_offload()
+    return pipe
 
 
 def main():
@@ -95,15 +117,19 @@ def main():
     ap.add_argument("--steps", type=int, default=40)
     ap.add_argument("--cfg", type=float, default=4.0)
     ap.add_argument("--limit", type=int, default=0, help="first N drawings only (smoke tests)")
+    ap.add_argument("--quant4", action="store_true", help="NF4 + CPU offload (20 GB pilot only)")
+    ap.add_argument("--guide_decode_scale", type=float, default=1.0, help="<1: pooled-latent decode (pilot only)")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     (out / "args.json").write_text(json.dumps({**vars(a), "model": MODEL, "revision": REVISION}, indent=1))
-    pipe = load_pipe(a.lora)
+    pipe = load_pipe(a.lora, quant4=a.quant4)
     guide = None
     if a.guide:
         pal = priors.Palette.load(ROOT / "outputs/data/palette.json")
-        energy = CraftEnergy(pal.lab, QwenLatentDecoder(pipe), w_pal=1, w_flat=1, w_edge=1, w_ground=1, size=512).cuda()
+        energy = CraftEnergy(pal.lab, QwenLatentDecoder(pipe, scale=a.guide_decode_scale), w_pal=1, w_flat=1, w_edge=1, w_ground=1, size=512).cuda()
+        if a.quant4:
+            pipe.vae.to("cuda")  # the guidance decodes with gradients outside the offload hooks
         guide = FlowCraftGuide(pipe, energy, a.guide_strength, a.guide_iter)
     contents = json.loads(Path(a.contents_json).read_text())
     cdir = Path(a.contents_json).parent
