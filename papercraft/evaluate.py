@@ -111,8 +111,11 @@ _REF = None
 
 
 def references(emb):
-    """Held-out Ku Shulan works (never used for training) and the full corpus."""
+    """Held-out Ku Shulan works (never used for training) and the full corpus (cached)."""
     global _REF
+    cache = ROOT / "outputs/data/ref_embeddings.pt"
+    if _REF is None and cache.exists():
+        _REF = torch.load(cache)
     if _REF is None:
         split = json.loads((ROOT / "outputs/data/split.json").read_text())
         held = split["held_out"] + [t["reference"] for t in split["test_indomain"]]
@@ -123,6 +126,7 @@ def references(emb):
         gt = {"ind_" + t["id"]: emb.images([pil(ROOT / t["reference"])]) for t in split["test_indomain"]}
         _REF = {"held_centroid": torch.nn.functional.normalize(hc.mean(0), dim=0), "corpus": cc,
                 "style_dino": sd, "gt": gt}
+        torch.save(_REF, cache)
     return _REF
 
 
