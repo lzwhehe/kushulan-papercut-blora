@@ -1,0 +1,83 @@
+[
+ {
+  "code": "K01",
+  "method": "cutcraft",
+  "drawing": "ood_teapot",
+  "svg": "outputs/svg_enforced/cutcraft/ood_teapot_s_seed0.svg",
+  "pieces": 51,
+  "sheets": 9,
+  "smallest_mm2": 8.77
+ },
+ {
+  "code": "K02",
+  "method": "blora",
+  "drawing": "ood_teapot",
+  "svg": "outputs/svg_enforced/blora/ood_teapot_s0_seed0.svg",
+  "pieces": 40,
+  "sheets": 5,
+  "smallest_mm2": 9.77
+ },
+ {
+  "code": "K03",
+  "method": "cutcraft",
+  "drawing": "ind_人物-5",
+  "svg": "outputs/svg_enforced/cutcraft/ind_人物-5_s_seed0.svg",
+  "pieces": 100,
+  "sheets": 8,
+  "smallest_mm2": 8.85
+ },
+ {
+  "code": "K04",
+  "method": "blora",
+  "drawing": "ind_人物-5",
+  "svg": "outputs/svg_enforced/blora/ind_人物-5_s0_seed0.svg",
+  "pieces": 109,
+  "sheets": 9,
+  "smallest_mm2": 9.54
+ },
+ {
+  "code": "K05",
+  "method": "cutcraft",
+  "drawing": "ood_tiger",
+  "svg": "outputs/svg_enforced/cutcraft/ood_tiger_s_seed0.svg",
+  "pieces": 151,
+  "sheets": 10,
+  "smallest_mm2": 10.26
+ },
+ {
+  "code": "K06",
+  "method": "blora",
+  "drawing": "ood_tiger",
+  "svg": "outputs/svg_enforced/blora/ood_tiger_s0_seed0.svg",
+  "pieces": 80,
+  "sheets": 4,
+  "smallest_mm2": 8.85
+ },
+ {
+  "code": "K07",
+  "method": "cutcraft",
+  "drawing": "ind_植物-17",
+  "svg": "outputs/svg_enforced/cutcraft/ind_植物-17_s_seed0.svg",
+  "pieces": 171,
+  "sheets": 13,
+  "smallest_mm2": 8.96
+ },
+ {
+  "code": "K08",
+  "method": "cutcraft",
+  "drawing": "ood_carp_fish",
+  "svg": "outputs/svg_enforced/cutcraft/ood_carp_fish_s_seed0.svg",
+  "pieces": 211,
+  "sheets": 10,
+  "smallest_mm2": 8.96
+ },
+ {
+  "code": "K09",
+  "method": "cutcraft",
+  "drawing": "ind_日常-25",
+  "svg": "outputs/svg_enforced/cutcraft/ind_日常-25_s_seed0.svg",
+  "pieces": 343,
+  "sheets": 14,
+  "smallest_mm2": 8.81
+ }
+]

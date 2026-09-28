@@ -9,6 +9,7 @@ python revision_metrics.py --originals               ->  outputs/rev_originals_f
 Structure is always measured against the original, unperturbed drawing (outputs/contents).
 """
 import json
+import os
 import sys
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
@@ -22,7 +23,7 @@ import priors
 
 ROOT = Path(__file__).resolve().parents[1]
 G = ROOT / "outputs/gen"
-CDIR = ROOT / "outputs/contents"
+CDIR = Path(os.environ.get("REV_CDIR", ROOT / "outputs/contents"))  # override for other drawing sets
 ALPHA = 2e-4
 
 
