@@ -38,6 +38,12 @@ def cutline_maps(path, pal, res=1024):
         lines = np.asarray(img) < 128
         lines = ndi.binary_dilation(morphology.skeletonize(lines), morphology.disk(1))
         out[name] = Image.fromarray(np.where(lines, 0, 255).astype(np.uint8))
+    # ablation: generic Canny edges of the work (what the canny ControlNet was trained on), same stroke width
+    import cv2
+    grey = (priors.load_rgb(path, res).mean(-1) * 255).astype(np.uint8)
+    e = cv2.Canny(grey, 100, 200) > 0
+    e = ndi.binary_dilation(morphology.skeletonize(e), morphology.disk(1))
+    out["canny"] = Image.fromarray(np.where(e, 0, 255).astype(np.uint8))
     return out
 
 

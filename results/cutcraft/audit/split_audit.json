@@ -1,0 +1,426 @@
+{
+ "tests_sharing_group_with_training": 6,
+ "rows": [
+  {
+   "test": "人物-16",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/16.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/28.jpg",
+     0.905
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/24.jpg",
+     0.863
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/13.jpg",
+     0.848
+    ]
+   ]
+  },
+  {
+   "test": "人物-26",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/26.jpg",
+   "match_sim": 1.0,
+   "group_size": 4,
+   "training_members_in_group": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/18.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/30.jpg"
+   ],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/30.jpg",
+     0.856
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/24.jpg",
+     0.79
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/18.jpg",
+     0.774
+    ]
+   ]
+  },
+  {
+   "test": "人物-3",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/3.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/19.jpg",
+     0.799
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/10.jpg",
+     0.784
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/6.jpg",
+     0.784
+    ]
+   ]
+  },
+  {
+   "test": "人物-4",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/23.jpg",
+   "match_sim": 1.0,
+   "group_size": 4,
+   "training_members_in_group": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/18.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/30.jpg"
+   ],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/27.jpg",
+     0.826
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/18.jpg",
+     0.815
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/30.jpg",
+     0.813
+    ]
+   ]
+  },
+  {
+   "test": "人物-5",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/5.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/1.jpg",
+     0.807
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/2.jpg",
+     0.801
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/person/4.jpg",
+     0.795
+    ]
+   ]
+  },
+  {
+   "test": "动物-18",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/18.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/1.jpg",
+     0.849
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/26.jpg",
+     0.839
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/42.jpg",
+     0.836
+    ]
+   ]
+  },
+  {
+   "test": "动物-38",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/38.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/4.jpg",
+     0.822
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/46.jpg",
+     0.692
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/43.jpg",
+     0.675
+    ]
+   ]
+  },
+  {
+   "test": "动物-鸟-3",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/12.jpg",
+   "match_sim": 1.0,
+   "group_size": 2,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Fish/4.jpg",
+     0.655
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/animals/13.jpg",
+     0.652
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Fish/3.jpg",
+     0.611
+    ]
+   ]
+  },
+  {
+   "test": "日常-25",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/25.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/17.jpg",
+     0.743
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/12.jpg",
+     0.742
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/11.jpg",
+     0.734
+    ]
+   ]
+  },
+  {
+   "test": "日常-3",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/3.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/9.jpg",
+     0.648
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/24.jpg",
+     0.639
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/20.jpg",
+     0.628
+    ]
+   ]
+  },
+  {
+   "test": "日常-6",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/6.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/1.jpg",
+     0.79
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/5.jpg",
+     0.717
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/daily/22.jpg",
+     0.616
+    ]
+   ]
+  },
+  {
+   "test": "植物-17",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/17.jpg",
+   "match_sim": 1.0,
+   "group_size": 3,
+   "training_members_in_group": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/9.jpg"
+   ],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/15.jpg",
+     0.878
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/25.jpg",
+     0.865
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/9.jpg",
+     0.858
+    ]
+   ]
+  },
+  {
+   "test": "植物-29",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/29.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/37.jpg",
+     0.782
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/38.jpg",
+     0.782
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Tree/5.jpg",
+     0.75
+    ]
+   ]
+  },
+  {
+   "test": "植物-8",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/8.jpg",
+   "match_sim": 1.0,
+   "group_size": 3,
+   "training_members_in_group": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/9.jpg"
+   ],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/15.jpg",
+     0.916
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/9.jpg",
+     0.879
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/35.jpg",
+     0.876
+    ]
+   ]
+  },
+  {
+   "test": "窗花-3",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/3.jpg",
+   "match_sim": 1.0,
+   "group_size": 12,
+   "training_members_in_group": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/12.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/16.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/17.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/18.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/6.jpg"
+   ],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/6.jpg",
+     0.919
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/12.jpg",
+     0.914
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/17.jpg",
+     0.904
+    ]
+   ]
+  },
+  {
+   "test": "窗花-4",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/4.jpg",
+   "match_sim": 1.0,
+   "group_size": 12,
+   "training_members_in_group": [
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/12.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/16.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/17.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/18.jpg",
+    "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/6.jpg"
+   ],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/7.jpg",
+     0.927
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/6.jpg",
+     0.898
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/window decoration/14.jpg",
+     0.894
+    ]
+   ]
+  },
+  {
+   "test": "边框-12",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/12.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/13.jpg",
+     0.796
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Curtain/4.jpg",
+     0.788
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/17.jpg",
+     0.788
+    ]
+   ]
+  },
+  {
+   "test": "边框-2",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/2.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/Wind/2.jpg",
+     0.875
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/7.jpg",
+     0.875
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/15.jpg",
+     0.836
+    ]
+   ]
+  },
+  {
+   "test": "边框-9",
+   "matched_entry": "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/9.jpg",
+   "match_sim": 1.0,
+   "group_size": 1,
+   "training_members_in_group": [],
+   "nearest_training": [
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/16.jpg",
+     0.852
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/frame/19.jpg",
+     0.821
+    ],
+    [
+     "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements/plants/6.jpg",
+     0.745
+    ]
+   ]
+  }
+ ]
+}

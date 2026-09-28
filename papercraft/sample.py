@@ -143,10 +143,19 @@ def main():
                              size=512).cuda()
         guide = CraftGuide(pipe, energy, a.guide_strength, a.guide_iter)
 
-    style_ids = a.styles if a.method in ("blora", "blora_style_cn") else [None]
+    style_ids = a.styles if a.method in ("blora", "blora_style_cn", "instantstyle_cn") else [None]
     if a.method.startswith(("coll", "cutcraft")):
         sd = filtered_lora(Path(a.lora) / "pytorch_lora_weights.safetensors", 1)
         pipe.load_lora_weights(sd, adapter_name="style")
+    elif a.method == "fulllora_cn":  # conventional LoRA on every attention layer
+        pipe.load_lora_weights(str(Path(a.lora) / "pytorch_lora_weights.safetensors"), adapter_name="style")
+    elif a.method == "instantstyle_cn":  # IP-Adapter injected only into the style block (InstantStyle)
+        pipe.load_ip_adapter("h94/IP-Adapter", subfolder="sdxl_models", weight_name="ip-adapter_sdxl_vit-h.safetensors",
+                             image_encoder_folder="models/image_encoder")
+        pipe.set_ip_adapter_scale({"up": {"block_0": [0.0, 1.0, 0.0]}})
+        split = json.loads((ROOT / "outputs/data/split.json").read_text())
+        ref_imgs = {k: Image.fromarray((priors.load_rgb(ROOT / split["style_refs"][k], 1024) * 255).astype(np.uint8))
+                    for k in a.styles}
 
     records = []
     for c in contents:
@@ -165,6 +174,8 @@ def main():
                 pipe.load_lora_weights(filtered_lora(ROOT / f"outputs/blora/style{k}/pytorch_lora_weights.safetensors", 1),
                                        adapter_name="blora")
                 prompt = f"{c['subject']} in [s{k}] style"
+            elif a.method == "instantstyle_cn":
+                prompt = f"{c['subject']}, papercut"
             elif a.method == "prompt_cn":
                 prompt = f"{c['subject']}, {DESC}"
             else:
@@ -178,6 +189,8 @@ def main():
                           height=1024, width=1024)
                 if use_cn:
                     kw.update(image=ctrl, controlnet_conditioning_scale=a.cn_scale, control_guidance_end=a.cn_end)
+                if a.method == "instantstyle_cn":
+                    kw.update(ip_adapter_image=ref_imgs[k])
                 if guide is not None:
                     guide.trace = []
                 t0 = time.time()

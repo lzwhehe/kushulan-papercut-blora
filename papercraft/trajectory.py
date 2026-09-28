@@ -21,7 +21,7 @@ OUT = ROOT / "paper/figures/assets"
 SHOW = [5, 12, 20, 30, 45]
 
 
-def run(guided, cid="ood_rooster", seed=0):
+def run(guided, cid="ood_rooster", seed=0, save=True):
     pipe = S.load_pipe(True)
     pipe.load_lora_weights(S.filtered_lora(ROOT / "outputs/style/cutline/pytorch_lora_weights.safetensors", 1),
                            adapter_name="style")
@@ -49,22 +49,30 @@ def run(guided, cid="ood_rooster", seed=0):
         with torch.no_grad():
             e, t, rgb = energy(x0, guide.line, guide.ground, return_terms=True)
         log.append({"step": i + 1, **{kk: float(v.mean()) for kk, v in t.items()}, "E": float(e.mean())})
-        if i + 1 in SHOW:
+        if save and i + 1 in SHOW:
             Image.fromarray((rgb[0].permute(1, 2, 0).clamp(0, 1).cpu().numpy() * 255).astype(np.uint8)).save(
                 OUT / f"traj_{'g' if guided else 'u'}_{i + 1:02d}.jpg", quality=92)
         return out
 
     pipe.scheduler.step = rec_step
     g = torch.Generator("cuda").manual_seed(seed)
-    img = pipe(prompt="a rooster in ksl papercut style", image=ctrl, controlnet_conditioning_scale=0.6,
+    subj = {c["id"]: c["subject"] for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}[cid]
+    img = pipe(prompt=f"{subj} in ksl papercut style", image=ctrl, controlnet_conditioning_scale=0.6,
                num_inference_steps=50, guidance_scale=5.0, generator=g, height=1024, width=1024).images[0]
-    img.resize((512, 512)).save(OUT / f"traj_{'g' if guided else 'u'}_final.jpg", quality=92)
+    if save:
+        img.resize((512, 512)).save(OUT / f"traj_{'g' if guided else 'u'}_final.jpg", quality=92)
     del pipe
     torch.cuda.empty_cache()
     return log
 
 
 if __name__ == "__main__":
-    res = {"unguided": run(False), "guided": run(True)}
-    (ROOT / "outputs/trajectory.json").write_text(json.dumps(res, indent=1))
-    print({k: v[-1] for k, v in res.items()})
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "multi":  # review #28: several drawings, no images saved
+        ids = ["ood_rooster", "ood_tiger", "ood_teapot", "ind_人物-5", "ind_植物-29", "repo_fish"]
+        res = {cid: {"unguided": run(False, cid, save=False), "guided": run(True, cid, save=False)} for cid in ids}
+        (ROOT / "outputs/trajectory_multi.json").write_text(json.dumps(res, indent=1))
+    else:
+        res = {"unguided": run(False), "guided": run(True)}
+        (ROOT / "outputs/trajectory.json").write_text(json.dumps(res, indent=1))
+        print({k: v[-1] for k, v in res.items()})

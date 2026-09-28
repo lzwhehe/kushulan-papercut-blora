@@ -1,0 +1,6 @@
+{
+ "method": "CLIP ViT-L/14 text->image top-5 training works per subject, then visual review of the contact sheet (outputs/audit/ood_subject_nn.jpg) by the analyst; no art-historical claim about the artist's lifetime output is made",
+ "represented": ["a rooster", "a rabbit", "a carp fish", "a frog", "a cat", "a teapot"],
+ "partially_represented": {"a crane bird": "generic birds only", "a woman beating a drum": "figures without drums", "a potted chrysanthemum": "chrysanthemum/flower motifs, no pot"},
+ "not_found": ["a tiger", "a deer", "a bicycle"]
+}

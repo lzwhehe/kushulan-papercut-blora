@@ -66,6 +66,8 @@ def parse():
     ap.add_argument("--controlnet", action="store_true",
                     help="train with the frozen canny ControlNet in the loop on cut-line maps")
     ap.add_argument("--cn_range", type=float, nargs=2, default=[0.4, 0.8])
+    ap.add_argument("--cutline_mode", default="both", choices=["both", "dense", "coarse", "canny"],
+                    help="which structure maps the ControlNet reads during training")
     return ap.parse_args()
 
 
@@ -94,9 +96,11 @@ def encode_prompts(prompts, dev):
 
 
 def lora_targets(unet, blocks):
+    """Attention projections of the chosen B-LoRA blocks, or of every attention layer ('all')."""
     names = []
     for n, _ in unet.named_modules():
-        if any(n.startswith(BLOCKS[b] + ".") for b in blocks) and n.split(".", 5)[-1] and (
+        in_block = "all" in blocks or any(n.startswith(BLOCKS[b] + ".") for b in blocks)
+        if in_block and (
                 n.endswith(("attn1.to_q", "attn1.to_k", "attn1.to_v", "attn1.to_out.0",
                             "attn2.to_q", "attn2.to_k", "attn2.to_v", "attn2.to_out.0"))):
             names.append(n)
@@ -158,8 +162,10 @@ def main():
         cdir = ROOT / "outputs/cutlines"
         for p, _ in data:
             stem = str(Path(p).relative_to(ROOT)).replace("/", "__")
+            kinds = {"both": ("dense", "coarse"), "dense": ("dense",), "coarse": ("coarse",),
+                     "canny": ("canny",)}[a.cutline_mode]
             ctrl_cache.append([torch.from_numpy(np.asarray(Image.open(cdir / f"{stem}__{k}.png").convert("L")) < 128)
-                               for k in ("dense", "coarse")])
+                               for k in kinds])
     if "proj" not in craft:
         del vae
     torch.cuda.empty_cache()
