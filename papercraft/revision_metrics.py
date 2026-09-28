@@ -170,6 +170,12 @@ def embed(methods):
         df["nn_train_dino"] = sims.max(1).values.numpy()
         df["nn_train_idx"] = sims.argmax(1).numpy()
         df["clip_style_dedup"] = (Cl @ C).numpy()
+        lab_files = [G / m / Path(x).with_suffix(".labels.npy") for x in df.file]
+        if all(f.exists() for f in lab_files):  # plans from evaluate.py --project
+            pl = _pal().lab_with_white
+            proj = [Image.fromarray((np.clip(priors.color.lab2rgb(pl[np.load(f)][None])[0], 0, 1) * 255).astype(np.uint8))
+                    for f in lab_files]
+            df["proj_clip_style_dedup"] = (c_emb(proj) @ C).numpy()
         df.to_csv(f, index=False)
         print(m, "nn_train %.3f (max %.3f)" % (df.nn_train_dino.mean(), df.nn_train_dino.max()),
               "clip_style_dedup %.3f" % df.clip_style_dedup.mean())

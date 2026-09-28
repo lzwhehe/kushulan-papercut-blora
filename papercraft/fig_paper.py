@@ -152,7 +152,7 @@ def assets():
     raw, de = priors.nearest_palette(lab, pl)
     rgbpal = np.clip(color.lab2rgb(pl[None])[0], 0, 1)
     _save_arr(rgbpal[raw], "cp_labels.jpg", 512)
-    _save_arr(_cmap(de, "jet", 0, 20), "cp_de.jpg", 512)
+    _save_arr(_cmap(de, "viridis", 0, 20), "cp_de.jpg", 512)
     proj, labels, _, _ = priors.cut_project(w, PAL)
     _save_arr(proj, "cp_proj.jpg", 512)
     maps = cutlines.cutline_maps(rep / "animals/2.jpg", PAL, res=512)
@@ -169,12 +169,12 @@ def assets():
         Image.fromarray((x * 255).astype(np.uint8)).save(ASSET / f"cg_{tag}_img.jpg", quality=92)
         lx = priors.to_lab(x)
         _, dx = priors.nearest_palette(lx, pl)
-        _save_arr(_cmap(dx, "jet", 0, 20), f"cg_{tag}_pal.jpg", 512)
+        _save_arr(_cmap(dx, "viridis", 0, 20), f"cg_{tag}_pal.jpg", 512)
         gx = np.sqrt(sum(ndi.sobel(lx[..., c], 1) ** 2 + ndi.sobel(lx[..., c], 0) ** 2 for c in range(3))) / 8
         _save_arr(_cmap(1 - np.exp(-(gx ** 2) / 64), "magma", 0, 1), f"cg_{tag}_flat.jpg", 512)
         g = ground_of(cid)
         dwhite = np.linalg.norm(lx - np.array([100, 0, 0]), axis=-1) * g
-        _save_arr(_cmap(dwhite, "jet", 0, 60), f"cg_{tag}_ground.jpg", 512)
+        _save_arr(_cmap(dwhite, "viridis", 0, 60), f"cg_{tag}_ground.jpg", 512)
     la = priors.load_rgb(ROOT / "outputs/contents/ood_rooster.png", 512)
     Image.fromarray((la * 255).astype(np.uint8)).save(ASSET / "cg_line.jpg", quality=92)
     _save_arr(np.where(ground_of("ood_rooster")[..., None], np.array([0.85, 0.9, 1.0]), np.array([1.0, 0.9, 0.75])),
@@ -205,21 +205,28 @@ def assets():
 
 
 
-def _grid(rows, name, cell=1.45, gap=0.03):
+def _grid(rows, name, cell=1.45, gap=0.03, col_labels=None, row_labels=None, header_fs=7):
     nr, nc = len(rows), len(rows[0])
-    fig, axes = plt.subplots(nr, nc, figsize=(cell * nc, cell * nr))
+    top = 0.35 if col_labels else 0.0
+    left = 0.55 if row_labels else 0.0
+    fig = plt.figure(figsize=(cell * nc + left, cell * nr + top))
+    gs = fig.add_gridspec(nr, nc, left=left / (cell * nc + left), right=1, bottom=0,
+                          top=1 - top / (cell * nr + top), wspace=gap, hspace=gap)
     for i, r in enumerate(rows):
         for j, x in enumerate(r):
-            ax = axes[i, j]
+            ax = fig.add_subplot(gs[i, j])
             ax.set_xticks([]), ax.set_yticks([])
-            for s in ax.spines.values():
-                s.set_visible(False)
+            for sp in ax.spines.values():
+                sp.set_visible(False)
+            if i == 0 and col_labels:
+                ax.set_title(col_labels[j], fontsize=header_fs, pad=2)
+            if j == 0 and row_labels:
+                ax.set_ylabel(row_labels[i], fontsize=header_fs - 0.5, rotation=90, labelpad=2)
             if x is None:
                 ax.set_facecolor("#f0f0f0")
-                ax.text(0.5, 0.5, "n/a", ha="center", va="center", color="#999", fontsize=8, transform=ax.transAxes)
+                ax.text(0.5, 0.5, "n/a", ha="center", va="center", color="#999", fontsize=7, transform=ax.transAxes)
                 continue
             ax.imshow(x if not isinstance(x, (str, Path)) else Image.open(x).convert("RGB").resize((384, 384)))
-    plt.subplots_adjust(wspace=gap, hspace=gap, left=0, right=1, top=1, bottom=0)
     fig.savefig(FIG / name, pil_kwargs={"quality": 90}, dpi=220)
     plt.close(fig)
 
@@ -227,54 +234,94 @@ def _grid(rows, name, cell=1.45, gap=0.03):
 def fig8():
     split = json.loads((ROOT / "outputs/data/split.json").read_text())
     ref = {"ind_" + t["id"]: ROOT / t["reference"] for t in split["test_indomain"]}
+    cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     ids = ["ind_动物-18", "ind_人物-5", "ind_植物-29", "ind_日常-3", "repo_fish", "ood_rooster", "ood_tiger", "ood_teapot"]
-    rows = []
+    cols = [("drawing", None), ("original", None), ("B-LoRA", "blora"), ("InstantStyle", "instantstyle"),
+            ("InstantStyle\n+ CraftGuide", "instantstyle_guide"), ("conv. LoRA\n+ CraftGuide", "fulllora_guide"),
+            ("cut-line", "cutline"), ("cut-line\n+ projection", "cutline+proj"), ("CutCraft", "cutcraft"),
+            ("CutCraft\n+ projection", "cutcraft+proj")]
+    cols = [c for c in cols if c[1] is None or (G / c[1].replace("+proj", "")).exists()]
+    rows, rlab = [], []
     for cid in ids:
-        rows.append([ROOT / f"outputs/contents/{cid}.png",
-                     im(ref[cid], 384) if cid in ref else None,
-                     gen("blora", cid, 0, 0), gen("blora_guide", cid, 0, 0), gen("prompt_cn", cid), gen("coll", cid),
-                     gen("cutline", cid), gen("cutcraft", cid), projected(gen("cutcraft", cid), cid)])
-    _grid(rows, "fig8_qualitative.jpg", cell=1.25)
+        r = []
+        for lab, m in cols:
+            if lab == "drawing":
+                r.append(ROOT / f"outputs/contents/{cid}.png")
+            elif lab == "original":
+                r.append(im(ref[cid], 384) if cid in ref else None)
+            elif m.endswith("+proj"):
+                r.append(projected(gen(m[:-5], cid), cid))
+            elif m in ("blora", "instantstyle", "instantstyle_guide"):
+                r.append(gen(m, cid, 0, 0))
+            else:
+                r.append(gen(m, cid))
+        rows.append(r)
+        c = cats[cid]
+        if c["set"] == "indomain":
+            num = cid.rsplit("-", 1)[-1]
+            rlab.append(f"{c['category']} {num}\n(in-domain)")
+        else:
+            rlab.append(c["subject"].replace("a ", "", 1) + ("\n(repository)" if c["set"] == "repo" else "\n(new subject)"))
+    _grid(rows, "fig8_qualitative.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5)
 
 
 def fig9():
+    from matplotlib.lines import Line2D
     from scipy import ndimage as ndi
     from skimage import morphology
-    ids = ["ood_carp_fish", "ind_人物-16", "ood_rooster", "ood_crane_bird", "ind_动物-鸟-3"]  # 2 best F1 + rooster, 2 lowest IoU
-    rows = []
-    for cid in ids:
+    ids = ["ood_carp_fish", "ind_动物-38", "ood_rooster", "ood_crane_bird", "ind_动物-鸟-3"]
+    names = ["carp (highest plan F1)", "animal 38 (2nd plan F1)", "rooster", "crane (2nd lowest IoU)", "sparse bird (lowest IoU)"]
+    TP, FN, FP = np.array([0, 114, 178]) / 255, np.array([230, 159, 0]) / 255, np.array([204, 121, 167]) / 255
+    fig = plt.figure(figsize=(9.6, 10.6))
+    gs = fig.add_gridspec(len(ids) + 1, 5, height_ratios=[1] * len(ids) + [0.12], hspace=0.05, wspace=0.03,
+                          left=0.07, right=0.995, top=0.965, bottom=0.045)
+    heads = ["line drawing", "CutCraft output", "palette distance (raw)", "cut projection + drawing", "error map on projection"]
+    for i, cid in enumerate(ids):
         la = priors.load_rgb(ROOT / f"outputs/contents/{cid}.png", 512)
         lines = la.mean(-1) < 0.85
         gt = morphology.skeletonize(lines)
         out = priors.load_rgb(gen("cutcraft", cid), 512)
         proj = np.asarray(projected(gen("cutcraft", cid), cid)).astype(np.float32) / 255
         pe = priors.edge_map(proj)
-        # palette-distance heat map on the raw output
         _, de = priors.nearest_palette(priors.to_lab(out), PAL.lab_with_white)
-        heat = _cmap(de, "jet", 0, 25)
-        # overlay: drawing lines in dark green over the projected output
         ov = proj.copy()
-        ov[ndi.binary_dilation(gt, iterations=1)] = [0.1, 0.75, 0.1]
-        # error map on the drawing's lines: TP green, FN blue; FP (edges far from any line) red
-        dt_gt = ndi.distance_transform_edt(~gt)
-        dt_pe = ndi.distance_transform_edt(~pe)
-        base = np.repeat((0.35 + 0.65 * np.asarray(Image.fromarray((proj * 255).astype(np.uint8)).convert("L"),
-                                                   np.float32)[..., None] / 255), 3, -1)
+        ov[ndi.binary_dilation(gt, iterations=1)] = [0.0, 0.0, 0.0]
+        dt_gt, dt_pe = ndi.distance_transform_edt(~gt), ndi.distance_transform_edt(~pe)
+        base = np.repeat(0.55 + 0.45 * proj.mean(-1, keepdims=True), 3, -1)
         err = base.copy()
         fp = pe & (dt_gt > 3)
-        tp = gt & (dt_pe <= 3)
-        fn = gt & (dt_pe > 3)
-        err[ndi.binary_dilation(fp, iterations=1)] = [0.9, 0.1, 0.1]
-        err[ndi.binary_dilation(tp, iterations=1)] = [0.1, 0.8, 0.1]
-        err[ndi.binary_dilation(fn, iterations=1)] = [0.1, 0.2, 0.95]
-        rows.append([Image.fromarray((la * 255).astype(np.uint8)), Image.fromarray((out * 255).astype(np.uint8)),
-                     Image.fromarray((heat * 255).astype(np.uint8)), Image.fromarray((ov * 255).astype(np.uint8)),
-                     Image.fromarray((np.clip(err, 0, 1) * 255).astype(np.uint8))])
+        yy, xx = np.indices(fp.shape)
+        err[fp & (((yy + xx) // 2) % 2 == 0)] = FP  # dotted: extra (mostly decorative) cut edges
+        err[ndi.binary_dilation(gt & (dt_pe <= 3), iterations=1)] = TP  # solid: reproduced drawing lines
+        err[ndi.binary_dilation(gt & (dt_pe > 3), iterations=2)] = FN  # thick: missed drawing lines
         r = priors.edge_f1(pe, lines, 3)
-        print(cid, {k: round(v, 3) for k, v in r.items()}, "IoU", round(priors.silhouette_iou(proj, priors.silhouette_from_lineart(lines)), 3))
-    _grid(rows, "fig9_errors.jpg", cell=1.9)
-
-
+        iou = priors.silhouette_iou(proj, priors.silhouette_from_lineart(lines))
+        panels = [la, out, None, ov, err]
+        for j in range(5):
+            ax = fig.add_subplot(gs[i, j])
+            ax.set_xticks([]), ax.set_yticks([])
+            for sp in ax.spines.values():
+                sp.set_linewidth(0.3)
+            if j == 2:
+                hm = ax.imshow(de, cmap="viridis", vmin=0, vmax=25)
+            else:
+                ax.imshow(np.clip(panels[j], 0, 1))
+            if i == 0:
+                ax.set_title(f"({'abcde'[j]}) {heads[j]}", fontsize=8, pad=3)
+            if j == 0:
+                ax.set_ylabel(names[i] + f"\nrecall {r['edge_r']:.2f} · F1 {r['edge_f1']:.2f} · IoU {iou:.2f}", fontsize=7)
+    cax = fig.add_subplot(gs[-1, 2])
+    cb = fig.colorbar(hm, cax=cax, orientation="horizontal")
+    cb.set_label("CIEDE2000 to nearest paper colour", fontsize=7)
+    cb.ax.tick_params(labelsize=6)
+    lax = fig.add_subplot(gs[-1, 3:])
+    lax.axis("off")
+    lax.legend(handles=[Line2D([0], [0], color=TP, lw=2, label="drawing line reproduced (TP)"),
+                        Line2D([0], [0], color=FN, lw=4, label="drawing line missed (FN)"),
+                        Line2D([0], [0], color=FP, lw=2, ls=":", label="extra cut edge (FP, mostly decoration)")],
+               loc="center", ncol=1, fontsize=7, frameon=False)
+    fig.savefig(FIG / "fig9_errors.jpg", pil_kwargs={"quality": 90}, dpi=220)
+    plt.close(fig)
 
 
 def traj_curve():
@@ -295,6 +342,23 @@ def traj_curve():
     plt.tight_layout(w_pad=0.6)
     fig.savefig(ASSET / "traj_curve.png", dpi=220, bbox_inches="tight")
     plt.close(fig)
+
+
+
+
+def colourbars():
+    """Stand-alone colour bars for the TikZ method figures (review #48)."""
+    import matplotlib as mpl
+    for name, cmap, vmin, vmax, label in [("cbar_de20", "viridis", 0, 20, r"CIEDE2000 to nearest paper colour"),
+                                          ("cbar_ground60", "viridis", 0, 60, r"CIELAB distance to paper white"),
+                                          ("cbar_flat", "magma", 0, 1, r"flatness penalty $1-e^{-|\nabla\ell|^2/\beta^2}$")]:
+        fig, ax = plt.subplots(figsize=(2.2, 0.42))
+        cb = fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(vmin, vmax), cmap=cmap), cax=ax,
+                          orientation="horizontal")
+        cb.set_label(label, fontsize=6.5, labelpad=1)
+        cb.ax.tick_params(labelsize=6, length=2, pad=1)
+        fig.savefig(ASSET / f"{name}.png", dpi=300, bbox_inches="tight", pad_inches=0.01)
+        plt.close(fig)
 
 
 if __name__ == "__main__":

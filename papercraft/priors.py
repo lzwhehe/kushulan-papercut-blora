@@ -108,8 +108,39 @@ def nearest_palette(lab: np.ndarray, pal_lab: np.ndarray):
 
 
 # ----------------------------------------------------------------- cut projection
+def enforce_constraints(labels: np.ndarray, white: int, min_area: int, min_width_px: int = 0,
+                        max_passes: int = 10) -> np.ndarray:
+    """Hard geometric constraints on a label map (review #34).
+
+    Parts of a paper piece narrower than ``min_width_px`` (removed by an opening with a disk of
+    radius min_width_px // 2) are reassigned to the nearest remaining pixel; then pieces smaller than
+    ``min_area`` are merged into their nearest neighbour, repeating until none is left.
+    """
+    labels = labels.copy()
+    for _ in range(max_passes):
+        bad = np.zeros_like(labels, bool)
+        if min_width_px > 1:
+            r = max(1, min_width_px // 2)
+            for k in np.unique(labels):
+                if k == white:
+                    continue
+                m = labels == k
+                bad |= m & ~ndi.binary_opening(m, morphology.disk(r))
+        for k in np.unique(labels):
+            cc, n = ndi.label(labels == k)
+            if n:
+                areas = np.bincount(cc.ravel())
+                areas[0] = min_area
+                bad |= areas[cc] < min_area
+        if not bad.any() or bad.all():
+            break
+        _, (iy, ix) = ndi.distance_transform_edt(bad, return_indices=True)
+        labels = labels[iy, ix]
+    return labels
+
+
 def cut_project(rgb: np.ndarray, pal: Palette, min_area_frac: float = 2e-4, smooth: int = 2,
-                ground: np.ndarray | None = None):
+                ground: np.ndarray | None = None, min_width_px: int = 0, enforce: bool = False):
     """Project an image onto a cuttable layered papercut.
 
     1. assign each pixel to the nearest palette colour (white = background);
@@ -149,6 +180,8 @@ def cut_project(rgb: np.ndarray, pal: Palette, min_area_frac: float = 2e-4, smoo
         # every sub-cuttable island takes the label of the nearest kept pixel
         _, (iy, ix) = ndi.distance_transform_edt(small, return_indices=True)
         labels = labels[iy, ix]
+    if enforce:
+        labels = enforce_constraints(labels, len(pal_lab) - 1, min_area, min_width_px)
     out_rgb = np.clip(color.lab2rgb(pal_lab[labels][None])[0], 0, 1)
     stats = {"islands_merged": n_small, "islands_first_pass": first, "layers": int(len(np.unique(labels)))}
     return out_rgb.astype(np.float32), labels, raw_labels, stats

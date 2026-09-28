@@ -12,16 +12,14 @@ OUT = ROOT / "paper/sections"
 
 
 def load(m):
-    d = G / m
-    if not (d / "metrics.csv").exists():
+    """Per-drawing means (review #09/#10: the drawing is the statistical unit)."""
+    from make_tables3 import per_drawing
+    df = per_drawing(m)
+    if df is None:
         return None
-    df = pd.read_csv(d / "metrics.csv")
-    # colour/craft statistics are undefined for (near-)blank outputs
-    blank = df["fg_frac"] < 0.02
-    for c in ("palette_de", "purity", "cut_residual", "fragments", "palette_js", "chroma", "flatness", "interior_de"):
-        if c in df:
-            df.loc[blank, c] = np.nan
-    df["kid"] = json.loads((d / "metrics_kid.json").read_text())["clip_kid_x1000"]
+    kid = df.attrs["kid"]
+    df = df.reset_index()
+    df["kid"] = kid
     return df
 
 
@@ -45,7 +43,7 @@ def table(rows, cols, fname, base=None):
                 continue
             s = fmt(float(df[c].mean()), dec)
             if b is not None and m != base and c not in ("kid", "fg_frac") and c in b:
-                j = df.merge(b, on=["content", "seed"], suffixes=("", "_b"))[[c, c + "_b"]].dropna()
+                j = df.merge(b, on="content", suffixes=("", "_b"))[[c, c + "_b"]].dropna()
                 if len(j) > 5 and not np.allclose(j[c], j[c + "_b"]):
                     p = wilcoxon(j[c], j[c + "_b"]).pvalue
                     s += r"$^{***}$" if p < 1e-3 else r"$^{**}$" if p < 1e-2 else r"$^{*}$" if p < 0.05 else ""
@@ -55,8 +53,8 @@ def table(rows, cols, fname, base=None):
     print(fname); print("\n".join(lines))
 
 
-C = [("palette_de", 1), ("purity", 2), ("cut_residual", 1), ("fragments", 0), ("edge_f1", 2), ("sil_iou", 2),
-     ("clip_style", 3), ("palette_js", 2), ("chroma", 0)]
+C = [("palette_de", 1), ("purity", 2), ("cut_residual", 1), ("raw_line_recall_t3", 2), ("raw_edge_prec_t3", 2),
+     ("raw_sil_iou", 2), ("raw_decoration_density", 1), ("clip_style_dedup", 3), ("palette_js", 2), ("chroma", 0)]
 if __name__ == "__main__":
     table([("CutCraft (full)", "cutcraft"), ("w/o palette term $E_{\\mathrm{pal}}$", "abl_no_pal"),
            ("w/o flatness term $E_{\\mathrm{flat}}$", "abl_no_flat"), ("w/o line-support term $E_{\\mathrm{edge}}$", "abl_no_edge"),
@@ -66,12 +64,12 @@ if __name__ == "__main__":
     table([("Collection block (coll)", "coll"), ("coll + self craft regulariser", "var_coll_self"),
            ("coll + self + foreign craft energy", "var_energy"), ("Projection self-distillation", "var_pd"),
            ("Cut-line block", "cutline"), ("Cut-line block + self craft regulariser", "cutline_self")],
-          [("fg_frac", 2), ("palette_de", 1), ("edge_f1", 2), ("sil_iou", 2), ("clip_style", 3), ("clip_text", 3),
+          [("fg_frac", 2), ("palette_de", 1), ("raw_line_recall_t3", 2), ("raw_sil_iou", 2), ("clip_style_dedup", 3), ("clip_text", 3),
            ("palette_js", 2), ("chroma", 0), ("kid", 2)], "table_variants.tex", base="cutline")
     table([("$\\eta=0$ (no guidance)", "cutline"), ("$\\eta=0.3$", "sens_g0.3"), ("$\\eta=0.6$", "sens_g0.6"),
            ("$\\eta=1.0$ (selected)", "cutcraft"), ("$\\eta=2.0$", "sens_g2.0")],
-          [("palette_de", 1), ("cut_residual", 1), ("fragments", 0), ("edge_f1", 2), ("sil_iou", 2), ("clip_style", 3),
-           ("kid", 2), ("chroma", 0)], "table_eta.tex", base="cutcraft")
+          [("palette_de", 1), ("cut_residual", 1), ("raw_line_recall_t3", 2), ("raw_edge_prec_t3", 2), ("raw_sil_iou", 2),
+           ("clip_style_dedup", 3), ("kid", 2), ("chroma", 0)], "table_eta.tex", base="cutcraft")
     table([("$s=0.4$", "sens_cn0.4"), ("$s=0.6$ (selected)", "cutcraft"), ("$s=0.8$", "sens_cn0.8")],
-          [("palette_de", 1), ("cut_residual", 1), ("fragments", 0), ("edge_f1", 2), ("sil_iou", 2), ("clip_style", 3),
-           ("kid", 2), ("chroma", 0)], "table_cn.tex", base="cutcraft")
+          [("palette_de", 1), ("cut_residual", 1), ("raw_line_recall_t3", 2), ("raw_edge_prec_t3", 2), ("raw_sil_iou", 2),
+           ("clip_style_dedup", 3), ("kid", 2), ("chroma", 0)], "table_cn.tex", base="cutcraft")
