@@ -37,6 +37,9 @@ def main():
     ap.add_argument("--steps", type=int, default=50)
     ap.add_argument("--cfg", type=float, default=10.0)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--config", choices=["controlnet", "transfer"], default="controlnet",
+                    help="official ControlNet demo (no norm sharing, CFG 5) or real-image transfer notebook (norm sharing, CFG 10)")
+    ap.add_argument("--contents_json", default=str(ROOT / "outputs/contents/contents.json"))
     a = ap.parse_args()
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     (out / "args.json").write_text(json.dumps(vars(a), indent=1))
@@ -62,7 +65,10 @@ def main():
     pipe.controlnet.forward = cn_forward
 
     split = json.loads((ROOT / "outputs/data/split.json").read_text())
-    contents = json.loads((ROOT / "outputs/contents/contents.json").read_text())
+    contents = json.loads(Path(a.contents_json).read_text())
+    cdir = Path(a.contents_json).parent
+    share_norm = a.config == "transfer"
+    cfg = a.cfg if a.config == "transfer" else 5.0
     if a.limit:
         contents = contents[: a.limit]
     for k in a.styles:
@@ -71,20 +77,20 @@ def main():
         zts = inversion.ddim_inversion(pipe, ref, ref_prompt, a.steps, 2)
         handler = sa_handler.Handler(pipe)
         handler.register(sa_handler.StyleAlignedArgs(
-            share_group_norm=True, share_layer_norm=True, share_attention=True, adain_queries=True,
+            share_group_norm=share_norm, share_layer_norm=share_norm, share_attention=True, adain_queries=True,
             adain_keys=True, adain_values=False, shared_score_shift=np.log(2), shared_score_scale=1.0))
         for c in contents:
             f = out / f"{c['id']}_s{k}_seed0.png"
             if f.exists():
                 continue
-            ctrl, _ = control_image(ROOT / f"outputs/contents/{c['id']}.png")
+            ctrl, _ = control_image(cdir / f"{c['id']}.png")
             zT, cb = inversion.make_inversion_callback(zts, offset=5)
             g = torch.Generator("cpu").manual_seed(0)
             lat = torch.randn(2, 4, 128, 128, generator=g, dtype=torch.float16).to("cuda")
             lat[0] = zT
             imgs = pipe([ref_prompt, f"{c['subject']}, papercut"], image=[ctrl, ctrl], latents=lat,
                         controlnet_conditioning_scale=a.cn_scale, callback_on_step_end=cb,
-                        num_inference_steps=a.steps, guidance_scale=a.cfg).images
+                        num_inference_steps=a.steps, guidance_scale=cfg).images
             imgs[1].save(f)
             print("generated", f.name, flush=True)
         handler.remove()

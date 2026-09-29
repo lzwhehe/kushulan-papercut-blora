@@ -1,0 +1,22 @@
+PRIMARY (Holm over 8)
+qwen_q2   vs cutcraft  raw_line_recall_t3   0.985 vs 0.978  diff +0.006 [-0.000,+0.012]  r=+0.52  p_holm=0.014  better=A
+qwen_q2   vs cutcraft  raw_sil_iou          0.871 vs 0.559  diff +0.312 [+0.246,+0.378]  r=+0.99  p_holm=5.7e-09  better=A
+qwen_q2   vs cutcraft  clip_style_dedup     0.802 vs 0.828  diff -0.026 [-0.038,-0.014]  r=-0.71  p_holm=0.00038  better=B
+qwen_q2   vs cutcraft  palette_js           0.419 vs 0.384  diff +0.035 [+0.007,+0.064]  r=+0.43  p_holm=0.03  better=B
+qwen_q1   vs qwen_q0   raw_line_recall_t3   0.972 vs 0.894  diff +0.078 [+0.056,+0.101]  r=+0.96  p_holm=6.1e-08  better=A
+qwen_q1   vs qwen_q0   raw_sil_iou          0.871 vs 0.677  diff +0.195 [+0.122,+0.273]  r=+0.77  p_holm=9.4e-05  better=A
+qwen_q1   vs qwen_q0   clip_style_dedup     0.853 vs 0.777  diff +0.076 [+0.065,+0.087]  r=+1.00  p_holm=9.3e-10  better=A
+qwen_q1   vs qwen_q0   palette_js           0.412 vs 0.489  diff -0.076 [-0.100,-0.052]  r=-0.81  p_holm=4.1e-05  better=A
+
+DESCRIPTIVE (all 34 drawings)
+ksl_original KID 0.07 line_recall=0.948 sil_iou=0.849 palette_de=6.441 cut_residual=9.070 clip_style=0.869 palette_js=0.012 chroma=47.458 dino_gt=1.000 nn_train_dino=0.826 proj_line_recall=0.894 proj_sil_iou=0.838 proj_clip_style=0.850
+cutcraft     KID 0.48 line_recall=0.978 sil_iou=0.559 palette_de=6.307 cut_residual=9.297 clip_style=0.828 palette_js=0.384 chroma=30.364 dino_gt=0.656 nn_train_dino=0.629 proj_line_recall=0.868 proj_sil_iou=0.756 proj_clip_style=0.845
+qwen_q0      KID 0.66 line_recall=0.894 sil_iou=0.677 palette_de=9.241 cut_residual=11.215 clip_style=0.777 palette_js=0.489 chroma=44.131 dino_gt=0.686 nn_train_dino=0.557 proj_line_recall=0.813 proj_sil_iou=0.844 proj_clip_style=0.844
+qwen_q1      KID 0.11 line_recall=0.972 sil_iou=0.871 palette_de=6.877 cut_residual=9.879 clip_style=0.853 palette_js=0.412 chroma=59.026 dino_gt=0.868 nn_train_dino=0.687 proj_line_recall=0.899 proj_sil_iou=0.859 proj_clip_style=0.850
+qwen_q2      KID 0.32 line_recall=0.985 sil_iou=0.871 palette_de=8.126 cut_residual=11.715 clip_style=0.802 palette_js=0.419 chroma=46.309 dino_gt=0.750 nn_train_dino=0.606 proj_line_recall=0.858 proj_sil_iou=0.839 proj_clip_style=0.827
+
+NEW SUBJECTS ONLY (12)
+cutcraft     line_recall=0.966 sil_iou=0.539 clip_style=0.809 palette_js=0.415 palette_de=6.275 chroma=31.464 nn_train_dino=0.489
+qwen_q0      line_recall=0.838 sil_iou=0.661 clip_style=0.737 palette_js=0.473 palette_de=9.900 chroma=42.239 nn_train_dino=0.388
+qwen_q1      line_recall=0.934 sil_iou=0.817 clip_style=0.820 palette_js=0.409 palette_de=7.094 chroma=59.511 nn_train_dino=0.462
+qwen_q2      line_recall=0.982 sil_iou=0.872 clip_style=0.784 palette_js=0.435 palette_de=8.173 chroma=49.085 nn_train_dino=0.424

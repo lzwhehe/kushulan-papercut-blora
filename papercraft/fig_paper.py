@@ -236,10 +236,10 @@ def fig8():
     ref = {"ind_" + t["id"]: ROOT / t["reference"] for t in split["test_indomain"]}
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     ids = ["ind_动物-18", "ind_人物-5", "ind_植物-29", "ind_日常-3", "repo_fish", "ood_rooster", "ood_tiger", "ood_teapot"]
-    cols = [("drawing", None), ("original", None), ("B-LoRA", "blora"), ("InstantStyle", "instantstyle"),
-            ("InstantStyle\n+ CraftGuide", "instantstyle_guide"), ("conv. LoRA\n+ CraftGuide", "fulllora_guide"),
-            ("cut-line", "cutline"), ("cut-line\n+ projection", "cutline+proj"), ("CutCraft", "cutcraft"),
-            ("CutCraft\n+ projection", "cutcraft+proj")]
+    cols = [("drawing", None), ("original", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
+            ("InstantStyle", "instantstyle"), ("Qwen-Image-Edit\nzero-shot", "qwen_q0"),
+            ("CutCraft-SDXL", "cutcraft"), ("CutCraft-SDXL\ncutting plan", "cutcraft+proj"),
+            ("CutCraft-Qwen", "qwen_q1"), ("CutCraft-Qwen\ncutting plan", "qwen_q1+proj")]
     cols = [c for c in cols if c[1] is None or (G / c[1].replace("+proj", "")).exists()]
     rows, rlab = [], []
     for cid in ids:
@@ -251,7 +251,7 @@ def fig8():
                 r.append(im(ref[cid], 384) if cid in ref else None)
             elif m.endswith("+proj"):
                 r.append(projected(gen(m[:-5], cid), cid))
-            elif m in ("blora", "instantstyle", "instantstyle_guide"):
+            elif m in ("blora", "instantstyle", "instantstyle_guide", "stylealigned"):
                 r.append(gen(m, cid, 0, 0))
             else:
                 r.append(gen(m, cid))

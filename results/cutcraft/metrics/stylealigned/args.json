@@ -1,0 +1,13 @@
+{
+ "out": "../../outputs/gen/stylealigned",
+ "styles": [
+  0,
+  1
+ ],
+ "cn_scale": 0.6,
+ "steps": 50,
+ "cfg": 10.0,
+ "limit": 0,
+ "config": "controlnet",
+ "contents_json": "/home/ubuntu/kushulan-papercut-blora/outputs/contents/contents.json"
+}

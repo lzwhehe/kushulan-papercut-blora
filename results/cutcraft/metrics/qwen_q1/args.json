@@ -1,0 +1,20 @@
+{
+ "out": "../../outputs/qwen/q1",
+ "lora": "/root/autodl-tmp/runs/cutline/lora/epoch-2.safetensors",
+ "guide": false,
+ "guide_strength": 1.0,
+ "guide_iter": 2,
+ "contents_json": "/root/autodl-tmp/work/kushulan-papercut-blora/outputs/contents/contents.json",
+ "seeds": [
+  0,
+  1
+ ],
+ "steps": 40,
+ "cfg": 4.0,
+ "limit": 0,
+ "quant4": false,
+ "offload": false,
+ "guide_decode_scale": 1.0,
+ "model": "Qwen/Qwen-Image-Edit-2511",
+ "revision": "6f3ccc0b56e431dc6a0c2b2039706d7d26f22cb9"
+}
