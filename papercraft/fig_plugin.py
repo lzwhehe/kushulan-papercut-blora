@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-BLUE, ORANGE, AQUA, INK, MUTED, GRID = "#2a78d6", "#eb6834", "#1baf7a", "#1f1f1e", "#6b6a64", "#e6e5df"
+BLUE, ORANGE, AQUA, INK, MUTED, GRID = "#201963", "#e6af25", "#c52929", "#1f1f1e", "#6b6a64", "#e6e5df"  # paper-stock palette: indigo, gold, red
 PANELS = [("raw_line_recall_t3", "Line recall", False), ("raw_sil_iou", "Silhouette IoU", False),
           ("clip_style_dedup", "CLIP style", False), ("palette_js", "Colour-mix distance", True)]
 STYLE = {"Scissor-path training": (BLUE, "o"), "Scissor-path maps vs generic edges": (AQUA, "s"), "Craft guidance": (ORANGE, "D")}
