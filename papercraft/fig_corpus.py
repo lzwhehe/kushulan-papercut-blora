@@ -6,6 +6,8 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+import pubstyle  # noqa: F401
 import numpy as np
 import pandas as pd
 from scipy.ndimage import gaussian_filter

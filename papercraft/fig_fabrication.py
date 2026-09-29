@@ -11,6 +11,8 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+import pubstyle  # noqa: F401
 import numpy as np
 import pymupdf
 from PIL import Image
@@ -67,7 +69,7 @@ def main():
                           f"smallest piece {k01['smallest_mm2']:.1f} mm$^2$ (limit 8 mm$^2$)\n"
                           f"minimum width 1 mm enforced\n"
                           f"1 px = {PX_MM:.3f} mm; SVG in millimetres\n"
-                          f"not yet cut (candidate design)", fontsize=5.8, color=MUTED,
+                          f"not yet cut (candidate design)", fontsize=6, color=MUTED,
                transform=ax[7].transAxes, linespacing=1.6)
     for a in ax[:7]:
         a.axis("off"); a.title.set_fontsize(6.5); a.title.set_color(INK); a.title.set_ha("left"); a.title.set_position((0, 1))

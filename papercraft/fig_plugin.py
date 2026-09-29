@@ -9,6 +9,8 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+import pubstyle  # noqa: F401  shared publication style (fonts, sizes, spines)
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,8 +26,7 @@ def main():
     y = list(range(len(df)))[::-1]
     order = list(dict.fromkeys(df.component))
     gap = [yy - 0.6 * order.index(c) for yy, c in zip(y, df.component)]
-    plt.rcParams.update({"font.size": 8, "axes.edgecolor": MUTED, "axes.labelcolor": INK,
-                         "xtick.color": MUTED, "ytick.color": INK, "font.family": "DejaVu Sans"})
+    plt.rcParams.update({"font.size": 7, "ytick.color": INK})
     fig, axes = plt.subplots(1, 4, figsize=(7.2, 3.9), sharey=True)
     for ax, (m, title, invert) in zip(axes, PANELS):
         for yy, (_, r) in zip(gap, df.iterrows()):

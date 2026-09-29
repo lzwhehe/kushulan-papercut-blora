@@ -8,6 +8,8 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+import pubstyle  # noqa: F401  shared publication style (fonts, sizes, spines)
 import numpy as np
 from PIL import Image
 
@@ -18,7 +20,7 @@ FIG = ROOT / "paper/figures"
 ASSET = FIG / "assets"
 G = ROOT / "outputs/gen"
 PAL = priors.Palette.load(ROOT / "outputs/data/palette.json")
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9, "axes.linewidth": 0.6, "savefig.dpi": 300})
+plt.rcParams.update({"font.size": 7, "axes.linewidth": 0.5, "savefig.dpi": 300})
 NAVY, RED, LBLUE, SALMON, GOLD = "#2d5277", "#a3302f", "#8fb3d1", "#e08a7e", "#e6b35a"
 
 
@@ -62,7 +64,7 @@ def fig1():
         ax.set_xticks([]), ax.set_yticks([])
         for s in ax.spines.values():
             s.set_visible(False)
-        ax.set_xlabel(f"({lab})", fontsize=15, fontweight="bold", labelpad=6)
+        ax.set_xlabel(f"({lab})", fontsize=12, fontweight="bold", labelpad=6)
     plt.subplots_adjust(wspace=0.04)
     save(fig, "fig1_challenges.jpg")
 
