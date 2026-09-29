@@ -44,7 +44,8 @@ def table(rows, cols, fname, base=None):
             s = fmt(float(df[c].mean()), dec)
             if b is not None and m != base and c not in ("kid", "fg_frac") and c in b:
                 j = df.merge(b, on="content", suffixes=("", "_b"))[[c, c + "_b"]].dropna()
-                if len(j) > 5 and not np.allclose(j[c], j[c + "_b"]):
+                thr = 0.5 if c in ("palette_de", "cut_residual") else (1.0 if c in ("chroma", "raw_decoration_density") else 0.01)
+                if len(j) > 5 and not np.allclose(j[c], j[c + "_b"]) and abs(j[c].mean() - j[c + "_b"].mean()) >= thr:
                     p = wilcoxon(j[c], j[c + "_b"]).pvalue
                     s += r"$^{***}$" if p < 1e-3 else r"$^{**}$" if p < 1e-2 else r"$^{*}$" if p < 0.05 else ""
             cells.append(s)

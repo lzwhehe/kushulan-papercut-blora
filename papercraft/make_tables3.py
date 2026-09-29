@@ -110,7 +110,7 @@ def svg_table():
             d = df[df.method == m]
             if not len(d):
                 continue
-            rec = fmt(d.plan_line_recall.mean(), 2) if "plan_line_recall" in d else "--"
+            rec = fmt(d.plan_line_recall.mean(), 2) if ("plan_line_recall" in d and lab == "enforced") else "--"
             lines.append(f"{name} & {lab} & {d.pieces.mean():.0f} & {(d.pieces_below_min > 0).mean():.2f} & "
                          f"{d.smallest_mm2.mean():.1f} & {d.pieces_with_thin_strip.mean():.1f} & {rec} \\\\")
     (OUT / "table_svg.tex").write_text("\n".join(lines) + "\n")
@@ -142,7 +142,8 @@ def supp_tables():
             ("StyleAligned + ControlNet", "stylealigned"),
            ("InstantStyle + ControlNet", "instantstyle"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
             ("Conv.\\ LoRA + ControlNet", "fulllora"), ("Conv.\\ LoRA + CraftGuide", "fulllora_guide"),
-            ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft", "cutcraft")]
+            ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft-SDXL", "cutcraft"),
+            ("Qwen-Image-Edit zero-shot (Q0)", "qwen_q0"), ("Qwen + Canny-edge LoRA (Q1$'$)", "qwen_q1_canny"), ("CutCraft-Qwen (Q1)", "qwen_q1")]
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None)] + rows, RAW, "table_indomain.tex", subset=["indomain"])
     write(rows, RAW, "table_ood.tex", subset=["repo", "ood"])
 
@@ -176,8 +177,11 @@ if __name__ == "__main__":
            ("StyleAligned + ControlNet", "stylealigned"),
            ("InstantStyle + ControlNet", "instantstyle"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
            ("Conv.\\ LoRA + ControlNet", "fulllora"), ("Conv.\\ LoRA + CraftGuide", "fulllora_guide"),
+           ("Conv.\\ LoRA + cut-line training", "fulllora_cl"), ("Conv.\\ LoRA + cut-line training + CraftGuide", "fulllora_cl_guide"),
            ("midrule", None),
-           ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft-SDXL (cut-line + CraftGuide)", "cutcraft"),
+           ("Collection block", "coll"), ("Collection block + CraftGuide", "coll_guide"),
+           ("Cut-line block", "cutline"), ("CutCraft-SDXL (cut-line + CraftGuide)", "cutcraft"),
+           ("Cut-line block, strict split", "cutline_strict"), ("Cut-line block, strict split + CraftGuide", "cutcraft_strict"),
            ("midrule", None),
            ("Qwen-Image-Edit-2511 zero-shot (Q0)", "qwen_q0"), ("Qwen + Canny-edge LoRA (Q1$'$)", "qwen_q1_canny"), ("CutCraft-Qwen (cut-line LoRA, Q1)", "qwen_q1"),
            ("CutCraft-Qwen + CraftGuide (Q2)", "qwen_q2")],
