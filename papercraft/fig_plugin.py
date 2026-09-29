@@ -12,20 +12,21 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-BLUE, ORANGE, INK, MUTED, GRID = "#2a78d6", "#eb6834", "#1f1f1e", "#6b6a64", "#e6e5df"
+BLUE, ORANGE, AQUA, INK, MUTED, GRID = "#2a78d6", "#eb6834", "#1baf7a", "#1f1f1e", "#6b6a64", "#e6e5df"
 PANELS = [("raw_line_recall_t3", "Line recall", False), ("raw_sil_iou", "Silhouette IoU", False),
           ("clip_style_dedup", "CLIP style", False), ("palette_js", "Colour-mix distance", True)]
-STYLE = {"Scissor-path training": (BLUE, "o"), "Craft guidance": (ORANGE, "D")}
+STYLE = {"Scissor-path training": (BLUE, "o"), "Scissor-path maps vs generic edges": (AQUA, "s"), "Craft guidance": (ORANGE, "D")}
 
 
 def main():
     df = pd.read_csv(ROOT / "outputs/plugin_matrix.csv")
     labels = [f"{h}{' †' if p else ''}" for h, p in zip(df.host, df.prespecified)]
     y = list(range(len(df)))[::-1]
-    gap = [yy - (0.6 if c == "Craft guidance" else 0) for yy, c in zip(y, df.component)]
+    order = list(dict.fromkeys(df.component))
+    gap = [yy - 0.6 * order.index(c) for yy, c in zip(y, df.component)]
     plt.rcParams.update({"font.size": 8, "axes.edgecolor": MUTED, "axes.labelcolor": INK,
                          "xtick.color": MUTED, "ytick.color": INK, "font.family": "DejaVu Sans"})
-    fig, axes = plt.subplots(1, 4, figsize=(7.2, 3.1), sharey=True)
+    fig, axes = plt.subplots(1, 4, figsize=(7.2, 3.9), sharey=True)
     for ax, (m, title, invert) in zip(axes, PANELS):
         for yy, (_, r) in zip(gap, df.iterrows()):
             col, mk = STYLE[r.component]
@@ -47,11 +48,11 @@ def main():
         ax.annotate("better →", xy=(1, -0.13), xycoords="axes fraction", ha="right", fontsize=7, color=MUTED)
     axes[0].set_yticks(gap); axes[0].set_yticklabels(labels)
     handles = [plt.Line2D([], [], color=c, marker=mk, ls="-", lw=2, ms=6, label=k) for k, (c, mk) in STYLE.items()]
-    handles.append(plt.Line2D([], [], color=MUTED, marker="o", mfc="white", ls="", ms=6, label="host model alone"))
-    fig.legend(handles=handles, loc="upper center", ncol=3, frameon=False, fontsize=7.5, bbox_to_anchor=(0.55, 1.02))
+    handles.append(plt.Line2D([], [], color=MUTED, marker="o", mfc="white", ls="", ms=6, label="host model without the component"))
+    fig.legend(handles=handles, loc="upper center", ncol=2, frameon=False, fontsize=7, bbox_to_anchor=(0.55, 0.995))
     fig.text(0.01, 0.005, "† comparison pre-specified before test generation. Faded markers: 95% CI of the change includes zero, or |change| < 0.01. Colour-mix axis reversed.",
              fontsize=6.5, color=MUTED)
-    fig.subplots_adjust(left=0.2, right=0.99, top=0.83, bottom=0.14, wspace=0.12)
+    fig.subplots_adjust(left=0.2, right=0.99, top=0.79, bottom=0.11, wspace=0.12)
     for ext in ("pdf", "png"):
         fig.savefig(ROOT / f"paper/figures/fig_plugin.{ext}", dpi=220)
     print("saved")

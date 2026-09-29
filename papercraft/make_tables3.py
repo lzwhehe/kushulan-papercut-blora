@@ -179,7 +179,7 @@ if __name__ == "__main__":
            ("midrule", None),
            ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft-SDXL (cut-line + CraftGuide)", "cutcraft"),
            ("midrule", None),
-           ("Qwen-Image-Edit-2511 zero-shot (Q0)", "qwen_q0"), ("CutCraft-Qwen (cut-line LoRA, Q1)", "qwen_q1"),
+           ("Qwen-Image-Edit-2511 zero-shot (Q0)", "qwen_q0"), ("Qwen + Canny-edge LoRA (Q1$'$)", "qwen_q1_canny"), ("CutCraft-Qwen (cut-line LoRA, Q1)", "qwen_q1"),
            ("CutCraft-Qwen + CraftGuide (Q2)", "qwen_q2")],
           RAW, "table_main.tex")
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None),

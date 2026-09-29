@@ -19,6 +19,8 @@ ROWS = [  # component, host label, before, after, pre-specified?
     ("Scissor-path training", "SDXL style block", "coll", "cutline", False),
     ("Scissor-path training", "Conventional LoRA", "fulllora", "fulllora_cl", False),
     ("Scissor-path training", "Qwen-Image-Edit-2511", "qwen_q0", "qwen_q1", True),
+    ("Scissor-path maps vs generic edges", "SDXL style block", "cl_canny", "cutline", False),
+    ("Scissor-path maps vs generic edges", "Qwen-Image-Edit-2511", "qwen_q1_canny", "qwen_q1", False),
     ("Craft guidance", "B-LoRA", "blora", "blora_guide", False),
     ("Craft guidance", "InstantStyle", "instantstyle", "instantstyle_guide", False),
     ("Craft guidance", "Conventional LoRA", "fulllora", "fulllora_guide", False),
