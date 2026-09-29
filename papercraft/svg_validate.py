@@ -154,7 +154,12 @@ def main(methods, enforce=False):
               "thin area %.3f" % df.thin_area_share.mean(), "pieces<8mm2 per design %.2f" % df.pieces_below_min.mean(),
               "invalid paths %d/%d" % (df.invalid_paths.sum(), df.paths.sum()), "raster agreement %.4f" % df.raster_agreement.mean(),
               "plan line recall %.3f" % df.plan_line_recall.mean())
-    pd.concat(rows).to_csv(ROOT / f"outputs/svg_validation{'_enforced' if enforce else ''}.csv", index=False)
+    out = ROOT / f"outputs/svg_validation{'_enforced' if enforce else ''}.csv"
+    new = pd.concat(rows)
+    if out.exists():  # keep rows of methods not re-run
+        old = pd.read_csv(out)
+        new = pd.concat([old[~old.method.isin(methods)], new])
+    new.to_csv(out, index=False)
 
 
 if __name__ == "__main__":

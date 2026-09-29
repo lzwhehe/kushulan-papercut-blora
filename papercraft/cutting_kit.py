@@ -7,7 +7,7 @@ For a rule-based selection of enforced 200 x 200 mm plans, writes one A4 PDF per
 plus a CSV piece list (number, sheet colour, area in mm^2, centroid in mm).
 
 Selection rule: CutCraft seed-0 plans sorted by piece count, six at evenly spaced quantiles;
-the B-LoRA (animal reference) plans of the first three of these drawings for comparison.
+the B-LoRA (animal reference) and CutCraft-Qwen plans of the first three of these drawings for comparison.
 Print at 100 % (no "fit to page"); the 50 mm bar on each page checks the scale.
 """
 import json
@@ -126,6 +126,7 @@ def main():
         jobs = [("cutcraft", SVG / "cutcraft" / (Path(r.file).stem + ".svg"))]
         if i < 3:
             jobs.append(("blora", SVG / "blora" / f"{cid}_s0_seed0.svg"))
+            jobs.append(("qwen_q1", SVG / "qwen_q1" / f"{cid}_s_seed0.svg"))  # CutCraft-Qwen, same drawing
         for m, svg in jobs:
             code = f"K{len(manifest) + 1:02d}"  # neutral code, method revealed only in the manifest
             df = design(svg, f"Design {code}", OUT / f"{code}.pdf")

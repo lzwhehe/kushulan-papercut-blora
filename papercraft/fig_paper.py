@@ -235,7 +235,9 @@ def fig8():
     split = json.loads((ROOT / "outputs/data/split.json").read_text())
     ref = {"ind_" + t["id"]: ROOT / t["reference"] for t in split["test_indomain"]}
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
-    ids = ["ind_动物-18", "ind_人物-5", "ind_植物-29", "ind_日常-3", "repo_fish", "ood_rooster", "ood_tiger", "ood_teapot"]
+    # in-domain showcase: per category the drawing with the highest mean CLIP style of CutCraft-SDXL and CutCraft-Qwen
+    # (seed 0), plus the two best remaining; all have an original. New subjects: Supplementary figure (figS_newsubjects).
+    ids = ["ind_人物-3", "ind_动物-38", "ind_窗花-3", "ind_日常-25", "ind_植物-17", "ind_边框-12", "ind_动物-18", "ind_窗花-4"]
     cols = [("drawing", None), ("original", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
             ("InstantStyle", "instantstyle"), ("Qwen-Image-Edit\nzero-shot", "qwen_q0"),
             ("CutCraft-SDXL", "cutcraft"), ("CutCraft-SDXL\ncutting plan", "cutcraft+proj"),
@@ -380,6 +382,30 @@ def figS7():
         rows.append(r)
     rlab = ["rooster", "person 5", "tiger", "plant 29", "fish (repository)", "teapot"]
     _grid(rows, "figS7_convlora.jpg", cell=1.3, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5)
+
+
+def figS_newsubjects():
+    """All 12 new-subject drawings (no original exists): popular frameworks and the two instantiations, seed 0."""
+    cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
+    ids = [k for k in cats if cats[k]["set"] == "ood"]
+    cols = [("drawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"), ("InstantStyle", "instantstyle"),
+            ("Qwen-Image-Edit\nzero-shot", "qwen_q0"), ("CutCraft-SDXL", "cutcraft"), ("CutCraft-SDXL\ncutting plan", "cutcraft+proj"),
+            ("CutCraft-Qwen", "qwen_q1"), ("CutCraft-Qwen\ncutting plan", "qwen_q1+proj")]
+    rows = []
+    for cid in ids:
+        r = []
+        for lab, m in cols:
+            if m is None:
+                r.append(ROOT / f"outputs/contents/{cid}.png")
+            elif m.endswith("+proj"):
+                r.append(projected(gen(m[:-5], cid), cid))
+            elif m in ("blora", "instantstyle", "stylealigned"):
+                r.append(gen(m, cid, 0, 0))
+            else:
+                r.append(gen(m, cid))
+        rows.append(r)
+    rlab = [cats[c]["subject"].replace("a ", "", 1) for c in ids]
+    _grid(rows, "figS9_newsubjects.jpg", cell=1.0, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6)
 
 if __name__ == "__main__":
     for f in sys.argv[1:]:

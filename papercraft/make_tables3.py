@@ -98,7 +98,7 @@ def stats_table():
 
 def svg_table():
     names = [("blora", "B-LoRA"), ("instantstyle_guide", "InstantStyle + guide"), ("fulllora_guide", "Conv.\\ LoRA + guide"),
-             ("cutline", "Cut-line block"), ("cutcraft", "CutCraft")]
+             ("cutline", "Cut-line block"), ("cutcraft", "CutCraft-SDXL"), ("qwen_q1", "CutCraft-Qwen")]
     frames = {}
     for f, lab in (("svg_validation.csv", "raw"), ("svg_validation_enforced.csv", "enforced")):
         fp = ROOT / "outputs" / f
@@ -185,6 +185,7 @@ if __name__ == "__main__":
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None),
            ("B-LoRA", "blora"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
            ("Conv.\\ LoRA + CraftGuide", "fulllora_guide"),
-           ("Cut-line block", "cutline"), ("CutCraft", "cutcraft")], PLAN, "table_plan.tex")
+           ("Cut-line block", "cutline"), ("CutCraft-SDXL", "cutcraft"),
+           ("Qwen-Image-Edit zero-shot", "qwen_q0"), ("CutCraft-Qwen", "qwen_q1")], PLAN, "table_plan.tex")
     if (ROOT / "outputs/stats_drawing_level.csv").exists():
         stats_table()

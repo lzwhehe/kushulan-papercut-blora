@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 G = ROOT / "outputs/gen"
 OUT = ROOT / "outputs/expert_pack"
 METHODS = {"blora": "{cid}_s0_seed0", "instantstyle_guide": "{cid}_s0_seed0", "cutline": "{cid}_s_seed0",
-           "cutcraft": "{cid}_s_seed0"}
+           "cutcraft": "{cid}_s_seed0", "qwen_q1": "{cid}_s_seed0"}
 SCALES = ["style resemblance (1-5)", "faithfulness to drawing (1-5)", "motif/colour appropriateness (1-5)",
           "feasibility to cut and paste (1-5)", "overall quality (1-5)", "comments"]
 
