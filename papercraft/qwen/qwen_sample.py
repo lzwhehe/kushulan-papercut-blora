@@ -78,7 +78,7 @@ class FlowCraftGuide(CraftGuide):
         return self._orig(model_output, timestep, sample, *args, **kw)
 
 
-def load_pipe(lora=None, dev="cuda", quant4=False):
+def load_pipe(lora=None, dev="cuda", quant4=False, offload=False):
     """quant4: NF4 transformer and text encoder + model CPU offload, for pilot runs on a 20 GB GPU only
     (the reported experiment runs in bf16 on a 96 GB GPU)."""
     from diffusers import QwenImageEditPlusPipeline
@@ -87,6 +87,9 @@ def load_pipe(lora=None, dev="cuda", quant4=False):
         if lora:
             pipe.load_lora_weights(lora, adapter_name="cutline")
         pipe.set_progress_bar_config(disable=True)
+        if offload:  # same bf16 weights, streamed layer by layer to a small GPU (slow, numerically identical path)
+            pipe.enable_sequential_cpu_offload()
+            return pipe
         return pipe.to(dev)
     from diffusers import BitsAndBytesConfig as DBnb, QwenImageTransformer2DModel
     from transformers import BitsAndBytesConfig as TBnb, Qwen2_5_VLForConditionalGeneration
@@ -118,12 +121,13 @@ def main():
     ap.add_argument("--cfg", type=float, default=4.0)
     ap.add_argument("--limit", type=int, default=0, help="first N drawings only (smoke tests)")
     ap.add_argument("--quant4", action="store_true", help="NF4 + CPU offload (20 GB pilot only)")
+    ap.add_argument("--offload", action="store_true", help="bf16 with sequential CPU offload (small GPUs)")
     ap.add_argument("--guide_decode_scale", type=float, default=1.0, help="<1: pooled-latent decode (pilot only)")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     (out / "args.json").write_text(json.dumps({**vars(a), "model": MODEL, "revision": REVISION}, indent=1))
-    pipe = load_pipe(a.lora, quant4=a.quant4)
+    pipe = load_pipe(a.lora, quant4=a.quant4, offload=a.offload)
     guide = None
     if a.guide:
         pal = priors.Palette.load(ROOT / "outputs/data/palette.json")
