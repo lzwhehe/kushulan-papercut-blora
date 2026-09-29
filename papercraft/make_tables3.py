@@ -139,7 +139,8 @@ def supp_tables():
         lines.append(r"\midrule")
     (OUT / "table_projabl.tex").write_text("\n".join(lines[:-1]) + "\n")
     rows = [("B-LoRA", "blora"), ("B-LoRA + CraftGuide", "blora_guide"), ("Prompt only + ControlNet", "prompt_cn"),
-            ("InstantStyle + ControlNet", "instantstyle"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
+            ("StyleAligned + ControlNet", "stylealigned"),
+           ("InstantStyle + ControlNet", "instantstyle"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
             ("Conv.\\ LoRA + ControlNet", "fulllora"), ("Conv.\\ LoRA + CraftGuide", "fulllora_guide"),
             ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft", "cutcraft")]
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None)] + rows, RAW, "table_indomain.tex", subset=["indomain"])
@@ -172,10 +173,14 @@ if __name__ == "__main__":
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None),
            ("B-LoRA (repository workflow)", "blora"), ("B-LoRA + CraftGuide", "blora_guide"),
            ("Prompt only + ControlNet", "prompt_cn"), ("B-LoRA style block + ControlNet", "blora_style_cn"),
+           ("StyleAligned + ControlNet", "stylealigned"),
            ("InstantStyle + ControlNet", "instantstyle"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
            ("Conv.\\ LoRA + ControlNet", "fulllora"), ("Conv.\\ LoRA + CraftGuide", "fulllora_guide"),
            ("midrule", None),
-           ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft (cut-line + CraftGuide)", "cutcraft")],
+           ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft-SDXL (cut-line + CraftGuide)", "cutcraft"),
+           ("midrule", None),
+           ("Qwen-Image-Edit-2511 zero-shot (Q0)", "qwen_q0"), ("CutCraft-Qwen (cut-line LoRA, Q1)", "qwen_q1"),
+           ("CutCraft-Qwen + CraftGuide (Q2)", "qwen_q2")],
           RAW, "table_main.tex")
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None),
            ("B-LoRA", "blora"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
