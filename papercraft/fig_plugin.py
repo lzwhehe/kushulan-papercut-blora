@@ -9,12 +9,10 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
-import pubstyle  # noqa: F401  shared publication style (fonts, sizes, spines)
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-BLUE, ORANGE, AQUA, INK, MUTED, GRID = "#201963", "#e6af25", "#c52929", "#1f1f1e", "#6b6a64", "#e6e5df"  # paper-stock palette: indigo, gold, red
+BLUE, ORANGE, AQUA, INK, MUTED, GRID = "#2a78d6", "#eb6834", "#1baf7a", "#1f1f1e", "#6b6a64", "#e6e5df"
 PANELS = [("raw_line_recall_t3", "Line recall", False), ("raw_sil_iou", "Silhouette IoU", False),
           ("clip_style_dedup", "CLIP style", False), ("palette_js", "Colour-mix distance", True)]
 STYLE = {"Scissor-path training": (BLUE, "o"), "Scissor-path maps vs generic edges": (AQUA, "s"), "Craft guidance": (ORANGE, "D")}
@@ -26,7 +24,8 @@ def main():
     y = list(range(len(df)))[::-1]
     order = list(dict.fromkeys(df.component))
     gap = [yy - 0.6 * order.index(c) for yy, c in zip(y, df.component)]
-    plt.rcParams.update({"font.size": 7, "ytick.color": INK})
+    plt.rcParams.update({"font.size": 8, "axes.edgecolor": MUTED, "axes.labelcolor": INK,
+                         "xtick.color": MUTED, "ytick.color": INK, "font.family": "DejaVu Sans"})
     fig, axes = plt.subplots(1, 4, figsize=(7.2, 3.9), sharey=True)
     for ax, (m, title, invert) in zip(axes, PANELS):
         for yy, (_, r) in zip(gap, df.iterrows()):

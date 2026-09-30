@@ -16,8 +16,6 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
-import pubstyle  # noqa: F401  shared publication style (fonts, sizes, spines)
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,6 +47,7 @@ def main():
     co = (present.T.astype(float) @ present.astype(float)) / len(Hn)  # share of works where both present
 
     fig = plt.figure(figsize=(7.2, 6.0))
+    plt.rcParams.update({"font.size": 7, "font.family": "DejaVu Sans"})
     # ---- a: a*-b* plane
     ax = fig.add_axes([0.07, 0.58, 0.40, 0.38])
     ax.axhline(0, color=GRID, lw=0.8); ax.axvline(0, color=GRID, lw=0.8)
@@ -65,9 +64,9 @@ def main():
     ax2 = fig.add_axes([0.07, 0.415, 0.40, 0.065])
     for i, k in enumerate(order):
         ax2.add_patch(plt.Rectangle((i, 0), 0.92, 1, color=rgb[k]))
-        ax2.text(i + 0.46, 1.12, code[k], ha="center", fontsize=5.5, color=INK)
-        ax2.text(i + 0.46, -0.35, f"L*{lab[k,0]:.0f}", ha="center", fontsize=5.5, color=MUTED)
-        ax2.text(i + 0.46, -0.8, f"C*{np.hypot(lab[k,1], lab[k,2]):.0f}", ha="center", fontsize=5.5, color=MUTED)
+        ax2.text(i + 0.46, 1.12, code[k], ha="center", fontsize=5.2, color=INK)
+        ax2.text(i + 0.46, -0.35, f"L*{lab[k,0]:.0f}", ha="center", fontsize=4.6, color=MUTED)
+        ax2.text(i + 0.46, -0.8, f"C*{np.hypot(lab[k,1], lab[k,2]):.0f}", ha="center", fontsize=4.6, color=MUTED)
     ax2.set_xlim(0, K); ax2.set_ylim(-1.0, 1.4); ax2.axis("off")
     # ---- b: co-occurrence network (circular layout in hue order)
     axn = fig.add_axes([0.55, 0.43, 0.42, 0.5])
@@ -93,7 +92,7 @@ def main():
         for k in order:
             axc.barh(y, s[k], left=left, color=rgb[k], edgecolor="white", lw=0.5, height=0.7)
             if s[k] >= 0.08:
-                axc.text(left + s[k] / 2, y, f"{s[k]*100:.0f}", ha="center", va="center", fontsize=5.5,
+                axc.text(left + s[k] / 2, y, f"{s[k]*100:.0f}", ha="center", va="center", fontsize=5.2,
                          color="white" if lab[k, 0] < 55 else INK)
             left += s[k]
         axc.text(-0.01, y, f"{lab_} (n = {sel.sum()})", ha="right", va="center", fontsize=6.5, color=INK)
@@ -106,7 +105,7 @@ def main():
         fig.savefig(ROOT / f"paper/figures/fig_atlas.{ext}", dpi=240)
     # palette table for the supplement
     lines = [r"\definecolor{pp%d}{HTML}{%s}" % (k, hexes[k].lstrip("#").upper()) for k in range(K)]
-    rows = [f"{code[k]} & \\textcolor{{pp{k}}}{{\\rule{{4mm}}{{2.4mm}}}} & {hexes[k].upper().replace('#', chr(92) + '#')} & {lab[k,0]:.0f} & {lab[k,1]:.0f} & {lab[k,2]:.0f} & {share[k]*100:.1f}\\\\" for k in order]
+    rows = [f"{code[k]} & \\textcolor{{pp{k}}}{{\\rule{{4mm}}{{2.4mm}}}} & {hexes[k].upper().replace("#", chr(92)+"#")} & {lab[k,0]:.0f} & {lab[k,1]:.0f} & {lab[k,2]:.0f} & {share[k]*100:.1f}\\\\" for k in order]
     (ROOT / "paper/sections/table_palette_colors.tex").write_text("\n".join(lines) + "\n")
     (ROOT / "paper/sections/table_palette.tex").write_text("\n".join(rows) + "\n")
     strong = sorted(pairs, key=lambda p: -co[p])[:5]

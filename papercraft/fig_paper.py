@@ -8,8 +8,6 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
-import pubstyle  # noqa: F401  shared publication style (fonts, sizes, spines)
 import numpy as np
 from PIL import Image
 
@@ -20,7 +18,7 @@ FIG = ROOT / "paper/figures"
 ASSET = FIG / "assets"
 G = ROOT / "outputs/gen"
 PAL = priors.Palette.load(ROOT / "outputs/data/palette.json")
-plt.rcParams.update({"font.size": 7, "axes.linewidth": 0.5, "savefig.dpi": 300})
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9, "axes.linewidth": 0.6, "savefig.dpi": 300})
 NAVY, RED, LBLUE, SALMON, GOLD = "#2d5277", "#a3302f", "#8fb3d1", "#e08a7e", "#e6b35a"
 
 
@@ -64,27 +62,12 @@ def fig1():
         ax.set_xticks([]), ax.set_yticks([])
         for s in ax.spines.values():
             s.set_visible(False)
-        ax.set_xlabel(f"({lab})", fontsize=12, fontweight="bold", labelpad=6)
+        ax.set_xlabel(f"({lab})", fontsize=15, fontweight="bold", labelpad=6)
     plt.subplots_adjust(wspace=0.04)
     save(fig, "fig1_challenges.jpg")
 
 
 # ---------------------------------------------------------------- Fig. 7
-def _treemap(vals, x, y, w, h):
-    """Slice-and-dice treemap (alternating direction) for a handful of categories; returns rects in the given box."""
-    rects, vals = [], list(vals)
-    idx = sorted(range(len(vals)), key=lambda i: -vals[i])
-    total, horiz = sum(vals), w >= h
-    while idx:
-        i = idx.pop(0); frac = vals[i] / total
-        if horiz:
-            rects.append((i, x, y, w * frac, h)); x += w * frac; w -= w * frac
-        else:
-            rects.append((i, x, y, w, h * frac)); y += h * frac; h -= h * frac
-        total -= vals[i]; horiz = not horiz
-    return rects
-
-
 def fig7():
     split = json.loads((ROOT / "outputs/data/split.json").read_text())
     import glob
@@ -95,35 +78,40 @@ def fig7():
     npat = len(glob.glob(str(ROOT / "data/整理的数据-常用_副本/库淑兰-data-处理后/Pattern_symbols/*/*")))
     labels = [n for n, _ in cats] + ["Pattern symbols"]
     vals = counts + [npat]
-    cols = ["#201963", "#4d7b35", "#c52929", "#e6af25", "#7b89a2", "#b3425c", "#decfcd"]
-    fig = plt.figure(figsize=(11, 3.6))
-    ax = fig.add_axes([0.02, 0.06, 0.40, 0.80]); ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
-    for i, x, y, w, h in _treemap(vals, 0, 0, 1, 1):
-        ax.add_patch(plt.Rectangle((x, y), w, h, facecolor=cols[i], edgecolor="white", lw=2))
-        dark = cols[i] not in ("#e6af25", "#decfcd")
-        ax.text(x + w / 2, y + h / 2, f"{labels[i]}\n{vals[i]} ({100*vals[i]/sum(vals):.0f}%)", ha="center", va="center",
-                fontsize=8.5 if w * h > 0.08 else 7, color="white" if dark else "#1f1f1e")
-    ax.set_title(f"a  Ku Shulan catalogue: {sum(vals)} image entries", loc="left", fontsize=10, pad=6)
-    # composition bars: catalogue split, then the drawings used for evaluation
-    bx = fig.add_axes([0.50, 0.14, 0.48, 0.66])
-    segs = [("catalogue images", [("training (style block, palette)", len(split["train"]), "#201963"),
-                                  ("held out: test-work entries + near-duplicates", len(split["held_out"]), "#7b89a2")]),
-            ("line drawings evaluated", [("in-domain outlines (with original)", len(split["test_indomain"]), "#c52929"),
-                                         ("new subjects", 12, "#e6af25"), ("repository", 3, "#4d7b35"), ("development only", 3, "#b3b3b3")])]
-    for row, (name, parts) in enumerate(segs):
-        y = 1 - row; left = 0
-        for lab, v, c in parts:
-            bx.barh(y, v, left=left, height=0.42, color=c, edgecolor="white", lw=1.5)
-            bx.text(left + v / 2, y, str(v), ha="center", va="center", color="white" if c not in ("#e6af25", "#b3b3b3") else "#1f1f1e", fontsize=9)
-            left += v
-        bx.text(-4, y + 0.30, name, ha="left", va="bottom", fontsize=9, color="#1f1f1e")
-        bx.text(left + 4, y, f"{left}", va="center", fontsize=9, color="#5a5a5a")
-    bx.set_xlim(0, 300); bx.set_ylim(-0.5, 1.7); bx.axis("off")
-    handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, parts in segs for _, _, c in parts]
-    names = [l for _, parts in segs for l, _, _ in parts]
-    bx.legend(handles, names, loc="upper center", bbox_to_anchor=(0.5, -0.02), ncol=2, frameon=False, fontsize=7.5)
-    bx.set_title("b  Split and evaluation sets", loc="left", fontsize=10, pad=6)
+    cols = [NAVY, "#3f7a4f", RED, GOLD, "#7a5aa6", "#4f97a3", "#b9b3a6"]
+    fig = plt.figure(figsize=(11, 4))
+    ax = fig.add_axes([0.0, 0.08, 0.27, 0.84])
+    w, _, autot = ax.pie(vals, colors=cols, startangle=90, counterclock=False, wedgeprops=dict(width=0.32, edgecolor="white"),
+                         autopct=lambda p: f"{p:.1f}%" if p > 6 else "", pctdistance=0.84,
+                         textprops=dict(color="white", fontsize=8.5, fontweight="bold"))
+    ax.text(0, 0.12, "Total", ha="center", fontsize=13)
+    ax.text(0, -0.13, f"{sum(vals)}", ha="center", fontsize=24)
+    ax.text(0, -0.36, "works", ha="center", fontsize=13)
+    ax.legend(w, [f"{l} ({v})" for l, v in zip(labels, vals)], loc="center left", bbox_to_anchor=(0.97, 0.5),
+              frameon=False, fontsize=8.5)
+    ax.set_title("Ku Shulan catalogue", fontsize=12, pad=4)
+    bx = fig.add_axes([0.66, 0.12, 0.33, 0.8])
+    rows = [("Training works\n(style block)", len(split["train"]), NAVY),
+            ("Held-out duplicates\n(never trained)", len(split["held_out"]), LBLUE),
+            ("In-domain outlines\n(test, with original)", len(split["test_indomain"]), RED),
+            ("Out-of-domain drawings\n(test)", 12, SALMON),
+            ("Repository drawings\n(test)", 3, GOLD),
+            ("Development drawings\n(tuning only)", 3, "#9a9a9a")]
+    y = np.arange(len(rows))[::-1]
+    for yy, (lab, v, c) in zip(y, rows):
+        bx.barh(yy, v, height=0.16, color=c)
+        bx.text(v + 3, yy, str(v), va="center", color=c, fontsize=10)
+    bx.set_yticks(y, [r[0] for r in rows], fontsize=10)
+    bx.set_xlim(0, 280)
+    bx.grid(axis="x", color="#e6e6e6", lw=0.8)
+    bx.set_axisbelow(True)
+    for s in ("top", "right", "left"):
+        bx.spines[s].set_visible(False)
+    bx.tick_params(axis="y", length=0)
+    bx.set_xlabel("Number of images", fontsize=12)
     save(fig, "fig7_dataset.pdf")
+
+
 
 
 # ---------------------------------------------------------------- assets for TikZ diagrams
@@ -217,26 +205,16 @@ def assets():
 
 
 
-def _grid(rows, name, cell=1.45, gap=0.03, col_labels=None, row_labels=None, header_fs=7, groups=None):
-    """Image grid. groups: list of (label, first_col, last_col, colour); a thin spacer column separates groups and a
-    coloured rule with the label sits above the column headers."""
+def _grid(rows, name, cell=1.45, gap=0.03, col_labels=None, row_labels=None, header_fs=7):
     nr, nc = len(rows), len(rows[0])
-    top = (0.35 if col_labels else 0.0) + (0.34 if groups else 0.0)
+    top = 0.35 if col_labels else 0.0
     left = 0.55 if row_labels else 0.0
-    bounds = sorted({g[2] for g in groups[:-1]}) if groups else []   # spacer after these columns
-    widths, colmap = [], {}
-    for j in range(nc):
-        colmap[j] = len(widths); widths.append(1.0)
-        if j in bounds:
-            widths.append(0.18)
-    W = cell * sum(widths) + left
-    fig = plt.figure(figsize=(W, cell * nr + top))
-    gs = fig.add_gridspec(nr, len(widths), width_ratios=widths, left=left / W, right=1, bottom=0,
+    fig = plt.figure(figsize=(cell * nc + left, cell * nr + top))
+    gs = fig.add_gridspec(nr, nc, left=left / (cell * nc + left), right=1, bottom=0,
                           top=1 - top / (cell * nr + top), wspace=gap, hspace=gap)
-    axes = {}
     for i, r in enumerate(rows):
         for j, x in enumerate(r):
-            ax = fig.add_subplot(gs[i, colmap[j]]); axes[(i, j)] = ax
+            ax = fig.add_subplot(gs[i, j])
             ax.set_xticks([]), ax.set_yticks([])
             for sp in ax.spines.values():
                 sp.set_visible(False)
@@ -249,13 +227,6 @@ def _grid(rows, name, cell=1.45, gap=0.03, col_labels=None, row_labels=None, hea
                 ax.text(0.5, 0.5, "n/a", ha="center", va="center", color="#999", fontsize=7, transform=ax.transAxes)
                 continue
             ax.imshow(x if not isinstance(x, (str, Path)) else Image.open(x).convert("RGB").resize((384, 384)))
-    if groups:
-        fig.canvas.draw()
-        ytop = 1 - (0.30 / (cell * nr + top))
-        for lab, a, b, col in groups:
-            x0 = axes[(0, a)].get_position().x0; x1 = axes[(0, b)].get_position().x1
-            fig.add_artist(plt.Line2D([x0, x1], [ytop, ytop], color=col, lw=2.2, transform=fig.transFigure, solid_capstyle="butt"))
-            fig.text((x0 + x1) / 2, ytop + 0.012, lab, ha="center", va="bottom", fontsize=header_fs + 0.5, color=col, fontweight="bold")
     fig.savefig(FIG / name, pil_kwargs={"quality": 90}, dpi=220)
     plt.close(fig)
 

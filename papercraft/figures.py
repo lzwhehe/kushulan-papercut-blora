@@ -8,8 +8,6 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
-import pubstyle  # noqa: F401  shared publication style (fonts, sizes, spines)
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -19,7 +17,7 @@ import priors
 ROOT = Path(__file__).resolve().parents[1]
 FIG = ROOT / "paper/figures"
 GEN = ROOT / "outputs/gen"
-plt.rcParams.update({"font.size": 7, "axes.linewidth": 0.5,
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "axes.linewidth": 0.6,
                      "xtick.major.width": 0.6, "ytick.major.width": 0.6, "savefig.dpi": 300})
 INK = "#222222"
 
