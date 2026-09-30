@@ -23,7 +23,7 @@ import priors
 ROOT = Path(__file__).resolve().parents[1]
 CL = ROOT / "outputs/cutlines"
 BASE = "data/整理的数据-常用_副本/库淑兰-data-处理后/Representative elements"
-WORKS = [("person/24.jpg", "Figure"), ("animals/21.jpg", "Animal"), ("plants/9.jpg", "Plant"), ("frame/20.jpg", "Border")]
+WORKS = [("person/24.jpg", "Figure"), ("plants/9.jpg", "Plant")]  # two works only, to limit reproduction of the artist's works
 
 
 def lines(path, res=512):

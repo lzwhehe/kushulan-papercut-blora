@@ -58,7 +58,7 @@ def compare_table():
                                                                         ("Ours, blank input", "qwen_q1_blank")])]
     lines = []
     ref = drawing_table("ksl_original")
-    lines.append("Ku Shulan originals & " + " & ".join(fmt(ref.attrs["kid"] if c == "kid" else ref[c].mean(), k) for c, k in COMPARE_COLS) + r" \\")
+    lines.append("Reference redrawings & " + " & ".join(fmt(ref.attrs["kid"] if c == "kid" else ref[c].mean(), k) for c, k in COMPARE_COLS) + r" \\")
     for title, rows in groups:
         body = []
         for lab, m in rows:
@@ -123,7 +123,7 @@ def prereg_table():
 def plans_table():
     raw = pd.read_csv(ROOT / "outputs/svg_validation.csv")
     enf = pd.read_csv(ROOT / "outputs/svg_validation_enforced.csv")
-    rows = [("Ku Shulan originals", "ksl_original"), ("B-LoRA", "blora"), ("StyleAligned + ControlNet", "stylealigned"),
+    rows = [("Reference redrawings", "ksl_original"), ("B-LoRA", "blora"), ("StyleAligned + ControlNet", "stylealigned"),
             ("InstantStyle + ControlNet", "instantstyle"), ("SDXL LoRA + ControlNet", "fulllora"),
             ("Qwen-Image-Edit, instruction only", Q0), ("Ours", OURS)]
     lines = []
@@ -138,7 +138,7 @@ def plans_table():
                  fmt(e.smallest_mm2.mean(), 1) if len(e) else "--",
                  fmt(e.plan_line_recall.mean(), 2) if len(e) else "--"]
         lines.append(lab + " & " + " & ".join(cells) + r" \\")
-        if lab == "Ku Shulan originals":
+        if lab == "Reference redrawings":
             lines.append(r"\midrule")
     (OUT / "table_v5_plans.tex").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))

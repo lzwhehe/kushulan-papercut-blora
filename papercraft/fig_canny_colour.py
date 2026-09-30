@@ -18,7 +18,7 @@ from make_tables_v5 import drawing_table
 ROOT = Path(__file__).resolve().parents[1]
 G = ROOT / "outputs/gen"
 EX = ["ood_rooster", "ood_tiger", "ood_crane_bird"]  # rooster (used throughout), a median and the largest difference in paper colours (seed 0)
-GROUPS = [("originals", "ksl_original", "#8c8c8c"), ("untrained", "qwen_q0", "#b9b3a6"),
+GROUPS = [("references", "ksl_original", "#8c8c8c"), ("untrained", "qwen_q0", "#b9b3a6"),
           ("Canny LoRA", "qwen_q1_canny", "#7b89a2"), ("cut-line LoRA", "qwen_q1", "#201963")]
 METRICS = [("lay_colours", "paper colours per design", False), ("purity", "colour purity", True), ("palette_de", "palette dist. ΔE$_{00}$", False)]
 

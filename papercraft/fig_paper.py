@@ -93,7 +93,7 @@ def fig7():
     bx = fig.add_axes([0.66, 0.12, 0.33, 0.8])
     rows = [("Training works\n(style block)", len(split["train"]), NAVY),
             ("Held-out duplicates\n(never trained)", len(split["held_out"]), LBLUE),
-            ("In-domain outlines\n(test, with original)", len(split["test_indomain"]), RED),
+            ("In-domain outlines\n(test, with reference)", len(split["test_indomain"]), RED),
             ("Out-of-domain drawings\n(test)", 12, SALMON),
             ("Repository drawings\n(test)", 3, GOLD),
             ("Development drawings\n(tuning only)", 3, "#9a9a9a")]
@@ -237,15 +237,15 @@ def fig8():
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     # in-domain showcase: per category the drawing with the highest mean CLIP style of CutCraft-SDXL and CutCraft-Qwen
     # (seed 0), plus the two best remaining; all have an original. New subjects: Supplementary figure (figS_newsubjects).
-    # rule: for each catalogue category the in-domain drawing with the highest CLIP style of our method (seed 0),
-    # then the two best remaining drawings; all have an original
+    # rule: the four in-domain drawings with the highest CLIP style of our method (seed 0), at most one per
+    # catalogue category; all have a reference redrawing. Kept to four to limit the reproduction of the artist's works.
     import pandas as pd
     rm = pd.read_csv(G / "qwen_q1" / "rev_metrics.csv")
     rm = rm[rm.file.str.contains("seed0") & rm.content.str.startswith("ind_")].sort_values("clip_style_dedup", ascending=False)
     cat = rm.content.map(lambda c: cats[c]["category"])
     first = rm.groupby(cat.values).head(1).content.tolist()
-    ids = first + [c for c in rm.content if c not in first][:2]
-    cols = [("drawing", None), ("original", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
+    ids = first[:4]
+    cols = [("drawing", None), ("reference\nredrawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
             ("InstantStyle", "instantstyle"), ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"),
             ("Ours", "qwen_q1"), ("Ours:\ncutting plan", "qwen_q1+proj")]
     cols = [c for c in cols if c[1] is None or (G / c[1].replace("+proj", "")).exists()]
@@ -255,7 +255,7 @@ def fig8():
         for lab, m in cols:
             if lab == "drawing":
                 r.append(ROOT / f"outputs/contents/{cid}.png")
-            elif lab == "original":
+            elif m is None and lab != "drawing":
                 r.append(im(ref[cid], 384) if cid in ref else None)
             elif m.endswith("+proj"):
                 r.append(projected(gen(m[:-5], cid), cid))
@@ -444,7 +444,7 @@ def fig_apps():
     plt.close(fig)
 
 
-def fig_noline(ids=("ind_动物-38", "ind_人物-3", "ood_rooster", "ood_teapot")):
+def fig_noline(ids=("ood_rooster", "ood_teapot", "ood_tiger", "ood_cat")):
     """Why the line drawing is needed: generation without it (prompt or blank input) next to generation with it."""
     cols = [("line drawing", None), ("SDXL\nprompt only", "prompt_only"), ("Qwen-Image-Edit\nblank input", "qwen_q0_blank"),
             ("Ours\nblank input", "qwen_q1_blank"), ("Qwen-Image-Edit\nwith drawing", "qwen_q0"), ("Ours\nwith drawing", "qwen_q1")]
