@@ -117,16 +117,15 @@ def main():
     PAL_LAB = pal.lab_with_white
     PAL_RGB = np.clip(priors.color.lab2rgb(PAL_LAB[None])[0], 0, 1)
     val = pd.read_csv(ROOT / "outputs/svg_validation_enforced.csv")
-    cc = val[val.method == "cutcraft"].sort_values("pieces").reset_index(drop=True)
+    cc = val[val.method == "qwen_q1"].sort_values("pieces").reset_index(drop=True)
     pick = cc.iloc[np.linspace(0, len(cc) - 1, 6).round().astype(int)]
     OUT.mkdir(parents=True, exist_ok=True)
     manifest = []
     for i, r in enumerate(pick.itertuples()):
         cid = r.file.split("_s_seed")[0]
-        jobs = [("cutcraft", SVG / "cutcraft" / (Path(r.file).stem + ".svg"))]
+        jobs = [("qwen_q1", SVG / "qwen_q1" / (Path(r.file).stem + ".svg"))]
         if i < 3:
             jobs.append(("blora", SVG / "blora" / f"{cid}_s0_seed0.svg"))
-            jobs.append(("qwen_q1", SVG / "qwen_q1" / f"{cid}_s_seed0.svg"))  # CutCraft-Qwen, same drawing
         for m, svg in jobs:
             code = f"K{len(manifest) + 1:02d}"  # neutral code, method revealed only in the manifest
             df = design(svg, f"Design {code}", OUT / f"{code}.pdf")

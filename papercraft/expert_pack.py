@@ -1,7 +1,7 @@
 """Blinded stimulus pack for the expert study (review #02, Supplementary S6).
 
 20 drawings drawn at random (seed 0) from the 34 held-out drawings; for each, the plan (cut projection,
-seed 0 / animal reference) of B-LoRA, InstantStyle + CraftGuide, the cut-line block and CutCraft.
+seed 0 / animal reference) of B-LoRA, InstantStyle, SDXL LoRA + ControlNet, the untrained editing model and our method.
 Stimuli are shown in random order under neutral codes, one per page with the line drawing beside it,
 and Ku Shulan originals of the in-domain drawings are added as anchors. Writes stimuli.pdf, a rating
 sheet template (ratings_template.csv) and the key (key_UNBLIND.csv, to be withheld from raters).
@@ -22,8 +22,8 @@ import priors
 ROOT = Path(__file__).resolve().parents[1]
 G = ROOT / "outputs/gen"
 OUT = ROOT / "outputs/expert_pack"
-METHODS = {"blora": "{cid}_s0_seed0", "instantstyle_guide": "{cid}_s0_seed0", "cutline": "{cid}_s_seed0",
-           "cutcraft": "{cid}_s_seed0", "qwen_q1": "{cid}_s_seed0"}
+METHODS = {"blora": "{cid}_s0_seed0", "instantstyle": "{cid}_s0_seed0", "fulllora": "{cid}_s_seed0",
+           "qwen_q0": "{cid}_s_seed0", "qwen_q1": "{cid}_s_seed0"}
 SCALES = ["style resemblance (1-5)", "faithfulness to drawing (1-5)", "motif/colour appropriateness (1-5)",
           "feasibility to cut and paste (1-5)", "overall quality (1-5)", "comments"]
 

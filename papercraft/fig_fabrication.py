@@ -1,4 +1,4 @@
-"""From line drawing to cut paper (design K01 of the cutting kit: teapot, CutCraft-SDXL, seed 0).
+"""From line drawing to cut paper (first design of the cutting kit: our method, seed 0).
 
 a drawing; b generated design; c enforced 200 mm cutting plan (re-rasterised SVG); d-f the three paper colours
 with most pieces, each piece filled in its colour and outlined, as cut from separate sheets; g numbered assembly
@@ -35,7 +35,11 @@ def main():
     lab = pal.lab_with_white
     rgb_pal = np.clip(priors.color.lab2rgb(lab[None])[0], 0, 1)
     white = len(lab) - 1
-    svg = ROOT / "outputs/svg_enforced/cutcraft/ood_teapot_s_seed0.svg"
+    manifest = {m["code"]: m for m in json.loads((ROOT / "outputs/cutting_kit/manifest_UNBLIND.json").read_text())}
+    code = next(c for c, m in manifest.items() if m["method"] == "qwen_q1" and m["drawing"] == "ood_teapot")
+    k01 = manifest[code]
+    cid = k01["drawing"]
+    svg = ROOT / k01["svg"]
     ras = rasterise(svg).astype(np.float32) / 255
     labels, _ = priors.nearest_palette(priors.to_lab(ras), lab)
     sheets = {}
@@ -43,15 +47,12 @@ def main():
         if k != white:
             sheets[int(k)] = ndi.label(labels == k)[1]
     top = sorted(sheets, key=lambda k: -sheets[k])[:3]
-    manifest = {m["code"]: m for m in json.loads((ROOT / "outputs/cutting_kit/manifest_UNBLIND.json").read_text())}
-    k01 = manifest["K01"]
-
     fig, axes = plt.subplots(2, 4, figsize=(7.2, 3.9))
     ax = axes.ravel()
-    ax[0].imshow(Image.open(ROOT / "outputs/contents/ood_teapot.png").convert("RGB")); ax[0].set_title("a  Line drawing")
-    ax[1].imshow(Image.open(ROOT / "outputs/gen/cutcraft/ood_teapot_s_seed0.png").convert("RGB")); ax[1].set_title("b  Generated design")
+    ax[0].imshow(Image.open(ROOT / f"outputs/contents/{cid}.png").convert("RGB")); ax[0].set_title("a  Line drawing")
+    ax[1].imshow(Image.open(ROOT / f"outputs/gen/qwen_q1/{cid}_s_seed0.png").convert("RGB")); ax[1].set_title("b  Generated design")
     ax[2].imshow(ras); ax[2].set_title("c  Cutting plan, 200 mm")
-    ax[3].imshow(page_crop(ROOT / "outputs/cutting_kit/K01.pdf", 0, box_mm=(80, 95, 140, 155))); ax[3].set_title("d  Numbered assembly view (detail)")
+    ax[3].imshow(page_crop(ROOT / f"outputs/cutting_kit/{code}.pdf", 0, box_mm=(80, 95, 140, 155))); ax[3].set_title("d  Numbered assembly view (detail)")
     for j, k in enumerate(top):
         m = labels == k
         canvas = np.ones(m.shape + (3,))

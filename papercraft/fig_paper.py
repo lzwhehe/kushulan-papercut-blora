@@ -237,10 +237,17 @@ def fig8():
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     # in-domain showcase: per category the drawing with the highest mean CLIP style of CutCraft-SDXL and CutCraft-Qwen
     # (seed 0), plus the two best remaining; all have an original. New subjects: Supplementary figure (figS_newsubjects).
-    ids = ["ind_人物-3", "ind_动物-38", "ind_窗花-3", "ind_日常-25", "ind_植物-17", "ind_边框-12", "ind_动物-18", "ind_窗花-4"]
+    # rule: for each catalogue category the in-domain drawing with the highest CLIP style of our method (seed 0),
+    # then the two best remaining drawings; all have an original
+    import pandas as pd
+    rm = pd.read_csv(G / "qwen_q1" / "rev_metrics.csv")
+    rm = rm[rm.file.str.contains("seed0") & rm.content.str.startswith("ind_")].sort_values("clip_style_dedup", ascending=False)
+    cat = rm.content.map(lambda c: cats[c]["category"])
+    first = rm.groupby(cat.values).head(1).content.tolist()
+    ids = first + [c for c in rm.content if c not in first][:2]
     cols = [("drawing", None), ("original", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
-            ("InstantStyle", "instantstyle"), ("Qwen-Image-Edit\nzero-shot", "qwen_q0"),
-            ("CutCraft", "cutcraft"), ("CutCraft\ncutting plan", "cutcraft+proj")]
+            ("InstantStyle", "instantstyle"), ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"),
+            ("Ours", "qwen_q1"), ("Ours:\ncutting plan", "qwen_q1+proj")]
     cols = [c for c in cols if c[1] is None or (G / c[1].replace("+proj", "")).exists()]
     rows, rlab = [], []
     for cid in ids:
@@ -388,7 +395,7 @@ def figS_newsubjects():
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     ids = [k for k in cats if cats[k]["set"] == "ood"]
     cols = [("drawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"), ("InstantStyle", "instantstyle"),
-            ("Qwen-Image-Edit\nzero-shot", "qwen_q0"), ("CutCraft", "cutcraft"), ("CutCraft\ncutting plan", "cutcraft+proj")]
+            ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"), ("Ours", "qwen_q1"), ("Ours:\ncutting plan", "qwen_q1+proj")]
     rows = []
     for cid in ids:
         r = []
@@ -408,3 +415,47 @@ def figS_newsubjects():
 if __name__ == "__main__":
     for f in sys.argv[1:]:
         globals()[f]()
+
+
+def fig_apps():
+    """Application: all 12 new subjects (not named in the training captions) as drawing, our design and cutting plan."""
+    import pandas as pd
+    cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
+    ids = [k for k in cats if cats[k]["set"] == "ood"]
+    pal_rgb = np.concatenate([PAL.rgb, [[1, 1, 1]]], 0)
+    ncol_blocks, cell = 3, 1.0
+    nrow = int(np.ceil(len(ids) / ncol_blocks))
+    fig = plt.figure(figsize=(cell * 3 * ncol_blocks + 0.3 * (ncol_blocks - 1), cell * nrow + 0.35))
+    outer = fig.add_gridspec(nrow, ncol_blocks, left=0.01, right=0.99, top=1 - 0.3 / (cell * nrow + 0.35), bottom=0.01, wspace=0.08, hspace=0.12)
+    for n, cid in enumerate(ids):
+        inner = outer[n // ncol_blocks, n % ncol_blocks].subgridspec(1, 3, wspace=0.02)
+        ims = [Image.open(ROOT / f"outputs/contents/{cid}.png").convert("RGB").resize((384, 384)),
+               Image.open(gen("qwen_q1", cid)).convert("RGB").resize((384, 384)),
+               pal_rgb[np.load(G / "qwen_q1" / f"{cid}_s_seed0.labels.npy")]]
+        for j, x in enumerate(ims):
+            ax = fig.add_subplot(inner[0, j]); ax.imshow(x); ax.set_xticks([]); ax.set_yticks([])
+            for sp in ax.spines.values():
+                sp.set_linewidth(0.3); sp.set_color("#bbbbbb")
+            if n < ncol_blocks:
+                ax.set_title(["drawing", "design", "cutting plan"][j], fontsize=6.5)
+            if j == 0:
+                ax.set_ylabel(cats[cid]["subject"].replace("a ", "", 1), fontsize=6)
+    fig.savefig(FIG / "fig_apps.jpg", pil_kwargs={"quality": 90}, dpi=220)
+    plt.close(fig)
+
+
+def fig_noline(ids=("ind_动物-38", "ind_人物-3", "ood_rooster", "ood_teapot")):
+    """Why the line drawing is needed: generation without it (prompt or blank input) next to generation with it."""
+    cols = [("line drawing", None), ("SDXL\nprompt only", "prompt_only"), ("Qwen-Image-Edit\nblank input", "qwen_q0_blank"),
+            ("Ours\nblank input", "qwen_q1_blank"), ("Qwen-Image-Edit\nwith drawing", "qwen_q0"), ("Ours\nwith drawing", "qwen_q1")]
+    rows = []
+    for cid in ids:
+        r = []
+        for lab, m in cols:
+            if m is None:
+                r.append(ROOT / f"outputs/contents/{cid}.png")
+            else:
+                f = gen(m, cid)
+                r.append(f if f.exists() else None)
+        rows.append(r)
+    _grid(rows, "fig_noline.jpg", cell=1.2, col_labels=[c[0] for c in cols], header_fs=6.5)
