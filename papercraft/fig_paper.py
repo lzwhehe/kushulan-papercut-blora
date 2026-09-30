@@ -293,8 +293,7 @@ def fig8():
             rlab.append(f"{c['category']} {num}\n(in-domain)")
         else:
             rlab.append(c["subject"].replace("a ", "", 1) + ("\n(repository)" if c["set"] == "repo" else "\n(new subject)"))
-    _grid(rows, "fig8_qualitative.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5,
-          groups=[("input and reference", 0, 1, "#5a5a5a"), ("popular frameworks", 2, 5, "#7b89a2"), ("CutCraft (ours)", 6, 9, "#201963")])
+    _grid(rows, "fig8_qualitative.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5)
 
 
 def fig9():
@@ -435,8 +434,7 @@ def figS_newsubjects():
                 r.append(gen(m, cid))
         rows.append(r)
     rlab = [cats[c]["subject"].replace("a ", "", 1) for c in ids]
-    _grid(rows, "figS9_newsubjects.jpg", cell=1.0, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6,
-          groups=[("input", 0, 0, "#5a5a5a"), ("popular frameworks", 1, 4, "#7b89a2"), ("CutCraft (ours)", 5, 8, "#201963")])
+    _grid(rows, "figS9_newsubjects.jpg", cell=1.0, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6)
 
 if __name__ == "__main__":
     for f in sys.argv[1:]:
