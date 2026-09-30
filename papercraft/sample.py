@@ -8,6 +8,8 @@ Methods
   coll_cn          ControlNet + collection style block (no craft regulariser)
   coll_self_cn     ControlNet + collection style block, self craft regulariser
   cutcraft_cn      ControlNet + collection style block, self + foreign craft regulariser
+  prompt_only      SDXL with the descriptive papercut prompt only: no line constraint, no LoRA
+  coll_nocn        a collection/cut-line style block (--lora) without ControlNet: no line constraint
 Any method accepts --guide to add CraftGuide (sampling-time craft energy guidance).
 """
 from __future__ import annotations
@@ -133,7 +135,7 @@ def main():
         contents = [c for c in contents if c["id"] in a.contents]
     all_ids = [c["id"] for c in json.loads(Path(a.contents_json).read_text())]
 
-    use_cn = a.method != "blora"
+    use_cn = a.method not in ("blora", "prompt_only", "coll_nocn")
     pipe = load_pipe(use_cn)
     guide = None
     if a.guide:
@@ -176,7 +178,7 @@ def main():
                 prompt = f"{c['subject']} in [s{k}] style"
             elif a.method == "instantstyle_cn":
                 prompt = f"{c['subject']}, papercut"
-            elif a.method == "prompt_cn":
+            elif a.method in ("prompt_cn", "prompt_only"):
                 prompt = f"{c['subject']}, {DESC}"
             else:
                 prompt = f"{c['subject']} in {STYLE_TOKEN}"
