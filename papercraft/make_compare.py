@@ -18,7 +18,7 @@ ROWS = [("Ku Shulan originals", "ksl_original"), (None, None),
         ("B-LoRA (repository workflow)", "blora"), ("StyleAligned + ControlNet", "stylealigned"),
         ("InstantStyle + ControlNet", "instantstyle"), ("Conv.\\ LoRA + ControlNet", "fulllora"),
         ("Qwen-Image-Edit-2511 (zero-shot)", "qwen_q0"), (None, None),
-        ("CutCraft-SDXL", "cutcraft"), ("CutCraft-Qwen", "qwen_q1")]
+        ("CutCraft", "cutcraft")]
 COLS = [("raw_line_recall_t3", 2), ("raw_sil_iou", 2), ("clip_style_dedup", 3), ("palette_js", 2), ("edge_f1", 2), ("palette_de", 1),
         ("kid", 2), ("content_clip", 3), ("style_gram", 3), ("clip_s", 3), ("lpips_content", 2)]
 PRIMARY = [("raw_line_recall_t3", True), ("raw_sil_iou", True), ("clip_style_dedup", True), ("palette_js", False)]
@@ -36,23 +36,19 @@ def main():
     (ROOT / "paper/sections/table_compare.tex").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
     rows = []
-    for ours, fam in (("cutcraft", "primary"), ("qwen_q1", "exploratory")):
+    for ours, fam in (("cutcraft", "primary"),):
         for b in BASELINES:
             for m, hb in PRIMARY:
                 r = compare(ours, b, m, hb); r["family"] = fam; rows.append(r)
-    for m, hb in PRIMARY:  # pre-registered Qwen comparison
-        r = compare("qwen_q1", "qwen_q0", m, hb); r["family"] = "qwen"; rows.append(r)
     df = pd.DataFrame(rows)
     prim = df.family == "primary"
     df.loc[prim, "p_holm"] = holm(df.loc[prim, "p"].values)
-    q = df.family == "qwen"
-    df.loc[q, "p_holm"] = holm(df.loc[q, "p"].values)
     df.to_csv(ROOT / "outputs/compare_stats.csv", index=False)
-    names = {"cutcraft": "CutCraft-SDXL", "qwen_q1": "CutCraft-Qwen", "blora": "B-LoRA", "stylealigned": "StyleAligned",
+    names = {"cutcraft": "CutCraft", "blora": "B-LoRA", "stylealigned": "StyleAligned",
              "instantstyle": "InstantStyle", "fulllora": "Conv.\\ LoRA", "qwen_q0": "Qwen zero-shot (Q0)"}
     mn = {"raw_line_recall_t3": "line recall", "raw_sil_iou": "silhouette IoU", "clip_style_dedup": "CLIP style", "palette_js": "colour-mix"}
     lines = []
-    for fam, lab in (("primary", "second primary family (20 tests, Holm)"), ("qwen", "pre-registered Q1 vs Q0 (4 tests, Holm)"), ("exploratory", "exploratory")):
+    for fam, lab in (("primary", "second primary family (20 tests, Holm)"),):
         lines.append("\\midrule\n\\multicolumn{7}{l}{\\emph{" + lab + "}}\\\\")
         for _, r in df[df.family == fam].iterrows():
             ph = ("$<$0.001" if r.p_holm < 0.001 else f"{r.p_holm:.3f}") if fam != "exploratory" else f"{r.p:.3f} (unc.)"

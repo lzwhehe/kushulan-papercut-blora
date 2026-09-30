@@ -240,8 +240,7 @@ def fig8():
     ids = ["ind_人物-3", "ind_动物-38", "ind_窗花-3", "ind_日常-25", "ind_植物-17", "ind_边框-12", "ind_动物-18", "ind_窗花-4"]
     cols = [("drawing", None), ("original", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
             ("InstantStyle", "instantstyle"), ("Qwen-Image-Edit\nzero-shot", "qwen_q0"),
-            ("CutCraft-SDXL", "cutcraft"), ("CutCraft-SDXL\ncutting plan", "cutcraft+proj"),
-            ("CutCraft-Qwen", "qwen_q1"), ("CutCraft-Qwen\ncutting plan", "qwen_q1+proj")]
+            ("CutCraft", "cutcraft"), ("CutCraft\ncutting plan", "cutcraft+proj")]
     cols = [c for c in cols if c[1] is None or (G / c[1].replace("+proj", "")).exists()]
     rows, rlab = [], []
     for cid in ids:
@@ -389,8 +388,7 @@ def figS_newsubjects():
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     ids = [k for k in cats if cats[k]["set"] == "ood"]
     cols = [("drawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"), ("InstantStyle", "instantstyle"),
-            ("Qwen-Image-Edit\nzero-shot", "qwen_q0"), ("CutCraft-SDXL", "cutcraft"), ("CutCraft-SDXL\ncutting plan", "cutcraft+proj"),
-            ("CutCraft-Qwen", "qwen_q1"), ("CutCraft-Qwen\ncutting plan", "qwen_q1+proj")]
+            ("Qwen-Image-Edit\nzero-shot", "qwen_q0"), ("CutCraft", "cutcraft"), ("CutCraft\ncutting plan", "cutcraft+proj")]
     rows = []
     for cid in ids:
         r = []

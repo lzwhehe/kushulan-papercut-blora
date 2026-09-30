@@ -120,6 +120,7 @@ def main():
     ap.add_argument("--steps", type=int, default=40)
     ap.add_argument("--cfg", type=float, default=4.0)
     ap.add_argument("--limit", type=int, default=0, help="first N drawings only (smoke tests)")
+    ap.add_argument("--blank", action="store_true", help="no line constraint: a blank white input image, same instruction")
     ap.add_argument("--quant4", action="store_true", help="NF4 + CPU offload (20 GB pilot only)")
     ap.add_argument("--offload", action="store_true", help="bf16 with sequential CPU offload (small GPUs)")
     ap.add_argument("--guide_decode_scale", type=float, default=1.0, help="<1: pooled-latent decode (pilot only)")
@@ -142,6 +143,8 @@ def main():
     records = []
     for c in contents:
         drawing = Image.open(cdir / f"{c['id']}.png").convert("RGB").resize((1024, 1024))
+        if a.blank:
+            drawing = Image.new("RGB", (1024, 1024), (255, 255, 255))
         line = torch.from_numpy(np.asarray(drawing.convert("L")) < 128)
         if guide:
             guide.line = line[None, None].cuda()

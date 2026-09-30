@@ -98,7 +98,7 @@ def stats_table():
 
 def svg_table():
     names = [("blora", "B-LoRA"), ("instantstyle_guide", "InstantStyle + guide"), ("fulllora_guide", "Conv.\\ LoRA + guide"),
-             ("cutline", "Cut-line block"), ("cutcraft", "CutCraft-SDXL"), ("qwen_q1", "CutCraft-Qwen")]
+             ("cutline", "Cut-line block"), ("cutcraft", "CutCraft")]
     frames = {}
     for f, lab in (("svg_validation.csv", "raw"), ("svg_validation_enforced.csv", "enforced")):
         fp = ROOT / "outputs" / f
@@ -142,8 +142,8 @@ def supp_tables():
             ("StyleAligned + ControlNet", "stylealigned"),
            ("InstantStyle + ControlNet", "instantstyle"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
             ("Conv.\\ LoRA + ControlNet", "fulllora"), ("Conv.\\ LoRA + CraftGuide", "fulllora_guide"),
-            ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft-SDXL", "cutcraft"),
-            ("Qwen-Image-Edit zero-shot (Q0)", "qwen_q0"), ("Qwen + Canny-edge LoRA (Q1$'$)", "qwen_q1_canny"), ("CutCraft-Qwen (Q1)", "qwen_q1")]
+            ("Collection block", "coll"), ("Cut-line block", "cutline"), ("CutCraft", "cutcraft"),
+            ("Qwen-Image-Edit zero-shot", "qwen_q0")]
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None)] + rows, RAW, "table_indomain.tex", subset=["indomain"])
     write(rows, RAW, "table_ood.tex", subset=["repo", "ood"])
 
@@ -180,16 +180,15 @@ if __name__ == "__main__":
            ("Conv.\\ LoRA + cut-line training", "fulllora_cl"), ("Conv.\\ LoRA + cut-line training + CraftGuide", "fulllora_cl_guide"),
            ("midrule", None),
            ("Collection block", "coll"), ("Collection block + CraftGuide", "coll_guide"),
-           ("Cut-line block", "cutline"), ("CutCraft-SDXL (cut-line + CraftGuide)", "cutcraft"),
+           ("Cut-line block", "cutline"), ("CutCraft (cut-line block + CraftGuide)", "cutcraft"),
            ("Cut-line block, strict split", "cutline_strict"), ("Cut-line block, strict split + CraftGuide", "cutcraft_strict"),
            ("midrule", None),
-           ("Qwen-Image-Edit-2511 zero-shot (Q0)", "qwen_q0"), ("Qwen + Canny-edge LoRA (Q1$'$)", "qwen_q1_canny"), ("CutCraft-Qwen (cut-line LoRA, Q1)", "qwen_q1"),
-           ("CutCraft-Qwen + CraftGuide (Q2)", "qwen_q2")],
+           ("Qwen-Image-Edit-2511 zero-shot", "qwen_q0")],
           RAW, "table_main.tex")
     write([("Ku Shulan originals", "ksl_original"), ("midrule", None),
            ("B-LoRA", "blora"), ("InstantStyle + CraftGuide", "instantstyle_guide"),
            ("Conv.\\ LoRA + CraftGuide", "fulllora_guide"),
-           ("Cut-line block", "cutline"), ("CutCraft-SDXL", "cutcraft"),
-           ("Qwen-Image-Edit zero-shot", "qwen_q0"), ("CutCraft-Qwen", "qwen_q1")], PLAN, "table_plan.tex")
+           ("Cut-line block", "cutline"), ("CutCraft", "cutcraft"),
+           ("Qwen-Image-Edit zero-shot", "qwen_q0")], PLAN, "table_plan.tex")
     if (ROOT / "outputs/stats_drawing_level.csv").exists():
         stats_table()
