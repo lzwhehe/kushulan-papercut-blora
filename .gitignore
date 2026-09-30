@@ -15,3 +15,13 @@ outputs/
 .migration/
 # Original remains on disk; its lossless parts are tracked instead.
 data/整理的数据-常用_副本/库淑兰剪纸数据采集/1.库淑兰剪纸作品.zip
+
+# Ku Shulan reference images and material derived from them are not publicly released
+# (rights of the artist's heirs and of the redrawers); kept locally only.
+/data/
+/KUSHULAN_dataset/
+/results/cutcraft/cutlines/
+/results/cutcraft/contents_robust/
+/results/cutcraft/contents/ind_*
+/results/cutcraft/audit/*.jpg
+/results/cutcraft/study_materials/expert_pack/stimuli.pdf
