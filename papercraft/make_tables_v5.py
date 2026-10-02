@@ -1,7 +1,7 @@
 """Tables for plan v5 (Qwen-Image-Edit with cut-line pairs as the only method).
 
-table_v5_compare.tex   Table 4: comparison with popular frameworks (same drawings), plus unconstrained generation
-table_v5_canny.tex     Table 5: cut lines vs generic Canny edges as training pairs (same model and settings)
+table_v5_compare.tex   Table 4: comparison with popular frameworks (same drawings), unconstrained generation and the Canny-edge ablation
+table_v5_canny.tex     Supplementary Table S5: cut lines vs generic Canny edges as training pairs (same model and settings)
 table_v5_plans.tex     Table 6: cutting plans and 200 mm SVG validation
 table_v5_prereg.tex    Supplementary: pre-registered comparison Q1 vs Q0 (four endpoints, Holm)
 Drawing-level means (seeds averaged); 95 % bootstrap CIs of paired differences; Wilcoxon p (exploratory
@@ -55,7 +55,8 @@ def compare_table():
                                                ("Qwen-Image-Edit, instruction only", Q0), ("Ours (cut-line pairs)", OURS)]),
               ("\\emph{No line drawing (prompt or blank input only)}", [("SDXL, prompt only", "prompt_only"),
                                                                         ("Qwen-Image-Edit, blank input", "qwen_q0_blank"),
-                                                                        ("Ours, blank input", "qwen_q1_blank")])]
+                                                                        ("Ours, blank input", "qwen_q1_blank")]),
+              ("\\emph{Ablation: same model and settings, Canny edges instead of cut lines}", [("Ours (Canny-edge pairs)", CANNY)])]
     lines = []
     ref = drawing_table("ksl_original")
     lines.append("Reference redrawings & " + " & ".join(fmt(ref.attrs["kid"] if c == "kid" else ref[c].mean(), k) for c, k in COMPARE_COLS) + r" \\")
@@ -76,7 +77,7 @@ def compare_table():
 CANNY_ROWS = [("line recall", "raw_line_recall_t3", 2, True), ("silhouette IoU", "raw_sil_iou", 2, True),
               ("CLIP style", "clip_style_dedup", 3, True), ("palette distance $\\Delta E_{00}$", "palette_de", 1, False),
               ("colour-mix distance", "palette_js", 2, False), ("paper colours per design", "lay_colours", 1, False),
-              ("colour purity", "purity", 2, True), ("chroma $C^*$", "chroma", 0, True), ("pieces per plan", "lay_pieces", 0, False)]
+              ("colour purity", "purity", 2, True), ("chroma $C^*$", "chroma", 0, True), ("pieces per design", "lay_pieces", 0, False)]
 
 
 def paired(a, b, col):

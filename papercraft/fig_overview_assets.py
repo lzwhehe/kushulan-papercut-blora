@@ -6,6 +6,9 @@
 - ov_svg.png: the enforced SVG plan of the rooster design, re-rasterised with piece outlines.
 - q_sheet{0,1,2}.jpg: the three paper colours with most area in the cutting plan of the rooster design,
   each shown as the pieces cut from its own sheet (silhouette of the plan in light grey for orientation).
+- ev_struct/proj.jpg, ev_mix.png: panel d, the measures on the rooster design (ours, seed 0): skeleton of the
+  drawing found (black) or missed (red) by the design's edges; the design on the paper stock; the paper-colour
+  shares q of the design and q_w of its nearest corpus work (same colour order).
 """
 from pathlib import Path
 
@@ -79,6 +82,42 @@ def svg_preview():
     im.save(ASSET / "ov_svg.png")
 
 
+def eval_assets():
+    """ev_*: panel d, computed with the evaluation code itself (prints R, IoU and the colour-mix distance)."""
+    from scipy import ndimage as ndi
+    from scipy.spatial.distance import jensenshannon
+    from skimage import morphology
+    import palette_usage as pu
+    import revision_metrics as rm
+    rgb = priors.load_rgb(ROOT / "outputs/gen/qwen_q1/ood_rooster_s_seed0.png", 512)
+    lns, sil, ground = rm.drawing("ood_rooster")
+    st = rm.structure(rgb, lns, sil)
+    gt = morphology.skeletonize(lns)
+    near = ndi.distance_transform_edt(~priors.edge_map(rgb)) <= 3
+    img = np.repeat(1 - 0.22 * (1 - rgb.mean(-1, keepdims=True)), 3, -1)
+    img[ndi.binary_dilation(gt & near, morphology.disk(1))] = (0.10, 0.10, 0.12)
+    img[ndi.binary_dilation(gt & ~near, morphology.disk(2))] = (0.85, 0.12, 0.10)
+    save(img, "ev_struct.jpg")
+    proj, labels, _, _ = priors.cut_project(rgb, PAL, ground=ground)
+    save(proj, "ev_proj.jpg")
+    q, H = pu.shares(labels), pu.corpus_hists()
+    js = np.array([jensenshannon(q, h, base=2) for h in H])
+    rgbpal = np.clip(color.lab2rgb(PAL.lab_with_white[None])[0], 0, 1)
+    W, h, gap = 600, 46, 22
+    bar = np.ones((2 * h + gap, W, 3))
+    order = np.argsort(-q)
+    for row, s in enumerate((q, H[js.argmin()])):
+        x, y = 0, row * (h + gap)
+        for c in order:
+            n = int(round(s[c] * W))
+            bar[y:y + h, x:x + n] = rgbpal[c]
+            x += n
+        bar[y:y + h, x:] = rgbpal[order[-1]] if x < W else 1
+    Image.fromarray((bar * 255).astype(np.uint8)).save(ASSET / "ev_mix.png")
+    print(f"rooster: R={st['line_recall_t3']:.3f} IoU={st['sil_iou']:.3f} D_mix={js.min():.3f}")
+
+
 if __name__ == "__main__":
     main()
     svg_preview()
+    eval_assets()
