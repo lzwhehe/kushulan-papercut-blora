@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>彩贴剪纸设计专家评价</title>
+<style>
+:root{--bg:#fafaf8;--card:#fff;--ink:#1f1f1e;--ink2:#5b5a55;--line:#dcdad3;--accent:#9e2a2b;--accent2:#f4e7e4;--ok:#2f6f3e}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1b1a;--card:#252523;--ink:#ecebe6;--ink2:#a9a79f;--line:#3d3c38;--accent:#e07a6c;--accent2:#3a2a27;--ok:#7cc48c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.45rem;margin:.2em 0 .6em}
+h2{font-size:1.1rem;margin:1.2em 0 .4em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:14px 0}
+.muted{color:var(--ink2);font-size:.92rem}
+label.opt{display:inline-flex;align-items:center;gap:6px;margin:4px 14px 4px 0;cursor:pointer}
+input[type=text],select,textarea{font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 9px}
+textarea{width:100%;min-height:58px;resize:vertical}
+button{font:inherit;border-radius:7px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pair figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px}
+.pair img{width:100%;height:auto;display:block}
+.pair figcaption{color:#5b5a55;font-size:.85rem;text-align:center;padding-top:4px}
+.scale{display:grid;grid-template-columns:minmax(150px,1.2fr) repeat(5,minmax(46px,1fr));gap:6px;align-items:center;margin:8px 0}
+.scale .dim{font-weight:600}
+.scale .dim small{display:block;font-weight:400;color:var(--ink2);font-size:.8rem;line-height:1.35}
+.scale button{padding:8px 0;width:100%}
+.scale button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.anchors{display:grid;grid-template-columns:minmax(150px,1.2fr) repeat(5,minmax(46px,1fr));gap:6px;font-size:.78rem;color:var(--ink2);text-align:center}
+.bar{height:6px;background:var(--line);border-radius:4px;overflow:hidden;margin:6px 0 2px}
+.bar>div{height:100%;background:var(--accent)}
+.defs dt{font-weight:600;margin-top:.5em}
+.defs dd{margin:0 0 .3em 0;color:var(--ink2)}
+.ok{color:var(--ok);font-weight:600}
+@media (max-width:640px){.pair{grid-template-columns:1fr 1fr;gap:8px}.scale,.anchors{grid-template-columns:repeat(5,1fr)}.scale .dim{grid-column:1/-1}.anchors span:first-child{display:none}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+const DATA = /*__DATA__*/null;
+const CONTACT = "";           // 研究者联系方式（可选），例如邮箱；留空则不显示
+const KEY = DATA.version;
+const DIMS = [
+  ["style", "风格相似度", "这件设计在多大程度上像库淑兰的彩贴剪纸（用色、纹样、造型）"],
+  ["faith", "对线稿的忠实度", "设计在多大程度上保留了左侧线稿中的形象与结构"],
+  ["motif", "纹样与配色的恰当性", "纹样与配色是否恰当、协调，符合彩贴剪纸的习惯"],
+  ["cut", "剪贴可行性", "按这张图纸能否用剪刀剪出各片纸并贴成作品（纸片大小、宽窄与分片是否合理）"],
+  ["overall", "总体质量", "综合来看，这件设计作为彩贴剪纸设计的质量"],
+];
+const ANCH = ["很差", "较差", "一般", "较好", "很好"];
+const ROLES = ["剪纸传承人或从业者", "剪纸/民间美术研究者", "高校教师", "设计师", "相关专业学生", "其他"];
+const YEARS = ["不足 2 年", "2–5 年", "5–10 年", "10 年以上"];
+
+let S = load() || {consent:false, rater:{id:"R-"+Math.random().toString(36).slice(2,8).toUpperCase(), role:"", years:"", fam:"", hands:""}, order:null, idx:0, ratings:{}, started:null, finished:null, screen:"intro"};
+let tStart = Date.now();
+
+function load(){ try{ const s = localStorage.getItem(KEY); return s ? JSON.parse(s) : null; }catch(e){ return null; } }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function h(tag, attrs={}, ...kids){ const e = document.createElement(tag); for (const [k,v] of Object.entries(attrs)){ if(k==="on") for(const [ev,fn] of Object.entries(v)) e.addEventListener(ev,fn); else if(k==="class") e.className=v; else if(v!==false && v!=null) e.setAttribute(k,v===true?"":v);} for(const c of kids.flat()){ if(c==null) continue; e.append(c.nodeType?c:document.createTextNode(c)); } return e; }
+
+function rng(seedStr){ let a=0; for(const ch of seedStr) a=(a*31+ch.charCodeAt(0))>>>0; return ()=>{ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function makeOrder(){
+  const r = rng(S.rater.id), main = DATA.main.slice();
+  for (let i=main.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [main[i],main[j]]=[main[j],main[i]]; }
+  const lo = Math.floor(main.length*2/3);
+  for (const c of DATA.repeat){ const p = lo + Math.floor(r()*(main.length-lo+1)); main.splice(p,0,c); }
+  return main;
+}
+
+function render(){
+  const app = document.getElementById("app"); app.textContent = "";
+  ({intro:intro, rater:rater, guide:guide, item:item, done:done})[S.screen](app);
+  window.scrollTo(0,0);
+}
+
+function intro(app){
+  app.append(
+    h("h1",{},"库淑兰风格彩贴剪纸设计 · 专家评价问卷"),
+    h("div",{class:"card"},
+      h("p",{},"感谢您参与本研究。我们研究的是：能否借助计算方法，依据一张线稿生成库淑兰风格的彩贴剪纸设计，并把它转换成可以剪贴的图纸。"),
+      h("p",{},"接下来您将看到若干组图片：左边是线稿，右边是依据这张线稿得到的剪纸图纸（每种颜色代表一种纸）。请从五个方面为每张图纸打分。图纸来自不同的方法，也有少量来自参考作品；为避免偏差，来源均不显示。"),
+      h("p",{},"共 "+(DATA.main.length+DATA.repeat.length)+" 项，约需 45–60 分钟。您可以随时关闭页面，进度会自动保存在本机浏览器中，下次用同一浏览器打开即可继续。"),
+      h("p",{},"问卷不收集姓名或联系方式。您的评分仅用于学术研究，以匿名编号汇总报告。参与完全自愿，您可以随时停止。"),
+      h("p",{class:"muted"},"图片中的参考作品为库淑兰作品的重绘图，仅供本评价使用，请勿转发或另作他用。"),
+      h("label",{class:"opt"}, h("input",{type:"checkbox", id:"cs", checked:S.consent, on:{change:e=>{S.consent=e.target.checked; save(); btn.disabled=!S.consent;}}}), "我已阅读以上说明，同意参与"),
+    ),
+  );
+  const btn = h("button",{class:"primary", disabled:!S.consent, on:{click:()=>{S.screen="rater"; save(); render();}}}, S.started ? "继续" : "开始");
+  app.append(h("div",{class:"row"},btn));
+}
+
+function radioGroup(name, opts, val, onset){
+  return h("div",{}, opts.map(o=>h("label",{class:"opt"}, h("input",{type:"radio", name, value:o, checked:val===o, on:{change:()=>onset(o)}}), o)));
+}
+
+function rater(app){
+  const R = S.rater;
+  const ok = ()=> R.id.trim() && R.role && R.years && R.fam && R.hands;
+  const next = h("button",{class:"primary", disabled:!ok(), on:{click:()=>{ if(!S.order){ S.order=makeOrder(); S.started=new Date().toISOString(); } S.screen="guide"; save(); render(); }}}, "下一步");
+  const upd = ()=>{ save(); next.disabled=!ok(); };
+  app.append(h("h1",{},"关于您"),
+    h("div",{class:"card"},
+      h("h2",{},"评分者编号"),
+      h("p",{class:"muted"},"已自动生成，可以改成研究者给您的编号。请不要填写姓名。"),
+      h("input",{type:"text", value:R.id, disabled:!!S.order, on:{input:e=>{R.id=e.target.value; upd();}}}),
+      h("h2",{},"您的身份"), radioGroup("role", ROLES, R.role, v=>{R.role=v; upd();}),
+      h("h2",{},"从事剪纸或相关研究、教学、设计的年限"), radioGroup("years", YEARS, R.years, v=>{R.years=v; upd();}),
+      h("h2",{},"您对库淑兰彩贴剪纸的熟悉程度"), radioGroup("fam", ["1 不熟悉","2","3","4","5 非常熟悉"], R.fam, v=>{R.fam=v; upd();}),
+      h("h2",{},"您是否亲手剪过或贴过剪纸作品"), radioGroup("hands", ["是","否"], R.hands, v=>{R.hands=v; upd();}),
+    ),
+    h("div",{class:"row"}, h("button",{on:{click:()=>{S.screen="intro"; save(); render();}}},"返回"), next));
+}
+
+function guide(app){
+  app.append(h("h1",{},"评分说明"),
+    h("div",{class:"card"},
+      h("p",{},"每一项都有五个评分维度，均为 1–5 分："+ANCH.map((a,i)=>(i+1)+" = "+a).join("，")+"。"),
+      h("dl",{class:"defs"}, DIMS.map(d=>[h("dt",{},d[1]), h("dd",{},d[2])])),
+      h("p",{class:"muted"},"请根据第一印象独立判断每一张图纸，不必与前后的图纸比较。个别图纸可能会再次出现，请照常评分。"),
+    ),
+    h("div",{class:"row"}, h("button",{on:{click:()=>{S.screen="rater"; save(); render();}}},"返回"),
+      h("button",{class:"primary", on:{click:()=>{S.screen="item"; save(); render();}}}, S.idx>0 ? "继续评分（第 "+(S.idx+1)+" 项）" : "开始评分")));
+}
+
+function item(app){
+  const n = S.order.length, code = S.order[S.idx], st = DATA.stimuli[code];
+  const r = S.ratings[code] || (S.ratings[code] = {});
+  tStart = Date.now();
+  const complete = ()=> DIMS.every(d=>r[d[0]]);
+  const nextBtn = h("button",{class:"primary", disabled:!complete(), on:{click:()=>go(1)}}, S.idx===n-1 ? "完成" : "下一项");
+  function go(step){
+    r.sec = Math.round(((r.sec||0)*1000 + Date.now()-tStart)/1000);
+    if (step>0 && S.idx===n-1){ S.finished=new Date().toISOString(); S.screen="done"; }
+    else S.idx = Math.max(0, Math.min(n-1, S.idx+step));
+    save(); render();
+  }
+  const done = Object.values(S.ratings).filter(x=>DIMS.every(d=>x[d[0]])).length;
+  app.append(
+    h("div",{class:"row", style:"justify-content:space-between"}, h("strong",{},"第 "+(S.idx+1)+" / "+n+" 项"), h("span",{class:"muted"},"已完成 "+done+" 项 · 编号 "+S.rater.id)),
+    h("div",{class:"bar"}, h("div",{style:"width:"+(100*S.idx/n)+"%"})),
+    h("div",{class:"card"},
+      h("div",{class:"pair"},
+        h("figure",{}, h("img",{src:DATA.drawings[st.drawing], alt:"线稿"}), h("figcaption",{},"线稿")),
+        h("figure",{}, h("img",{src:st.img, alt:"剪纸图纸 "+code}), h("figcaption",{},"剪纸图纸 "+code))),
+      h("div",{class:"anchors", style:"margin-top:14px"}, h("span",{}), ANCH.map((a,i)=>h("span",{},(i+1)+" "+a))),
+      DIMS.map(d=>{
+        const row = h("div",{class:"scale"}, h("div",{class:"dim"}, d[1], h("small",{},d[2])));
+        for (let v=1; v<=5; v++){
+          const b = h("button",{class: r[d[0]]===v ? "on" : "", "aria-label":d[1]+" "+v, on:{click:()=>{ r[d[0]]=v; save(); [...row.querySelectorAll("button")].forEach((x,i)=>x.className=(i+1===v?"on":"")); nextBtn.disabled=!complete(); }}}, String(v));
+          row.append(b);
+        }
+        return row;
+      }),
+      h("h2",{},"意见（可选）"),
+      h("textarea",{placeholder:"例如：哪里不像库淑兰、哪些纸片难以剪出……", on:{input:e=>{r.comment=e.target.value; save();}}}, r.comment||""),
+    ),
+    h("div",{class:"row"},
+      h("button",{disabled:S.idx===0, on:{click:()=>go(-1)}},"上一项"), nextBtn,
+      h("button",{on:{click:()=>{ r.sec = Math.round(((r.sec||0)*1000 + Date.now()-tStart)/1000); S.screen="guide"; save(); render(); }}},"查看评分说明")));
+}
+
+function exportObj(){
+  return {version:KEY, rater:S.rater, started:S.started, finished:S.finished, order:S.order,
+          ratings:S.order.map(c=>({code:c, ...S.ratings[c]}))};
+}
+function toCSV(o){
+  const cols = ["rater","code"].concat(DIMS.map(d=>d[0])).concat(["sec","comment"]);
+  const esc = v=> v==null ? "" : /[",\n]/.test(String(v)) ? '"'+String(v).replace(/"/g,'""')+'"' : String(v);
+  return [cols.join(",")].concat(o.ratings.map(r=>[o.rater.id, r.code, ...DIMS.map(d=>r[d[0]]), r.sec, r.comment].map(esc).join(","))).join("\n");
+}
+function download(name, text, type){
+  const a = h("a",{href:URL.createObjectURL(new Blob([text],{type})), download:name}); document.body.append(a); a.click(); a.remove();
+}
+
+function done(app){
+  const o = exportObj(), base = "kushulan_expert_"+S.rater.id;
+  const msg = h("p",{class:"muted"});
+  app.append(h("h1",{},"评分完成，谢谢您！"),
+    h("div",{class:"card"},
+      h("p",{class:"ok"},"您已完成全部 "+S.order.length+" 项评分。"),
+      h("p",{},"请点击下方按钮下载结果文件，并把文件发回给研究者"+(CONTACT ? "（"+CONTACT+"）" : "")+"。如果下载不方便，也可以复制结果后粘贴到邮件或聊天中发送。"),
+      h("div",{class:"row"},
+        h("button",{class:"primary", on:{click:()=>download(base+".json", JSON.stringify(o,null,1), "application/json")}},"下载结果（JSON）"),
+        h("button",{on:{click:()=>download(base+".csv", "﻿"+toCSV(o), "text/csv")}},"下载结果（CSV）"),
+        h("button",{on:{click:async()=>{ try{ await navigator.clipboard.writeText(JSON.stringify(o)); msg.textContent="已复制到剪贴板。"; }catch(e){ msg.textContent="复制失败，请使用下载按钮。"; } }}},"复制结果")),
+      msg),
+    h("div",{class:"row"}, h("button",{on:{click:()=>{S.screen="item"; S.idx=S.order.length-1; save(); render();}}},"返回修改")));
+}
+
+render();
+</script>
+</body>
+</html>
