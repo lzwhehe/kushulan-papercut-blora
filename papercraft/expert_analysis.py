@@ -2,12 +2,13 @@
 
 Usage: python expert_analysis.py <folder with kushulan_expert_*.json> [--out results/cutcraft/expert_study]
 
-Unblinds the ratings with key_UNBLIND.csv and outputs/expert_survey/repeats.csv and writes:
+Short design (v2): two forms A and B with 10 drawings each, three dimensions. Unblinds the ratings with
+results/cutcraft/study_materials/expert_pack_v2/key_UNBLIND.csv (codes are unique across forms) and writes:
   ratings_long.csv   one row per rater x stimulus x dimension (repeats excluded)
   method_means.csv   per method and dimension: mean over raters of the rater's mean, SD, n raters
   paired_tests.csv   ours against every other method: drawing-level means (averaged over raters),
                      mean difference, 95% bootstrap CI, Wilcoxon signed-rank p, Holm-adjusted per dimension
-  reliability.csv    ICC(2,1) and ICC(2,k) per dimension over the main stimuli; within-rater
+  reliability.csv    ICC(2,1) and ICC(2,k) per dimension and form (raters who rated the same form); within-rater
                      consistency on the repeated stimuli (mean absolute difference, exact agreement)
   raters.csv         background of the raters (as entered; no names are collected)
   report.md          a short summary of the above
@@ -21,10 +22,8 @@ import pandas as pd
 from scipy import stats
 
 ROOT = Path(__file__).resolve().parents[1]
-KEY = ROOT / "results/cutcraft/study_materials/expert_pack/key_UNBLIND.csv"
-REPEATS = ROOT / "outputs/expert_survey/repeats.csv"
-DIMS = {"style": "style resemblance", "faith": "faithfulness to drawing", "motif": "motif/colour appropriateness",
-        "cut": "feasibility to cut and paste", "overall": "overall quality"}
+KEY = ROOT / "results/cutcraft/study_materials/expert_pack_v2/key_UNBLIND.csv"
+DIMS = {"style": "style resemblance", "faith": "faithfulness to drawing", "cut": "feasibility to cut and paste"}
 NAMES = {"qwen_q1": "ours", "qwen_q0": "untrained editing model", "fulllora": "SDXL LoRA + ControlNet",
          "instantstyle": "InstantStyle", "blora": "B-LoRA", "original": "reference redrawings (anchors)"}
 
@@ -34,7 +33,7 @@ def load(folder):
     for f in sorted(Path(folder).glob("*.json")):
         d = json.loads(f.read_text(encoding="utf8"))
         rid = d["rater"]["id"]
-        raters.append({**d["rater"], "started": d.get("started"), "finished": d.get("finished"), "file": f.name})
+        raters.append({"form": d.get("form", ""), **d["rater"], "started": d.get("started"), "finished": d.get("finished"), "file": f.name})
         for r in d["ratings"]:
             for k in DIMS:
                 if r.get(k) is not None:
@@ -86,9 +85,9 @@ def main():
     long, raters = load(a.folder)
     if long.empty:
         raise SystemExit("no ratings found")
-    key = pd.read_csv(KEY)
-    rep = pd.read_csv(REPEATS) if REPEATS.exists() else pd.DataFrame(columns=["code", "repeats"])
-    main_ = long[~long.code.isin(rep.code)].merge(key, on="code")
+    key = pd.read_csv(KEY, keep_default_na=False)
+    rep = key[key.repeat_of != ""][["code", "repeat_of"]].rename(columns={"repeat_of": "repeats"})
+    main_ = long[~long.code.isin(rep.code)].merge(key[key.repeat_of == ""].drop(columns="repeat_of"), on="code")
     main_["method"] = main_.method.map(lambda m: NAMES.get(m, m))
     main_.to_csv(out / "ratings_long.csv", index=False)
     raters.to_csv(out / "raters.csv", index=False)
@@ -121,19 +120,20 @@ def main():
     # reliability
     rel = []
     for dim in DIMS:
-        mat = main_[main_.dim == dim].pivot_table(index="code", columns="rater", values="score").dropna()
-        if mat.shape[1] >= 2 and mat.shape[0] >= 2:
-            s1, sk = icc2(mat.to_numpy(float))
-            rel.append({"dim": dim, "measure": "ICC(2,1)", "value": s1, "n_stimuli": mat.shape[0], "n_raters": mat.shape[1]})
-            rel.append({"dim": dim, "measure": "ICC(2,k)", "value": sk, "n_stimuli": mat.shape[0], "n_raters": mat.shape[1]})
+        for form, sub in main_[main_.dim == dim].groupby("form"):
+            mat = sub.pivot_table(index="code", columns="rater", values="score").dropna()
+            if mat.shape[1] >= 2 and mat.shape[0] >= 2:
+                s1, sk = icc2(mat.to_numpy(float))
+                rel.append({"dim": dim, "form": form, "measure": "ICC(2,1)", "value": s1, "n_stimuli": mat.shape[0], "n_raters": mat.shape[1]})
+                rel.append({"dim": dim, "form": form, "measure": "ICC(2,k)", "value": sk, "n_stimuli": mat.shape[0], "n_raters": mat.shape[1]})
         if not rep.empty:
             r2 = long[long.code.isin(rep.code) & (long.dim == dim)].merge(rep, on="code")
             r1 = long[(long.dim == dim)][["rater", "code", "score"]].rename(columns={"code": "repeats", "score": "first"})
             both = r2.merge(r1, on=["rater", "repeats"])
             if len(both):
-                rel.append({"dim": dim, "measure": "repeat mean abs. difference", "value": (both.score - both["first"]).abs().mean(),
+                rel.append({"dim": dim, "form": "all", "measure": "repeat mean abs. difference", "value": (both.score - both["first"]).abs().mean(),
                             "n_stimuli": len(both), "n_raters": both.rater.nunique()})
-                rel.append({"dim": dim, "measure": "repeat exact agreement", "value": (both.score == both["first"]).mean(),
+                rel.append({"dim": dim, "form": "all", "measure": "repeat exact agreement", "value": (both.score == both["first"]).mean(),
                             "n_stimuli": len(both), "n_raters": both.rater.nunique()})
     rel = pd.DataFrame(rel)
     rel.to_csv(out / "reliability.csv", index=False)

@@ -48,15 +48,13 @@ const KEY = DATA.version;
 const DIMS = [
   ["style", "风格相似度", "这件设计在多大程度上像库淑兰的彩贴剪纸（用色、纹样、造型）"],
   ["faith", "对线稿的忠实度", "设计在多大程度上保留了左侧线稿中的形象与结构"],
-  ["motif", "纹样与配色的恰当性", "纹样与配色是否恰当、协调，符合彩贴剪纸的习惯"],
   ["cut", "剪贴可行性", "按这张图纸能否用剪刀剪出各片纸并贴成作品（纸片大小、宽窄与分片是否合理）"],
-  ["overall", "总体质量", "综合来看，这件设计作为彩贴剪纸设计的质量"],
 ];
 const ANCH = ["很差", "较差", "一般", "较好", "很好"];
 const ROLES = ["剪纸传承人或从业者", "剪纸/民间美术研究者", "高校教师", "设计师", "相关专业学生", "其他"];
 const YEARS = ["不足 2 年", "2–5 年", "5–10 年", "10 年以上"];
 
-let S = load() || {consent:false, rater:{id:"R-"+Math.random().toString(36).slice(2,8).toUpperCase(), role:"", years:"", fam:"", hands:""}, order:null, idx:0, ratings:{}, started:null, finished:null, screen:"intro"};
+let S = load() || {consent:false, rater:{id:DATA.form+"-"+Math.random().toString(36).slice(2,8).toUpperCase(), role:"", years:"", fam:"", hands:""}, order:null, idx:0, ratings:{}, started:null, finished:null, screen:"intro"};
 let tStart = Date.now();
 
 function load(){ try{ const s = localStorage.getItem(KEY); return s ? JSON.parse(s) : null; }catch(e){ return null; } }
@@ -80,11 +78,11 @@ function render(){
 
 function intro(app){
   app.append(
-    h("h1",{},"库淑兰风格彩贴剪纸设计 · 专家评价问卷"),
+    h("h1",{},"库淑兰风格彩贴剪纸设计 · 专家评价问卷"), h("p",{class:"muted"},"问卷 "+DATA.form+" 卷"),
     h("div",{class:"card"},
       h("p",{},"感谢您参与本研究。我们研究的是：能否借助计算方法，依据一张线稿生成库淑兰风格的彩贴剪纸设计，并把它转换成可以剪贴的图纸。"),
       h("p",{},"接下来您将看到若干组图片：左边是线稿，右边是依据这张线稿得到的剪纸图纸（每种颜色代表一种纸）。请从五个方面为每张图纸打分。图纸来自不同的方法，也有少量来自参考作品；为避免偏差，来源均不显示。"),
-      h("p",{},"共 "+(DATA.main.length+DATA.repeat.length)+" 项，约需 45–60 分钟。您可以随时关闭页面，进度会自动保存在本机浏览器中，下次用同一浏览器打开即可继续。"),
+      h("p",{},"共 "+(DATA.main.length+DATA.repeat.length)+" 项，每项三个维度，约需 "+Math.round((DATA.main.length+DATA.repeat.length)*0.3)+"–"+Math.round((DATA.main.length+DATA.repeat.length)*0.4)+" 分钟。您可以随时关闭页面，进度会自动保存在本机浏览器中，下次用同一浏览器打开即可继续。"),
       h("p",{},"问卷不收集姓名或联系方式。您的评分仅用于学术研究，以匿名编号汇总报告。参与完全自愿，您可以随时停止。"),
       h("p",{class:"muted"},"图片中的参考作品为库淑兰作品的重绘图，仅供本评价使用，请勿转发或另作他用。"),
       h("label",{class:"opt"}, h("input",{type:"checkbox", id:"cs", checked:S.consent, on:{change:e=>{S.consent=e.target.checked; save(); btn.disabled=!S.consent;}}}), "我已阅读以上说明，同意参与"),
@@ -165,13 +163,13 @@ function item(app){
 }
 
 function exportObj(){
-  return {version:KEY, rater:S.rater, started:S.started, finished:S.finished, order:S.order,
+  return {version:KEY, form:DATA.form, rater:S.rater, started:S.started, finished:S.finished, order:S.order,
           ratings:S.order.map(c=>({code:c, ...S.ratings[c]}))};
 }
 function toCSV(o){
-  const cols = ["rater","code"].concat(DIMS.map(d=>d[0])).concat(["sec","comment"]);
+  const cols = ["form","rater","code"].concat(DIMS.map(d=>d[0])).concat(["sec","comment"]);
   const esc = v=> v==null ? "" : /[",\n]/.test(String(v)) ? '"'+String(v).replace(/"/g,'""')+'"' : String(v);
-  return [cols.join(",")].concat(o.ratings.map(r=>[o.rater.id, r.code, ...DIMS.map(d=>r[d[0]]), r.sec, r.comment].map(esc).join(","))).join("\n");
+  return [cols.join(",")].concat(o.ratings.map(r=>[o.form, o.rater.id, r.code, ...DIMS.map(d=>r[d[0]]), r.sec, r.comment].map(esc).join(","))).join("\n");
 }
 function download(name, text, type){
   const a = h("a",{href:URL.createObjectURL(new Blob([text],{type})), download:name}); document.body.append(a); a.click(); a.remove();
