@@ -237,16 +237,14 @@ def fig8():
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     # in-domain showcase: per category the drawing with the highest mean CLIP style of CutCraft-SDXL and CutCraft-Qwen
     # (seed 0), plus the two best remaining; all have an original. New subjects: Supplementary figure (figS_newsubjects).
-    # rule: per catalogue category the in-domain drawing with the highest CLIP style of our method (seed 0), then
-    # the two best remaining drawings (eight rows); all have a reference redrawing.
+    # rule: the four in-domain drawings with the highest CLIP style of our method (seed 0), at most one per
+    # catalogue category; all have a reference redrawing. Kept to four to limit the reproduction of the artist's works.
     import pandas as pd
     rm = pd.read_csv(G / "qwen_q1" / "rev_metrics.csv")
     rm = rm[rm.file.str.contains("seed0") & rm.content.str.startswith("ind_")].sort_values("clip_style_dedup", ascending=False)
     cat = rm.content.map(lambda c: cats[c]["category"])
     first = rm.groupby(cat.values).head(1).content.tolist()
-    # eight rows: the best drawing of every catalogue category (six), then the two best remaining ones
-    rest = [c for c in rm.content.tolist() if c not in first]
-    ids = list(dict.fromkeys(first + rest))[:8]
+    ids = first[:4]
     cols = [("drawing", None), ("reference\nredrawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
             ("InstantStyle", "instantstyle"), ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"),
             ("Ours", "qwen_q1"), ("Ours:\ncutting plan", "qwen_q1+proj")]
