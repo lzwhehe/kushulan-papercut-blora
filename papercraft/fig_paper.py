@@ -231,23 +231,25 @@ def _grid(rows, name, cell=1.45, gap=0.03, col_labels=None, row_labels=None, hea
     plt.close(fig)
 
 
-def fig8():
+def fig8(plan=False):
     split = json.loads((ROOT / "outputs/data/split.json").read_text())
     ref = {"ind_" + t["id"]: ROOT / t["reference"] for t in split["test_indomain"]}
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     # in-domain showcase: per category the drawing with the highest mean CLIP style of CutCraft-SDXL and CutCraft-Qwen
     # (seed 0), plus the two best remaining; all have an original. New subjects: Supplementary figure (figS_newsubjects).
-    # rule: the four in-domain drawings with the highest CLIP style of our method (seed 0), at most one per
-    # catalogue category; all have a reference redrawing. Kept to four to limit the reproduction of the artist's works.
+    # rule: per catalogue category the in-domain drawing with the highest CLIP style of our method (seed 0), then
+    # the two best remaining drawings (eight rows); all have a reference redrawing.
     import pandas as pd
     rm = pd.read_csv(G / "qwen_q1" / "rev_metrics.csv")
     rm = rm[rm.file.str.contains("seed0") & rm.content.str.startswith("ind_")].sort_values("clip_style_dedup", ascending=False)
     cat = rm.content.map(lambda c: cats[c]["category"])
     first = rm.groupby(cat.values).head(1).content.tolist()
-    ids = first[:4]
+    # eight rows: the best drawing of every catalogue category (six), then the two best remaining ones
+    rest = [c for c in rm.content.tolist() if c not in first]
+    ids = (first + rest)[:8]
     cols = [("drawing", None), ("reference\nredrawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
             ("InstantStyle", "instantstyle"), ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"),
-            ("Ours", "qwen_q1"), ("Ours:\ncutting plan", "qwen_q1+proj")]
+            ("Ours", "qwen_q1")] + ([("Ours:\ncutting plan", "qwen_q1+proj")] if plan else [])
     cols = [c for c in cols if c[1] is None or (G / c[1].replace("+proj", "")).exists()]
     rows, rlab = [], []
     for cid in ids:
@@ -417,21 +419,22 @@ if __name__ == "__main__":
         globals()[f]()
 
 
-def fig_apps():
-    """Application: all 12 new subjects (not named in the training captions) as drawing, our design and cutting plan."""
+def fig_apps(plan=False):
+    """All 12 new subjects (not named in the training captions): drawing, our design and (optionally) its cutting plan."""
     import pandas as pd
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
     ids = [k for k in cats if cats[k]["set"] == "ood"]
     pal_rgb = np.concatenate([PAL.rgb, [[1, 1, 1]]], 0)
-    ncol_blocks, cell = 3, 1.0
+    ncol_blocks, cell = (3, 1.0) if plan else (4, 1.0)
+    ncols = 3 if plan else 2
     nrow = int(np.ceil(len(ids) / ncol_blocks))
-    fig = plt.figure(figsize=(cell * 3 * ncol_blocks + 0.3 * (ncol_blocks - 1), cell * nrow + 0.35))
+    fig = plt.figure(figsize=(cell * ncols * ncol_blocks + 0.3 * (ncol_blocks - 1), cell * nrow + 0.35))
     outer = fig.add_gridspec(nrow, ncol_blocks, left=0.01, right=0.99, top=1 - 0.3 / (cell * nrow + 0.35), bottom=0.01, wspace=0.08, hspace=0.12)
     for n, cid in enumerate(ids):
-        inner = outer[n // ncol_blocks, n % ncol_blocks].subgridspec(1, 3, wspace=0.02)
+        inner = outer[n // ncol_blocks, n % ncol_blocks].subgridspec(1, ncols, wspace=0.02)
         ims = [Image.open(ROOT / f"outputs/contents/{cid}.png").convert("RGB").resize((384, 384)),
                Image.open(gen("qwen_q1", cid)).convert("RGB").resize((384, 384)),
-               pal_rgb[np.load(G / "qwen_q1" / f"{cid}_s_seed0.labels.npy")]]
+               pal_rgb[np.load(G / "qwen_q1" / f"{cid}_s_seed0.labels.npy")]][:ncols]
         for j, x in enumerate(ims):
             ax = fig.add_subplot(inner[0, j]); ax.imshow(x); ax.set_xticks([]); ax.set_yticks([])
             for sp in ax.spines.values():
