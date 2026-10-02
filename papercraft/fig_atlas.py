@@ -25,6 +25,9 @@ CATS = [("person", "Figures"), ("animals", "Animals"), ("plants", "Plants"), ("d
 CO_MIN = 0.03
 
 
+LABEL_DIR = {"P1": (-1, 1), "P8": (-1.25, 0)}
+
+
 def category(path):
     return "Pattern_symbols" if "Pattern_symbols" in path else path.split("/")[-2]
 
@@ -53,8 +56,13 @@ def main():
     ax.axhline(0, color=GRID, lw=0.8); ax.axvline(0, color=GRID, lw=0.8)
     for k in order:
         a, b = lab[k, 1], lab[k, 2]
-        ax.scatter(a, b, s=90 + 3200 * share[k], color=rgb[k], edgecolor=INK, lw=0.5, zorder=3)
-        ax.annotate(code[k], (a, b), xytext=(4, 4), textcoords="offset points", fontsize=6, color=INK)
+        s = 90 + 3200 * share[k]
+        ax.scatter(a, b, s=s, color=rgb[k], edgecolor=INK, lw=0.5, zorder=3, clip_on=False)
+        off = 0.71 * np.sqrt(s) / 2 + 1.5  # label just outside the marker (radius in points)
+        dx, dy = LABEL_DIR.get(code[k], (1, 1))  # crowded markers get their label on another side
+        ax.annotate(code[k], (a, b), xytext=(dx * off, dy * off), textcoords="offset points", fontsize=6, color=INK,
+                    ha="right" if dx < 0 else "left", va="center" if dy == 0 else "baseline", zorder=5)
+    ax.margins(x=0.10, y=0.12)  # room for the largest markers at the edges
     ax.set_xlabel("a* (green – red)", fontsize=7); ax.set_ylabel("b* (blue – yellow)", fontsize=7)
     ax.set_title("a  Paper-stock colours in CIELAB (area = corpus share)", loc="left", fontsize=7.5, color=INK)
     for s in ("top", "right"):
@@ -105,7 +113,7 @@ def main():
         fig.savefig(ROOT / f"paper/figures/fig_atlas.{ext}", dpi=240)
     # palette table for the supplement
     lines = [r"\definecolor{pp%d}{HTML}{%s}" % (k, hexes[k].lstrip("#").upper()) for k in range(K)]
-    rows = [f"{code[k]} & \\textcolor{{pp{k}}}{{\\rule{{4mm}}{{2.4mm}}}} & {hexes[k].upper().replace("#", chr(92)+"#")} & {lab[k,0]:.0f} & {lab[k,1]:.0f} & {lab[k,2]:.0f} & {share[k]*100:.1f}\\\\" for k in order]
+    rows = [f"{code[k]} & \\textcolor{{pp{k}}}{{\\rule{{4mm}}{{2.4mm}}}} & {hexes[k].upper().replace('#', chr(92) + '#')} & {lab[k,0]:.0f} & {lab[k,1]:.0f} & {lab[k,2]:.0f} & {share[k]*100:.1f}\\\\" for k in order]
     (ROOT / "paper/sections/table_palette_colors.tex").write_text("\n".join(lines) + "\n")
     (ROOT / "paper/sections/table_palette.tex").write_text("\n".join(rows) + "\n")
     strong = sorted(pairs, key=lambda p: -co[p])[:5]
