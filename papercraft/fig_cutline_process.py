@@ -31,7 +31,7 @@ def lines(path, res=512):
     return np.asarray(im) < 128
 
 
-def diff_image(cut, canny):
+def diff_image(cut, canny, grow_iter=1):
     cs, ks = morphology.skeletonize(cut), morphology.skeletonize(canny)
     near_c = ndi.distance_transform_edt(~cs) <= 2
     near_k = ndi.distance_transform_edt(~ks) <= 2
@@ -39,7 +39,7 @@ def diff_image(cut, canny):
     shared = (cs & near_k) | (ks & near_c)
     only_k = ks & ~near_c
     only_c = cs & ~near_k
-    grow = lambda m: ndi.binary_dilation(m, iterations=1)
+    grow = lambda m: ndi.binary_dilation(m, iterations=grow_iter)
     out[grow(shared)] = (0.15, 0.15, 0.15)
     out[grow(only_k)] = (0.84, 0.16, 0.16)
     out[grow(only_c)] = (0.16, 0.35, 0.84)
@@ -56,9 +56,9 @@ def main():
         _, dense_lab, raw, _ = priors.cut_project(rgb, pal, min_area_frac=2e-4, smooth=2)
         stem = path.replace("/", "__")
         d, c, k = (lines(CL / f"{stem}__{n}.png") for n in ("dense", "coarse", "canny"))
-        rows.append((lab, [rgb, pal_rgb[raw], pal_rgb[dense_lab], ~d, ~c, ~k, diff_image(d, k)]))
-    cols = ["a  work", "b  nearest paper colour", "c  filtered, pieces\n    < 8 mm$^2$ merged", "d  dense cut lines",
-            "e  coarse cut lines", "f  generic edges (Canny)", "g  d vs f"]
+        rows.append((lab, [rgb, pal_rgb[raw], pal_rgb[dense_lab], ~d, ~c, ~k, diff_image(d, k, grow_iter=2)]))
+    cols = ["a  work", "b  nearest paper colour", "c  small pieces merged", "d  fine cut lines",
+            "e  coarse cut lines", "f  Canny edges", "g  cut lines vs Canny"]
     fig, axes = plt.subplots(len(rows), len(cols), figsize=(1.3 * len(cols), 1.36 * len(rows)))
     for i, (lab, ims) in enumerate(rows):
         for j, im in enumerate(ims):
@@ -70,9 +70,13 @@ def main():
             if i == 0:
                 ax.set_title(cols[j], fontsize=6.3, loc="left")
         axes[i, 0].set_ylabel(lab, fontsize=7)
-    fig.text(0.995, 0.004, "g: black = both  |  red = Canny only (details below the cuttable size, texture)  |  blue = cut line only (colours of similar lightness)",
-             ha="right", va="bottom", fontsize=5.8, color="#444444")
-    fig.subplots_adjust(left=0.035, right=0.995, top=0.93, bottom=0.03, wspace=0.04, hspace=0.05)
+    from matplotlib.patches import Patch
+    keys = [((0.15, 0.15, 0.15), "in both"), ((0.84, 0.16, 0.16), "Canny only: texture and details too small to cut"),
+            ((0.16, 0.35, 0.84), "cut lines only: edges between colours of similar lightness")]
+    handles = [Patch(color="none", label="in g:")] + [Patch(color=c, label=l) for c, l in keys]
+    fig.legend(handles=handles, loc="lower right", ncol=4, fontsize=6.3, frameon=False, handlelength=1.2, handleheight=0.7,
+               columnspacing=1.4, bbox_to_anchor=(0.995, -0.005))
+    fig.subplots_adjust(left=0.035, right=0.995, top=0.93, bottom=0.085, wspace=0.04, hspace=0.05)
     fig.savefig(ROOT / "paper/figures/fig_cutline_process.jpg", dpi=250, pil_kwargs={"quality": 92})
     print("saved")
 
