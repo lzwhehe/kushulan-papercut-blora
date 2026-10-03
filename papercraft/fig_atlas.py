@@ -85,9 +85,11 @@ def main():
         axn.plot([pos[i][0], pos[j][0]], [pos[i][1], pos[j][1]], color=INK, alpha=0.12 + 0.6 * (co[i, j] - 0.15) / (co.max() - 0.15),
                  lw=0.4 + 3.5 * (co[i, j] - 0.15) / (co.max() - 0.15), zorder=1, solid_capstyle="round")
     for k in order:
-        axn.scatter(*pos[k], s=60 + 2600 * share[k], color=rgb[k], edgecolor=INK, lw=0.5, zorder=3)
-        r = 1.2
-        axn.text(pos[k][0] * r, pos[k][1] * r, code[k], ha="center", va="center", fontsize=6, color=INK)
+        s = 60 + 2600 * share[k]
+        axn.scatter(*pos[k], s=s, color=rgb[k], edgecolor=INK, lw=0.5, zorder=3)
+        # label just outside the marker: radius in points over points per data unit (axes 0.42 x 7.2 in for 2.7 units)
+        r = 1 + (np.sqrt(s) / 2) / (0.42 * 7.2 * 72 / 2.7) + 0.13
+        axn.text(pos[k][0] * r, pos[k][1] * r, code[k], ha="center", va="center", fontsize=6, color=INK, zorder=5)
     axn.set_xlim(-1.35, 1.35); axn.set_ylim(-1.35, 1.35); axn.set_aspect("equal"); axn.axis("off")
     axn.set_title("b  Colours used together in one work\n    (link width: share of works with both, ≥ 15 %)", loc="left", fontsize=7.5, color=INK)
     # ---- c: stacked bars per category
