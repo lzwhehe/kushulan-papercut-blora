@@ -231,6 +231,41 @@ def _grid(rows, name, cell=1.45, gap=0.03, col_labels=None, row_labels=None, hea
     plt.close(fig)
 
 
+SHOWCASE = ["ind_人物-3", "ind_植物-8", "ind_植物-29", "ind_日常-6", "ind_日常-25", "ind_动物-18", "ind_动物-38", "ind_边框-9"]
+
+
+def _qual_rows(ids, cols, cats, ref):
+    rows, rlab = [], []
+    for cid in ids:
+        r = []
+        for lab, m in cols:
+            if lab == "drawing":
+                r.append(ROOT / f"outputs/contents/{cid}.png")
+            elif m is None:
+                r.append(im(ref[cid], 384) if cid in ref else None)
+            elif m in ("blora", "instantstyle", "instantstyle_guide", "stylealigned"):
+                r.append(gen(m, cid, 0, 0))
+            else:
+                r.append(gen(m, cid))
+        rows.append(r)
+        rlab.append(f"{cats[cid]['category']} {cid.rsplit('-', 1)[-1]}\n(in-domain)")
+    return rows, rlab
+
+
+def fig_indomain_all():
+    """Supplementary: all 19 in-domain drawings with every method (seed 0), in two parts."""
+    split = json.loads((ROOT / "outputs/data/split.json").read_text())
+    ref = {"ind_" + t["id"]: ROOT / t["reference"] for t in split["test_indomain"]}
+    cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
+    ids = sorted(ref, key=lambda c: (cats[c]["category"], int(c.rsplit("-", 1)[-1])))
+    cols = [("drawing", None), ("reference\nredrawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
+            ("InstantStyle", "instantstyle"), ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"),
+            ("Ours", "qwen_q1")]
+    for part, sub in enumerate((ids[:10], ids[10:]), 1):
+        rows, rlab = _qual_rows(sub, cols, cats, ref)
+        _grid(rows, f"figS_indomain_{part}.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5)
+
+
 def fig8(plan=False):
     split = json.loads((ROOT / "outputs/data/split.json").read_text())
     ref = {"ind_" + t["id"]: ROOT / t["reference"] for t in split["test_indomain"]}
@@ -239,14 +274,10 @@ def fig8(plan=False):
     # (seed 0), plus the two best remaining; all have an original. New subjects: Supplementary figure (figS_newsubjects).
     # rule: per catalogue category the in-domain drawing with the highest CLIP style of our method (seed 0), then
     # the two best remaining drawings (eight rows); all have a reference redrawing.
-    import pandas as pd
-    rm = pd.read_csv(G / "qwen_q1" / "rev_metrics.csv")
-    rm = rm[rm.file.str.contains("seed0") & rm.content.str.startswith("ind_")].sort_values("clip_style_dedup", ascending=False)
-    cat = rm.content.map(lambda c: cats[c]["category"])
-    first = rm.groupby(cat.values).head(1).content.tolist()
-    # eight rows: the best drawing of every catalogue category (six), then the two best remaining ones
-    rest = [c for c in rm.content.tolist() if c not in first]
-    ids = (first + rest)[:8]
+    # 2026-10-03: the two window flowers selected by that rule were replaced by the authors with plant 29 and daily
+    # object 25 (the single-colour window flowers are given several colours by the model, see the text); all 19
+    # in-domain drawings are shown in the supplement (fig_indomain_all).
+    ids = SHOWCASE
     cols = [("drawing", None), ("reference\nredrawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
             ("InstantStyle", "instantstyle"), ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"),
             ("Ours", "qwen_q1")] + ([("Ours:\ncutting plan", "qwen_q1+proj")] if plan else [])
