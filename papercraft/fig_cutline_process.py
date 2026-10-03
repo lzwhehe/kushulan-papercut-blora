@@ -68,13 +68,13 @@ def main():
             for sp in ax.spines.values():
                 sp.set_linewidth(0.3); sp.set_color("#bbbbbb")
             if i == 0:
-                ax.set_title(cols[j], fontsize=6.3, loc="left")
-        axes[i, 0].set_ylabel(lab, fontsize=7)
+                ax.set_title(cols[j], fontsize=7.0, loc="left")
+        axes[i, 0].set_ylabel(lab, fontsize=7.5)
     from matplotlib.patches import Patch
     keys = [((0.15, 0.15, 0.15), "in both"), ((0.84, 0.16, 0.16), "Canny only: texture and details too small to cut"),
             ((0.16, 0.35, 0.84), "cut lines only: edges between colours of similar lightness")]
     handles = [Patch(color="none", label="in g:")] + [Patch(color=c, label=l) for c, l in keys]
-    fig.legend(handles=handles, loc="lower right", ncol=4, fontsize=6.3, frameon=False, handlelength=1.2, handleheight=0.7,
+    fig.legend(handles=handles, loc="lower right", ncol=4, fontsize=7.0, frameon=False, handlelength=1.2, handleheight=0.7,
                columnspacing=1.4, bbox_to_anchor=(0.995, -0.005))
     fig.subplots_adjust(left=0.035, right=0.995, top=0.93, bottom=0.085, wspace=0.04, hspace=0.05)
     fig.savefig(ROOT / "paper/figures/fig_cutline_process.jpg", dpi=250, pil_kwargs={"quality": 92})

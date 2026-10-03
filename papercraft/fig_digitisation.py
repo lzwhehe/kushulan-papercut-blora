@@ -93,7 +93,7 @@ def main():
     axa.hexbin(px[:, 1], px[:, 2], gridsize=70, bins="log", cmap="Greys", mincnt=1, linewidths=0)
     for k in order:
         axa.scatter(pal.lab[k, 1], pal.lab[k, 2], s=25 + 1400 * pal.weight[k], color=pal.rgb[k], edgecolor=INK, lw=0.6, zorder=3)
-        axa.annotate(code[k], (pal.lab[k, 1], pal.lab[k, 2]), xytext=(3, 3), textcoords="offset points", fontsize=5.2, zorder=4)
+        axa.annotate(code[k], (pal.lab[k, 1], pal.lab[k, 2]), xytext=(3, 3), textcoords="offset points", fontsize=5.6, zorder=4)
     axa.set_xlabel("a*"); axa.set_ylabel("b*")
     axa.set_title("a  k-means (K = 16) on foreground pixels\n    of the 257 training works (CIELAB)", loc="left", fontsize=7)
     for s in ("top", "right"):
@@ -101,7 +101,8 @@ def main():
     axs = fig.add_axes([0.07, top(0.545), 0.29, hs(0.02)])
     for i, k in enumerate(order):
         axs.add_patch(Rectangle((i, 0), 0.94, 1, color=pal.rgb[k]))
-        axs.text(i + 0.47, -0.6, code[k], ha="center", va="top", fontsize=4.6)
+        axs.text(i + 0.47, -0.4, code[k][1:], ha="center", va="top", fontsize=5.6)  # 1-16, "P" once at the left
+    axs.text(-0.3, -0.4, "P", ha="right", va="top", fontsize=5.6)
     axs.set_xlim(0, 16); axs.set_ylim(0, 1); axs.axis("off")
     fig.text(0.07, top(0.505), "foreground: not ($L^*>90$ and $C^*<10$); ≤ 4,000 pixels per work", fontsize=5.6, color=MUTED)
 

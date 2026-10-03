@@ -72,9 +72,10 @@ def main():
     ax2 = fig.add_axes([0.07, 0.415, 0.40, 0.065])
     for i, k in enumerate(order):
         ax2.add_patch(plt.Rectangle((i, 0), 0.92, 1, color=rgb[k]))
-        ax2.text(i + 0.46, 1.12, code[k], ha="center", fontsize=5.2, color=INK)
-        ax2.text(i + 0.46, -0.35, f"L*{lab[k,0]:.0f}", ha="center", fontsize=4.6, color=MUTED)
-        ax2.text(i + 0.46, -0.8, f"C*{np.hypot(lab[k,1], lab[k,2]):.0f}", ha="center", fontsize=4.6, color=MUTED)
+        ax2.text(i + 0.46, 1.12, code[k], ha="center", fontsize=5.6, color=INK)
+        ax2.text(i + 0.46, -0.38, f"{lab[k,0]:.0f}", ha="center", fontsize=5.6, color=MUTED)
+        ax2.text(i + 0.46, -0.86, f"{np.hypot(lab[k,1], lab[k,2]):.0f}", ha="center", fontsize=5.6, color=MUTED)
+    ax2.text(-0.25, -0.38, "$L^*$", ha="right", fontsize=5.6, color=MUTED); ax2.text(-0.25, -0.86, "$C^*$", ha="right", fontsize=5.6, color=MUTED)
     ax2.set_xlim(0, K); ax2.set_ylim(-1.0, 1.4); ax2.axis("off")
     # ---- b: co-occurrence network (circular layout in hue order)
     axn = fig.add_axes([0.55, 0.43, 0.42, 0.5])
@@ -102,7 +103,7 @@ def main():
         for k in order:
             axc.barh(y, s[k], left=left, color=rgb[k], edgecolor="white", lw=0.5, height=0.7)
             if s[k] >= 0.08:
-                axc.text(left + s[k] / 2, y, f"{s[k]*100:.0f}", ha="center", va="center", fontsize=5.2,
+                axc.text(left + s[k] / 2, y, f"{s[k]*100:.0f}", ha="center", va="center", fontsize=5.6,
                          color="white" if lab[k, 0] < 55 else INK)
             left += s[k]
         axc.text(-0.01, y, f"{lab_} (n = {sel.sum()})", ha="right", va="center", fontsize=6.5, color=INK)

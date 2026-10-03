@@ -263,7 +263,7 @@ def fig_indomain_all():
             ("Ours", "qwen_q1")]
     for part, sub in enumerate((ids[:10], ids[10:]), 1):
         rows, rlab = _qual_rows(sub, cols, cats, ref)
-        _grid(rows, f"figS_indomain_{part}.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5)
+        _grid(rows, f"figS_indomain_{part}.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=7.8)
 
 
 def fig8(plan=False):
@@ -303,7 +303,7 @@ def fig8(plan=False):
             rlab.append(f"{c['category']} {num}\n(in-domain)")
         else:
             rlab.append(c["subject"].replace("a ", "", 1) + ("\n(repository)" if c["set"] == "repo" else "\n(new subject)"))
-    _grid(rows, "fig8_qualitative.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=6.5)
+    _grid(rows, "fig8_qualitative.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=7.8)
 
 
 def fig9():
