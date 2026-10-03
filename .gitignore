@@ -30,3 +30,16 @@ data/整理的数据-常用_副本/库淑兰剪纸数据采集/1.库淑兰剪纸
 /docs/assets/research-pipeline.jpg
 /docs/assets/results/*-style.*
 /docs/assets/results/*-comparison.png
+# Unpublished manuscript and writing material: kept locally until the paper is published.
+/paper/
+/.claude/
+/docs/REVISION_STATUS.md
+/docs/CUTCRAFT.md
+/docs/writing_analysis_kuang2025.md
+/docs/mirror_mapping.md
+/docs/craft_process_sources.md
+/docs/layered_prototype.md
+/docs/FIGURE_STYLE_GUIDE.md
+/docs/figure_templates.png
+/docs/assets/overview.png
+/docs/assets/comparison.jpg
