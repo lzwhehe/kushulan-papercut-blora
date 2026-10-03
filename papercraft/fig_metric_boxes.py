@@ -34,7 +34,7 @@ def main():
         t = per_drawing(m).reset_index()
         t["split"] = split_of(t)
         tabs[m] = t
-    fig, axes = plt.subplots(2, 4, figsize=(7.2, 4.9))
+    fig, axes = plt.subplots(2, 4, figsize=(7.2, 4.0))
     for r, (title, splits) in enumerate(EXPS):
       for ax, (col, lab) in zip(axes[r], MEASURES):
         data = [tabs[m].loc[tabs[m].split.isin(splits), col].dropna().values for _, m, _ in METHODS]
@@ -53,8 +53,8 @@ def main():
         ax.set_title(lab, fontsize=7); ax.tick_params(axis="y", labelsize=6)
         for sp in ("top", "right"):
             ax.spines[sp].set_visible(False)
-      axes[r][0].annotate(("a  " if r == 0 else "b  ") + title, (0, 1.16), xycoords="axes fraction", fontsize=7.5, fontweight="bold")
-    fig.subplots_adjust(left=0.05, right=0.99, top=0.92, bottom=0.17, wspace=0.35, hspace=0.42)
+      axes[r][0].annotate(("a  " if r == 0 else "b  ") + title, (0, 1.2), xycoords="axes fraction", fontsize=7.5, fontweight="bold")
+    fig.subplots_adjust(left=0.05, right=0.99, top=0.88, bottom=0.2, wspace=0.35, hspace=0.62)
     fig.savefig(ROOT / "paper/figures/fig_metric_boxes.pdf")
     fig.savefig(ROOT / "paper/figures/fig_metric_boxes.png", dpi=220)
     print("saved")

@@ -1,6 +1,7 @@
 """Tables for plan v5 (Qwen-Image-Edit with cut-line pairs as the only method).
 
-table_v5_compare.tex   Table 4: comparison with popular frameworks (same drawings), unconstrained generation and the Canny-edge ablation
+table_v5_compare.tex   Table 4: comparison with popular frameworks (same drawings) and the Canny-edge ablation
+                       (generation without a drawing is reported in Supplementary Section S3)
 table_v5_canny.tex     Supplementary Table S5: cut lines vs generic Canny edges as training pairs (same model and settings)
 table_v5_plans.tex     Table 6: cutting plans and 200 mm SVG validation
 table_v5_prereg.tex    Supplementary: pre-registered comparison Q1 vs Q0 (four endpoints, Holm)
@@ -53,9 +54,6 @@ def compare_table():
     groups = [("\\emph{Line drawing as input}", [("B-LoRA (repository workflow)", "blora"), ("StyleAligned + ControlNet", "stylealigned"),
                                                ("InstantStyle + ControlNet", "instantstyle"), ("SDXL LoRA + ControlNet", "fulllora"),
                                                ("Qwen-Image-Edit, instruction only", Q0), ("Ours (cut-line pairs)", OURS)]),
-              ("\\emph{No line drawing (prompt or blank input only)}", [("SDXL, prompt only", "prompt_only"),
-                                                                        ("Qwen-Image-Edit, blank input", "qwen_q0_blank"),
-                                                                        ("Ours, blank input", "qwen_q1_blank")]),
               ("\\emph{Ablation: same model and settings, Canny edges instead of cut lines}", [("Ours (Canny-edge pairs)", CANNY)])]
     lines = []
     ref = drawing_table("ksl_original")
