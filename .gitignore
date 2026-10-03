@@ -25,3 +25,8 @@ data/整理的数据-常用_副本/库淑兰剪纸数据采集/1.库淑兰剪纸
 /results/cutcraft/contents/ind_*
 /results/cutcraft/audit/*.jpg
 /results/cutcraft/study_materials/expert_pack/stimuli.pdf
+# Lossless parts of the ZIP of Ku Shulan's works and gallery images showing her works: not publicly released.
+/archives/archive.part*
+/docs/assets/research-pipeline.jpg
+/docs/assets/results/*-style.*
+/docs/assets/results/*-comparison.png
