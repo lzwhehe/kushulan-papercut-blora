@@ -231,7 +231,10 @@ def _grid(rows, name, cell=1.45, gap=0.03, col_labels=None, row_labels=None, hea
     plt.close(fig)
 
 
-SHOWCASE = ["ind_人物-3", "ind_植物-8", "ind_植物-29", "ind_日常-6", "ind_日常-25", "ind_动物-18", "ind_动物-38", "ind_边框-9"]
+SHOWCASE = ["ind_人物-3", "ind_植物-8", "ind_植物-29", "ind_日常-6", "ind_日常-25", "ind_动物-18", "ind_动物-38", "ind_边框-2"]
+# the outlines of borders 9 and 12 trace training works (frame/19 and frame/10), not their test works, so these two
+# drawings are left out of the figures (found 2026-10-03)
+TRACE_TRAINING = {"ind_边框-9", "ind_边框-12"}
 
 
 def _qual_rows(ids, cols, cats, ref):
@@ -253,15 +256,15 @@ def _qual_rows(ids, cols, cats, ref):
 
 
 def fig_indomain_all():
-    """Supplementary: all 19 in-domain drawings with every method (seed 0), in two parts."""
+    """Supplementary: the in-domain drawings with every method (seed 0), in two parts (borders 9 and 12 left out)."""
     split = json.loads((ROOT / "outputs/data/split.json").read_text())
     ref = {"ind_" + t["id"]: ROOT / t["reference"] for t in split["test_indomain"]}
     cats = {c["id"]: c for c in json.loads((ROOT / "outputs/contents/contents.json").read_text())}
-    ids = sorted(ref, key=lambda c: (cats[c]["category"], int(c.rsplit("-", 1)[-1])))
+    ids = sorted((c for c in ref if c not in TRACE_TRAINING), key=lambda c: (cats[c]["category"], int(c.rsplit("-", 1)[-1])))
     cols = [("drawing", None), ("reference\nredrawing", None), ("B-LoRA", "blora"), ("StyleAligned", "stylealigned"),
             ("InstantStyle", "instantstyle"), ("SDXL LoRA\n+ ControlNet", "fulllora"), ("Qwen-Image-Edit\ninstruction only", "qwen_q0"),
             ("Ours", "qwen_q1")]
-    for part, sub in enumerate((ids[:10], ids[10:]), 1):
+    for part, sub in enumerate((ids[:9], ids[9:]), 1):
         rows, rlab = _qual_rows(sub, cols, cats, ref)
         _grid(rows, f"figS_indomain_{part}.jpg", cell=1.15, col_labels=[c[0] for c in cols], row_labels=rlab, header_fs=7.8)
 
